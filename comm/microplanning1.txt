@@ -1,0 +1,18 @@
+MICROPLANNING
+
+07/02/2023
+
+Lucie avait commencer le projet chez elle.
+Elle a travaillé sur le point c et sur sdl.
+Pendant cette séance on a poursuivit notre travail sur sdl notamment avec la bibliothèque ttf pour écrire du texte.
+On a fait un makefile. 
+
+08/02/2023
+ 
+installation SDL_ttf, SDL_image, SDL_mixer, sur tous les PCs
+test ttf
+reorganisation des fichiers
+ 
+ 
+Bourgeois Mathilde, Antout Amandine, Barbier Lucie, Boulanger Damien 
+
