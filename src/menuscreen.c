@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <SDL2/SDL_ttf.h>
+#include "../lib/screens.h"
 
 
 
@@ -85,7 +86,7 @@ int main (int argc, char ** argv){
     //Carrés menu
     TTF_Font *police=NULL;
     //TTF_Font *TTF_OpenFont(const char * file, int ptsize);
-    if( (police = TTF_OpenFont("ChowFun.ttf", 20)) == NULL){
+    if( (police = TTF_OpenFont("src/font/ChowFun.ttf", 20)) == NULL){
         printf("erreur chargement font\n");
         exit(EXIT_FAILURE);
     }
@@ -117,7 +118,7 @@ int main (int argc, char ** argv){
     if (SDL_SetRenderDrawColor(renderer, 80, 200, 190, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de la couleur du rendu");
     
-    image = SDL_LoadBMP("newgame.bmp");
+    image = SDL_LoadBMP("src/img/newgame.bmp");
     if (image == NULL){ 
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);

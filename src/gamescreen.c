@@ -1,5 +1,5 @@
 /*Pour compiler : gcc gamescreen.c -o gamescreen $(sdl2-config --cflags --libs)*/
-#include "screens.h"
+#include "../lib/screens.h"
 
 int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
 
