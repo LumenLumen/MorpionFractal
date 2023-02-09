@@ -14,14 +14,14 @@ INCS=-I${SDL_INC_DIR}
 
 SRC=src/
 HDIR=lib/
-PROG=menuscreen
+PROG=morpionfractal
 
-all: menu
+all: game
 
-menu: ${fich_menu_seul}
-	${CC} ${FLAGS} ${fich_menu_seul} -o ${PROG} ${LIBS} ${INCS}
+game: ${fich_jeu_complet}
+	${CC} ${FLAGS} ${fich_jeu_complet} -o ${PROG} ${LIBS} ${INCS}
 
-menuscreen.o: ${SRC}menuscreen.c
+menuscreen.o: ${SRC}menuscreen.c ${HDIR}screens.h
 	${CC} -c ${FLAGS} ${SRC}menuscreen.c -o menuscreen.o ${LIBS} ${INCS}
 
 gamescreen.o: ${SRC}gamescreen.c ${HDIR}screens.h
@@ -30,10 +30,10 @@ gamescreen.o: ${SRC}gamescreen.c ${HDIR}screens.h
 morpion.o: ${SRC}morpion.c
 	${CC} -c ${FLAGS} ${SRC}morpion.c -o morpion.o ${LIBS} ${INCS}
 
-morpionfonction.o: ${SRC}morpionfonction.c
+morpionfonction.o: ${SRC}morpionfonction.c ${HDIR}morpion.h
 	${CC} -c ${FLAGS} ${SRC}morpionfonction.c -o morpionfonction.o ${LIBS} ${INCS}
 
-sauvegarde.o: ${SRC}sauvegarde.c
+sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 	${CC} -c ${FLAGS} ${SRC}sauvegarde.c -o sauvegarde.o ${LIBS} ${INCS}
 
 clean:

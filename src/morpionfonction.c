@@ -164,7 +164,7 @@ void tour_du_joueur(int carre_jouable, int * joueur, int grille[N][N], int * xdc
 Prends en paramètre la grille, le morpion, et les derniers coordonnées joués.*/
 void check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     int carre[M][M] ; //On recopie le contenu du carré où le dernier coup a été joué dans carre
-    int num_carre = coog_to_carr(xdc, ydc);
+    //int num_carre = coog_to_carr(xdc, ydc);
     int i,j ;
 
     //On se place sur la première case du carré où le dernier coup a été joué.
@@ -177,7 +177,7 @@ void check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
         }
     }
     
-    if(i = morpiongagne(carre)){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
+    if(i == morpiongagne(carre)){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
         morpion[xdc/3][ydc/3] = i ;
     }    
 }

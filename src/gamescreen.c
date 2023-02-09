@@ -105,10 +105,10 @@ int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
     return 0 ;
 }
 
-int gamescreen (void){
+int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
 
-    SDL_Window * window = NULL ;
-    SDL_Renderer * renderer = NULL ;
+    //SDL_Window * window = NULL ; //on garde la fenêtre de menu, pas besoin d'en créer une nouvelle
+    //SDL_Renderer * renderer = NULL ;
     SDL_bool program_launched = SDL_TRUE ;
     SDL_Event event ;
 
@@ -117,22 +117,24 @@ int gamescreen (void){
     SDL_Rect grille[9][9];
     int i, j;
 
+    SDL_RenderClear(renderer);
+
     //Initialise SDL pour l'aspect visuel.
     if(SDL_Init(SDL_INIT_VIDEO) != 0){
         SDL_ExitWithError("Initialisation SDL");
     }
 
-    //Création de la fenêtre.
+    /* //Création de la fenêtre.
     window = SDL_CreateWindow("Morpion fractal", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_H, SCREEN_W, 0);
     if (window == NULL){
         SDL_ExitWithError("Création fenêtre échouée"); 
-    }
+    } 
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (renderer == NULL){
         SDL_DestroyWindow(window);
         SDL_ExitWithError("Création rendu échouée"); 
-    }
+    } */
 
     /*======================================= AFFICHAGE ===================================================*/
     if(SDL_AfficherGrilleVide(renderer, contour) != 0){
@@ -166,6 +168,7 @@ int gamescreen (void){
                             for (j = 0 ; j < 9 ; j++){
                                 if (SDL_ClickInButton(event.button.x, event.button.y,grille[i][j])){ //On checke dans quelle case il a joué.
                                     printf("Carré %d, %d\n", i, j);
+                                    
                                 }
                             }
                         }

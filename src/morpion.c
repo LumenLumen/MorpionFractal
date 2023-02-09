@@ -1,9 +1,10 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
+#include "../lib/screens.h"
 
 void morpion (int, option_t);
 
-void menu (option_t * opt){
+void menu_term (option_t * opt){
     char res ;
 
     system("clear");
@@ -26,11 +27,11 @@ void menu (option_t * opt){
             printf("Saisie invalide.") ;
     }
 
-    menu(opt);
+    menu_term(opt);
 }
 
 void main (){
     option_t * opt = malloc(sizeof(option_t));
     opt->autosave = 1 ;
-    menu(opt);
+    menuscreen();
 }

@@ -33,7 +33,7 @@ int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button){
     return ((mousex >= button.x && mousex <= button.x + button.w) && (mousey >= button.y && mousey <= button.y + button.h));
 }
 
-int main (int argc, char ** argv){
+int menuscreen (void){
 
     SDL_Window * window = NULL ;
     SDL_Renderer * renderer = NULL ;
@@ -73,6 +73,7 @@ int main (int argc, char ** argv){
         SDL_DestroyWindow(window);
         SDL_ExitWithError("Création rendu échouée");
     }
+
 
     //Fond
     if (SDL_SetRenderDrawColor(renderer, 160, 95, 165, SDL_ALPHA_OPAQUE) != 0)
@@ -170,21 +171,27 @@ int main (int argc, char ** argv){
             switch(event.type){
                 
                 case SDL_MOUSEBUTTONDOWN :
-                    if (SDL_ClickInButton(event.button.x, event.button.y, newgame))
+                    //clic sur le bouton nouvelle partie
+                    if (SDL_ClickInButton(event.button.x, event.button.y, newgame)){
                         printf("Nouvelle partie !\n");
-                        
+                        gamescreen(window,renderer);
+                        }
+                    
+                    //clic sur chargement d'une partie
                     else if (SDL_ClickInButton(event.button.x, event.button.y, loadgame)){
 
                     }
-                        
+                    //clic sur options
                     else if (SDL_ClickInButton(event.button.x, event.button.y, optiongame))
                         printf("Affichage des options !\n");
+
+                    //clic sur quitter
                     else if (SDL_ClickInButton(event.button.x, event.button.y, quitgame))
                         program_launched = SDL_FALSE ;
                     continue;
                     
 
-                //La croix en huat à droite est pressée.
+                //La croix en haut à droite est pressée.
                 case SDL_QUIT : 
                     program_launched = SDL_FALSE ; 
                     break ;

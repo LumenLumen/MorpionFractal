@@ -12,4 +12,4 @@ SDL_Rect SDL_CreerRect(int x, int y, int w, int h);
 int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button);
 int menuscreen (void);
 int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour);
-int gamescreen (void);
+int gamescreen (SDL_Window * window, SDL_Renderer * renderer);
