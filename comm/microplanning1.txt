@@ -12,7 +12,7 @@ On a fait un makefile.
 installation SDL_ttf, SDL_image, SDL_mixer, sur tous les PCs
 test ttf
 reorganisation des fichiers
- 
+Nous avons fait les boutons pour notre menu en pixel art. On a essayer d'afficher nos images sur notre menu. 
  
 Bourgeois Mathilde, Antout Amandine, Barbier Lucie, Boulanger Damien 
 
