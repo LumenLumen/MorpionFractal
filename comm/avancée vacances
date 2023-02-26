@@ -9,6 +9,9 @@ Dimanche 26 Fev
 
 - debuggage affichage de texte (fermeture de la police alors qu'il ne fallait pas)
 - changement chartre graphique (bleu aqua)
+- création d'un bouton de sauvegarde
+- debuggage mauvais vainqueur affiché
+- debuggage le programme se termine quand le jeu se finit
 
 token
 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

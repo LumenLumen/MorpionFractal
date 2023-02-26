@@ -205,7 +205,7 @@ void morpion_term (int reload, option_t opt){
     (* xdc) = -1 ;
 
     if (reload)
-        load("save.txt", grille, &joueur, xdc, ydc);
+        load_term("save.txt", grille, &joueur, xdc, ydc);
     else {
         init_grille(grille);
         init_morpion(morpion);
@@ -222,7 +222,7 @@ void morpion_term (int reload, option_t opt){
         check_carre(grille, morpion, *xdc, *ydc);
         vainqueur = morpiongagne(morpion);
 
-        if (opt.autosave) save("save.txt", grille, joueur, *xdc, *ydc);
+        if (opt.autosave) save_term("save.txt", grille, joueur, *xdc, *ydc);
     }
 
     system("clear");

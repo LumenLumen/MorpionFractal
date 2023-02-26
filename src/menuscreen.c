@@ -147,7 +147,6 @@ int SDL_AfficherTexte (SDL_Renderer * renderer, TTF_Font * police, SDL_Color cou
     SDL_Rect boite_de_texte = SDL_CreerRect(0, SCREEN_H, SCREEN_W, ESPACE_TEXTE);
 
     //Fond
-    printf("Création du fond | ");
     if (SDL_SetRenderDrawColor(renderer, 187, 238, 238, SDL_ALPHA_OPAQUE) != 0){
         return 1;
     }
@@ -157,8 +156,6 @@ int SDL_AfficherTexte (SDL_Renderer * renderer, TTF_Font * police, SDL_Color cou
     }
 
     //Texte
-
-    printf("Création texte | ");
     SDL_Surface * texte = TTF_RenderUTF8_Blended (police, chaine, couleur);
     if(!texte) return 1;
 
@@ -197,15 +194,15 @@ int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, in
         carre = (*xdc)%M * 3 + (*ydc)%M ;
     }
 
-    //printf("Contenu de la case visée : %i en x=%i et y=%i",grille[x][y],x,y);
+    //printf("Contenu de la case visée : %i en x=%i et y=%i avec carre=%i et morpion=%i ",grille[x][y],x,y,carre,morpion[x/M][y/M]);
     if((coog_to_carr(x,y) != carre) && (carre != 9)){
-        printf("Carré non valide.\n");
+        return 3 ;
     }
     else if (grille[x][y] != 0){
-        printf("La case est déjà occupée.\n") ;
+        return 4;
     }
     else if (carre == 9 && morpion[x/M][y/M] != 0){
-        printf("Le carré est déjà complété.\n");
+        return 5;
     }
     else {
         *xdc = x ;

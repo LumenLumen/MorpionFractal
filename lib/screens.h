@@ -14,7 +14,7 @@ SDL_Rect SDL_CreerRect(int x, int y, int w, int h);
 int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button);
 int menuscreen (void);
 int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour);
-int gamescreen (SDL_Window * window, SDL_Renderer * renderer);
+int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload);
 int SDL_ajouter_symbole_dans_case (SDL_Rect casegrille, SDL_Renderer * renderer, SDL_Texture * croix);
 int SDL_AfficherTexte (SDL_Renderer * renderer, TTF_Font * police, SDL_Color couleur, char * chaine/*, SDL_Rect boite_de_texte*/);
 int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y);

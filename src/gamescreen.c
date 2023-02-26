@@ -1,8 +1,9 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
+#include "../lib/sauvegarde.h"
 
 
-int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
+int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
 
     SDL_RenderClear(renderer);
 
@@ -10,12 +11,14 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
     SDL_Event event ;
 
     SDL_Rect contour = SDL_CreerRect(MARGIN, MARGIN, SCREEN_H - MARGIN*2, SCREEN_W - MARGIN*2);
+    SDL_Rect sauv_rec = SDL_CreerRect(SCREEN_W*8/9, MARGIN+contour.h, MARGIN, MARGIN);
 
     SDL_Rect grille[9][9];
     //SDL_Rect morpion[3][3];
 
     SDL_Texture * croix ;
     SDL_Texture * rond ;
+    SDL_Texture * sauv ;
     SDL_Surface * image ;
     TTF_Font *police = NULL;
     
@@ -28,10 +31,16 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
     int * xdc = malloc(sizeof(int)); //Ligne du dernier coup ;
     int * ydc = malloc(sizeof(int)); //Colonne du dernier coup ;
 
-    (* xdc) = -1 ;
-    (* ydc) = -1 ;
-    init_grille(grille_int);
-    init_morpion(morpion_int);
+    if (reload){ //si reload=1, on charge le fichier de sauvegarde
+        load("toto.txt",grille_int,morpion_int,&joueur,xdc,ydc);
+        afficher_morpion(morpion_int);
+    }
+    else{ //sinon, on initialise une nouvelle grille
+        (* xdc) = -1 ;
+        (* ydc) = -1 ;
+        init_grille(grille_int);
+        init_morpion(morpion_int);
+    }
 
     /*========================== CHARGEMENT DES IMAGES ===============================*/
     
@@ -55,6 +64,18 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
     }
 
     rond = SDL_CreateTextureFromSurface(renderer, image);
+    if (rond == NULL){
+        SDL_DestroyWindow(window);
+        SDL_ExitWithError("Echec du chargement de l'image sur la texture.");
+    }
+
+    image = IMG_Load("./src/img/sauv.png");
+    if(!image){
+        SDL_DestroyWindow(window);
+        SDL_ExitWithError("Echec du chargement de l'image.");
+    }
+
+    sauv = SDL_CreateTextureFromSurface(renderer, image);
     if (rond == NULL){
         SDL_DestroyWindow(window);
         SDL_ExitWithError("Echec du chargement de l'image sur la texture.");
@@ -96,6 +117,21 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
         }
     }*/
 
+    /*=================================== BOUTON DE SAUVEGARDE =============================================*/
+
+    SDL_ajouter_symbole_dans_case(sauv_rec,renderer,sauv);
+
+    /*=================================== CHARGEMENT NOUVELLE GRILLE =============================================*/
+
+    if (reload){ //si reload=1, on initialise la grille chargée (affichage des X et des O)
+        for (i=0;i<N;i++){
+            for (j=0;j<N;j++){
+                if(grille_int[j][i]==X) SDL_ajouter_symbole_dans_case(grille[i][j],renderer,croix);
+                else if(grille_int[j][i]==O) SDL_ajouter_symbole_dans_case(grille[i][j],renderer,rond);
+            }
+        } 
+    }
+
     /*=================================== GESTION DES EVENEMENTS =============================================*/
 
     while(program_launched){ 
@@ -111,23 +147,35 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
                         for (i = 0 ; i < 9 ; i++){
                             for (j = 0 ; j < 9 ; j++){
                                 if (SDL_ClickInButton(event.button.y, event.button.x,grille[i][j])){ //On checke dans quelle case il a joué.
-                                    if (! valideCase(&joueur, grille_int, morpion_int, xdc, ydc, i, j)){
+                                    switch (valideCase(&joueur, grille_int, morpion_int, xdc, ydc, i, j)){
+                                        case 0 :
+                                            if (joueur == X) SDL_ajouter_symbole_dans_case(grille[j][i], renderer, rond);
+                                            else SDL_ajouter_symbole_dans_case(grille[j][i], renderer, croix);
 
-                                        if (joueur == X) SDL_ajouter_symbole_dans_case(grille[j][i], renderer, croix);
-                                        else SDL_ajouter_symbole_dans_case(grille[j][i], renderer, rond);
+                                            check_carre(grille_int, morpion_int, i, j);
 
-                                        check_carre(grille_int, morpion_int, i, j);
-
-                                        vainqueur = morpiongagne(morpion_int);
-                                        if (vainqueur != 0) program_launched = SDL_FALSE ;
-                                        printf("\n");
-                                        printf("\n");
+                                            vainqueur = morpiongagne(morpion_int);
+                                            if (vainqueur != 0) program_launched = SDL_FALSE ;
+                                            break;
+                                        case 3 :
+                                            SDL_AfficherTexte(renderer, police, noir, "Carré non valide.");
+                                            break ;
+                                        case 4 :
+                                            SDL_AfficherTexte(renderer, police, noir, "La case est déjà occupée.");
+                                            break ;
+                                        case 5 :
+                                            SDL_AfficherTexte(renderer, police, noir, "Le carré est déjà complété.");
+                                            break ;
                                     }
                                     
                                 }
                             }
                         }
 
+                    }
+                    if (SDL_ClickInButton(event.button.x, event.button.y, sauv_rec)){ //SI le joueur clique sur le bouton de sauvegarde
+                        SDL_AfficherTexte(renderer, police, noir,"Partie sauvegardée !");
+                        save("toto.txt",grille_int,morpion_int,joueur,*xdc,*ydc); //sauvegarde
                     }
                     continue;
                 
@@ -147,8 +195,8 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
 
     //Annonce du vainqueur
     //printf("Appel fonction | ");
-    if (i == X) SDL_AfficherTexte(renderer, police, noir, "Le vainqueur est Bob.");
-    else SDL_AfficherTexte(renderer, police, noir, "Le vainqueur est Chochodile.");
+    if (vainqueur == O) SDL_AfficherTexte(renderer, police, noir, "Le vainqueur est O.");
+    else SDL_AfficherTexte(renderer, police, noir, "Le vainqueur est X.");
     SDL_Delay(1000);
     //printf("Fin fonction.");
 
@@ -157,6 +205,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
+    exit(0);
     return 0;
 }
 
@@ -315,17 +364,15 @@ int menuscreen (void){
                 case SDL_MOUSEBUTTONDOWN :
                     //clic sur le bouton nouvelle partie
                     if (SDL_ClickInButton(event.button.x, event.button.y, newgame)){
-                        printf("Nouvelle partie !\n");
-                        gamescreen(window,renderer);
+                        gamescreen(window,renderer,0);
                         }
                     
                     //clic sur chargement d'une partie
                     else if (SDL_ClickInButton(event.button.x, event.button.y, loadgame)){
-
+                        gamescreen(window,renderer,1);
                     }
                     //clic sur options
-                    else if (SDL_ClickInButton(event.button.x, event.button.y, optiongame))
-                        printf("Affichage des options !\n");
+                    else if (SDL_ClickInButton(event.button.x, event.button.y, optiongame));
 
                     //clic sur quitter
                     else if (SDL_ClickInButton(event.button.x, event.button.y, quitgame))
