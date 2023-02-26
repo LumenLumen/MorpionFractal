@@ -1,0 +1,14 @@
+Vendredi 17 Fev
+
+- changement de l'affichage pour alterner entre croix et rond
+- vérification qu'une case du grand morpion a été complétée + vérification de victoire
+- problème dans le traitement des données, les axes x et y sont inversés -> Débuggage fait avec succès !
+- Correction du bug qui fait qu'on ne peut pas envoyer un joueur sur une case qui a déjà été joué -> Okay, on est trop fort !
+
+Dimanche 26 Fev
+
+- debuggage affichage de texte (fermeture de la police alors qu'il ne fallait pas)
+- changement chartre graphique (bleu aqua)
+
+token
+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

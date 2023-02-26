@@ -1,14 +1,8 @@
-/*Pour compiler : gcc menuscreen.c -o menuscreen $(sdl2-config --cflags --libs)*/
-
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <SDL2/SDL_ttf.h>
 #include "../lib/screens.h"
-
-
-
-#define SCREEN_H 800
-#define SCREEN_W 800
+#include "../lib/morpion.h"
 
 //En cas d'erreur, la fonction affiche l'erreur avec le message passé en paramètre
 void SDL_ExitWithError(const char * message){
@@ -33,172 +27,195 @@ int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button){
     return ((mousex >= button.x && mousex <= button.x + button.w) && (mousey >= button.y && mousey <= button.y + button.h));
 }
 
-int main (int argc, char ** argv){
+//Affiche la grille.
+int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
 
-    SDL_Window * window = NULL ;
-    SDL_Renderer * renderer = NULL ;
-    SDL_bool program_launched = SDL_TRUE ;
-    SDL_Event event ;
-
-    SDL_Surface * image = NULL ; 
-    SDL_Texture * texture = NULL ;
-    
     SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H);
-    SDL_Rect newgame = SDL_CreerRect(SCREEN_W/3, 50, SCREEN_W/3, SCREEN_H/6);
-    SDL_Rect loadgame = SDL_CreerRect(SCREEN_W/3, 100 + SCREEN_H/6, SCREEN_W/3, SCREEN_H/6);
-    SDL_Rect optiongame = SDL_CreerRect(SCREEN_W/3, 150 + 2*SCREEN_H/6, SCREEN_W/3, SCREEN_H/6);
-    SDL_Rect quitgame = SDL_CreerRect(SCREEN_W/3, 200 + 3*SCREEN_H/6, SCREEN_W/3, SCREEN_H/6);
-    // A revoir si on resize la fenêtre
-
-    //Initialise SDL pour l'aspect visuel.
-    if(SDL_Init(SDL_INIT_VIDEO) != 0){
-        SDL_ExitWithError("Initialisation SDL");
-    }
-
-    //Initialise TTF
-	if(TTF_Init() == -1) {
-		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
-		exit(EXIT_FAILURE);
-	}
-
-    //Création de la fenêtre.
-    window = SDL_CreateWindow("Morpion fractal", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_H, SCREEN_W, 0);
-    if (window == NULL){
-        SDL_ExitWithError("Création fenêtre échouée"); 
-    }
-
-    //Création du rendu.
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    if (renderer == NULL){
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Création rendu échouée");
-    }
+    SDL_Rect contour1 = SDL_CreerRect(contour.x - 1, contour.y - 1, contour.w, contour.h);
+    SDL_Rect contour2 = SDL_CreerRect(contour.x + 1, contour.y + 1, contour.w, contour.h);
 
     //Fond
-    if (SDL_SetRenderDrawColor(renderer, 160, 95, 165, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de la couleur du rendu");
+    if (SDL_SetRenderDrawColor(renderer, 187, 238, 238, SDL_ALPHA_OPAQUE) != 0){
+        return 1;
+    }
     
     if (SDL_RenderFillRect(renderer, &background) != 0){
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer le rectangle background.");
+        return 1;
     }
 
-    //Carrés menu
-    TTF_Font *police=NULL;
-    //TTF_Font *TTF_OpenFont(const char * file, int ptsize);
-    if( (police = TTF_OpenFont("src/font/ChowFun.ttf", 20)) == NULL){
-        printf("erreur chargement font\n");
-        exit(EXIT_FAILURE);
+    //Couleur
+    if (SDL_SetRenderDrawColor(renderer, 80, 200, 190, SDL_ALPHA_OPAQUE) != 0){
+        return 1;
     }
-        SDL_Color noir={0,0,0};
-        //test création du texte
-        SDL_Surface *texte=TTF_RenderUTF8_Blended(police,"coucou",noir);
-        if(!texte){
-            printf("Erreur à la création du texte : %s\n",SDL_GetError());
-            exit(EXIT_FAILURE);
-        }
-        SDL_SetRenderDrawColor(renderer,0,0,0,255);
-        SDL_Texture *texte_tex = SDL_CreateTextureFromSurface(renderer,texte);
-        if(!texte_tex){
-            printf("Erreur à la création du rendu de texte : %s\n",SDL_GetError());
-            exit(EXIT_FAILURE);
-        }
-        SDL_FreeSurface(texte);
-        //position du texte
-        /* newgame.x=50;
-        newgame.y=30; */
-        SDL_QueryTexture(texte_tex,NULL,NULL,&(newgame.w),&(newgame.h));
-        TTF_CloseFont(police);
+
+
+    //Contour de la grille.
+    if (SDL_RenderDrawRect(renderer, &contour) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawRect(renderer, &contour2) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawRect(renderer, &contour1) != 0){
+        return 1;
+    }
+
+    //Dessin des lignes majeures.
+    if (SDL_RenderDrawLine(renderer, MARGIN + contour.w/3, contour.y, MARGIN + contour.w/3, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + contour.w/3 + 1, contour.y, MARGIN + contour.w/3 + 1, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + 2*contour.w/3, contour.y, MARGIN + 2*contour.w/3, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + 2*contour.w/3 + 1, contour.y, MARGIN + 2*contour.w/3 + 1, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + contour.h/3, contour.x + contour.w , MARGIN + contour.h/3) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + contour.h/3 + 1, contour.x + contour.w , MARGIN + contour.h/3 + 1) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 2*contour.h/3, contour.x + contour.w, MARGIN + 2*contour.h/3) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 2*contour.h/3 + 1, contour.x + contour.w, MARGIN + 2*contour.h/3 + 1) != 0){
+        return 1;
+    }
+
+    //Dessin des lignes mineures verticales.
+
+    if (SDL_RenderDrawLine(renderer, MARGIN + contour.w/9, contour.y, MARGIN + contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + 2*contour.w/9, contour.y, MARGIN + 2*contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+
+    if (SDL_RenderDrawLine(renderer, MARGIN + 4*contour.w/9, contour.y, MARGIN + 4*contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + 5*contour.w/9, contour.y, MARGIN + 5*contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+
+    if (SDL_RenderDrawLine(renderer, MARGIN + 7*contour.w/9, contour.y, MARGIN + 7*contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, MARGIN + 8*contour.w/9, contour.y, MARGIN + 8*contour.w/9, contour.y + contour.h) != 0){
+        return 1;
+    }
+
+    //Dessins des lignes mineures horizontales
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 1*contour.h/9, contour.x + contour.w, MARGIN + 1*contour.h/9) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 2*contour.h/9, contour.x + contour.w, MARGIN + 2*contour.h/9) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 4*contour.h/9, contour.x + contour.w, MARGIN + 4*contour.h/9) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 5*contour.h/9, contour.x + contour.w, MARGIN + 5*contour.h/9) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 7*contour.h/9, contour.x + contour.w, MARGIN + 7*contour.h/9) != 0){
+        return 1;
+    }
+    if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 8*contour.h/9, contour.x + contour.w, MARGIN + 8*contour.h/9) != 0){
+        return 1;
+    }
+
+    return 0 ;
+}
+
+//Prends en paramètre la case, le rendu et le symbole à afficher.
+int SDL_ajouter_symbole_dans_case (SDL_Rect casegrille, SDL_Renderer * renderer, SDL_Texture * croix){
+    SDL_Rect temp = casegrille ;
+    SDL_QueryTexture(croix, NULL, NULL, &(casegrille.w), &(casegrille.h));
+    casegrille = temp ;
+    SDL_RenderCopy(renderer, croix, NULL, &casegrille);
+    SDL_RenderPresent(renderer);
+    return 0;
+}
+
+int SDL_AfficherTexte (SDL_Renderer * renderer, TTF_Font * police, SDL_Color couleur, char * chaine/*, SDL_Rect boite_de_texte*/){
+
+    SDL_Rect boite_de_texte = SDL_CreerRect(0, SCREEN_H, SCREEN_W, ESPACE_TEXTE);
+
+    //Fond
+    printf("Création du fond | ");
+    if (SDL_SetRenderDrawColor(renderer, 187, 238, 238, SDL_ALPHA_OPAQUE) != 0){
+        return 1;
+    }
     
-   
-   SDL_SetRenderDrawColor(renderer,0,0,0,255);
-   SDL_RenderCopy(renderer,texte_tex,NULL,&newgame);
-   
+    if (SDL_RenderFillRect(renderer, &boite_de_texte) != 0){
+        return 1;
+    }
 
-    if (SDL_SetRenderDrawColor(renderer, 80, 200, 190, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de la couleur du rendu");
-    
-    image = SDL_LoadBMP("src/img/newgame.bmp");
-    if (image == NULL){ 
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de charger l'image");
-    }
-    texture = SDL_CreateTextureFromSurface(renderer, image);
-    SDL_FreeSurface(image);
-    if (texture == NULL){ 
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer la texture");
-    }
-    if(SDL_QueryTexture(texture, NULL, NULL, &newgame.w, &newgame.h) != 0){
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de charger la texture");
-    }
-    newgame = SDL_CreerRect(SCREEN_W/3, 50, SCREEN_W/3, SCREEN_H/6);
-    if(SDL_RenderCopy(renderer, texture, NULL, &newgame) != 0){
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible d'afficher la texture");
+    //Texte
+
+    printf("Création texte | ");
+    SDL_Surface * texte = TTF_RenderUTF8_Blended (police, chaine, couleur);
+    if(!texte) return 1;
+
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
+    SDL_Texture * texte_tex = SDL_CreateTextureFromSurface(renderer,texte);
+
+    if(!texte_tex) return 2;
+    SDL_FreeSurface(texte);
+
+    if (SDL_QueryTexture(texte_tex, NULL, NULL, &(boite_de_texte.w), &(boite_de_texte.h))){
+        return 3;
     }
     
-
-    if (SDL_RenderFillRect(renderer, &loadgame) != 0){
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer le rectangle loadgame.");
-    }
-
-    if (SDL_RenderFillRect(renderer, &optiongame) != 0){
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer le rectangle optiongame.");
-    }
-
-    if (SDL_RenderFillRect(renderer, &quitgame) != 0){
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer le rectangle quitgame.");
-    }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderCopy(renderer, texte_tex, NULL, &boite_de_texte);
 
     SDL_RenderPresent(renderer);
+    SDL_DestroyTexture(texte_tex);
+    return 0 ;
+}
 
-    //DEBUT DES EVENTS
-    while(program_launched){ 
-        
-        //On attends un événement.
-        while(SDL_PollEvent(&event)){ 
+/*Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
+Retourne -1 si le coup n'est pas valide, 0 sinon.*/
+int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
 
-            switch(event.type){
-                
-                case SDL_MOUSEBUTTONDOWN :
-                    if (SDL_ClickInButton(event.button.x, event.button.y, newgame))
-                        printf("Nouvelle partie !\n");
-                        
-                    else if (SDL_ClickInButton(event.button.x, event.button.y, loadgame)){
+    int carre = -1 ;
 
-                    }
-                        
-                    else if (SDL_ClickInButton(event.button.x, event.button.y, optiongame))
-                        printf("Affichage des options !\n");
-                    else if (SDL_ClickInButton(event.button.x, event.button.y, quitgame))
-                        program_launched = SDL_FALSE ;
-                    continue;
-                    
-
-                //La croix en huat à droite est pressée.
-                case SDL_QUIT : 
-                    program_launched = SDL_FALSE ; 
-                    break ;
-
-                default : break ;
-            }
-        }
+    if (*xdc == -1){ //C'est le premier tour.
+        carre =  4 ;
+    }
+    //Si le joueur est renvoyé sur une case déjà gagnée par un joueur.
+    else if ( morpion[(*xdc)%M][(*ydc)%M] != 0 ){
+        carre = 9;
+    }
+    else {
+        carre = (*xdc)%M * 3 + (*ydc)%M ;
     }
 
+    //printf("Contenu de la case visée : %i en x=%i et y=%i",grille[x][y],x,y);
+    if((coog_to_carr(x,y) != carre) && (carre != 9)){
+        printf("Carré non valide.\n");
+    }
+    else if (grille[x][y] != 0){
+        printf("La case est déjà occupée.\n") ;
+    }
+    else if (carre == 9 && morpion[x/M][y/M] != 0){
+        printf("Le carré est déjà complété.\n");
+    }
+    else {
+        *xdc = x ;
+        *ydc = y ;//Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
+        grille[x][y] = *joueur ; //On ajoute la valeur du joueur à la grille à l'endroit joué.
+        //Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.
+        if (*joueur == X) *joueur = O ;
+        else *joueur = X ;
+        return 0 ; 
+    }
 
-    //Libération de la mémoire
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    TTF_Quit();
-    SDL_Quit();
-    return 0;
+    return -1 ;
 }
