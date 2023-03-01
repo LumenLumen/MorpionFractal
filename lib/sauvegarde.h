@@ -11,6 +11,9 @@ typedef struct option_s {
     int autosave ;
 } option_t ;
 
-void save (char * name, int grille[N][N], int joueur, int, int);
-void load (char * name, int grille[N][N], int * joueur, int*, int*);
+void save_term (char * name, int grille[N][N], int joueur, int, int);
+void load_term (char * name, int grille[N][N], int * joueur, int*, int*);
+
+void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int, int);
+void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int*, int*);
 void option (option_t *);

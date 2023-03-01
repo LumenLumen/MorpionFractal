@@ -1,9 +1,10 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
+#include "../lib/screens.h"
 
-void morpion (int, option_t);
+void morpion_term (int, option_t);
 
-void menu (option_t * opt){
+void menu_term (option_t * opt){
     char res ;
 
     system("clear");
@@ -18,19 +19,20 @@ void menu (option_t * opt){
     while (getchar() != '\n'); //On vide le buffer.
 
     switch (res){
-        case '1' : morpion(0, *opt); break ;
-        case '2' : morpion(1, *opt); break ;
+        case '1' : morpion_term(0, *opt); break ;
+        case '2' : morpion_term(1, *opt); break ;
         case '3' : option(opt); break ;
         case '4' : free (opt); exit(0); break ;
         default : 
             printf("Saisie invalide.") ;
     }
 
-    menu(opt);
+    menu_term(opt);
 }
 
-void main (){
+int main (int argc, char * argv[]){
     option_t * opt = malloc(sizeof(option_t));
     opt->autosave = 1 ;
-    menu(opt);
+    menuscreen();
+    return 0;
 }
