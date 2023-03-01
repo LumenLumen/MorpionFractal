@@ -2,7 +2,7 @@
 #include "../lib/sauvegarde.h"
 #include "../lib/screens.h"
 
-void morpion (int, option_t);
+void morpion_term (int, option_t);
 
 void menu_term (option_t * opt){
     char res ;
@@ -19,8 +19,8 @@ void menu_term (option_t * opt){
     while (getchar() != '\n'); //On vide le buffer.
 
     switch (res){
-        case '1' : morpion(0, *opt); break ;
-        case '2' : morpion(1, *opt); break ;
+        case '1' : morpion_term(0, *opt); break ;
+        case '2' : morpion_term(1, *opt); break ;
         case '3' : option(opt); break ;
         case '4' : free (opt); exit(0); break ;
         default : 
@@ -30,8 +30,12 @@ void menu_term (option_t * opt){
     menu_term(opt);
 }
 
-void main (){
+int main (int argc, char * argv[]){
     option_t * opt = malloc(sizeof(option_t));
     opt->autosave = 1 ;
     menuscreen();
+<<<<<<< HEAD
+=======
+    return 0;
+>>>>>>> d8f4c1318d2c68dac0033536e85f555d5ac9f64c
 }

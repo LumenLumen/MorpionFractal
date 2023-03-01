@@ -15,4 +15,4 @@ int morpiongagne(int grille[M][M]);
 int coog_to_carr (int x, int y);
 int debut_de_tour(int xdc, int ydc, int joueur, int morpion[M][M]);
 void tour_du_joueur(int carre_jouable, int * joueur, int grille[N][N], int * xdc, int * ydc);
-void check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc);
+int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc);

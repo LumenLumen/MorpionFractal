@@ -19,12 +19,13 @@ void afficher_grille(int grille[N][N]){
     int i, j;
     for (i=0 ; i<N ; i++){
         for(j=0 ; j<N ; j++){
-            
+            /*
             switch (grille[i][j]){
                 case 0 : printf("0 ") ; break ;
                 case O : printf("o ") ; break ;
                 case X : printf("x ") ; break ;
-            }
+            }*/
+            printf("%i ", grille[i][j]);
 
             if ((j%3 == 2) && (j != 8)) printf ("| ");
         }
@@ -100,7 +101,7 @@ int coog_to_carr (int x, int y){
 /*Effectue les affichages du début de tour et vérifie où le joueur peut jouer. 
 Prend en paramètre le joueur et les coordonnées du dernier coup joué, ainsi que le morpion.
 Retourne le numéro de la case (0-8) où le joueur peut jouer, 9 si partout.*/
-int debut_de_tour(int xdc, int ydc, int joueur, int morpion[M][M]){
+int debut_de_tour_term(int xdc, int ydc, int joueur, int morpion[M][M]){
 
     //A qui est le tour.
     if (joueur == X)
@@ -128,7 +129,7 @@ int debut_de_tour(int xdc, int ydc, int joueur, int morpion[M][M]){
 
 /*Demande le coup au joueur, vérifie qu'il est valide.
 Prend en paramètre le carré jouable, le joueur dont c'est le tour, la grille, l'adresse du dernier coup joué*/
-void tour_du_joueur(int carre_jouable, int * joueur, int grille[N][N], int * xdc, int * ydc){
+void tour_du_joueur_term(int carre_jouable, int * joueur, int grille[N][N], int * xdc, int * ydc){
     int x, y ;
 
     printf("Sur quelle ligne souhaitez-vous jouer (1-9) ? ");
@@ -140,15 +141,15 @@ void tour_du_joueur(int carre_jouable, int * joueur, int grille[N][N], int * xdc
 
     if ((x<0 || x>8) && (y<0 || y>8)){
         printf("Coordonnées non valides.\n");
-        tour_du_joueur(carre_jouable,joueur,grille,xdc,ydc);
+        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
     }
     else if((coog_to_carr(x,y) != carre_jouable) && (carre_jouable != 9)){
         printf("Carré non valide.\n");
-        tour_du_joueur(carre_jouable,joueur,grille,xdc,ydc);
+        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
     }
     else if (grille[x][y] != 0){
         printf("La case est déjà occupée.\n") ;
-        tour_du_joueur(carre_jouable,joueur,grille,xdc,ydc);
+        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
     }
     else {
         *xdc = x ;
@@ -162,7 +163,7 @@ void tour_du_joueur(int carre_jouable, int * joueur, int grille[N][N], int * xdc
 
 /*Vérifie que si un carré a été rempli grâce au dernier coup, rempli le morpion 3*3 si nécessaire.
 Prends en paramètre la grille, le morpion, et les derniers coordonnées joués.*/
-void check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
+int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     int carre[M][M] ; //On recopie le contenu du carré où le dernier coup a été joué dans carre
     //int num_carre = coog_to_carr(xdc, ydc);
     int i,j ;
@@ -176,17 +177,26 @@ void check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
             carre[i][j]=grille[xdc+i][ydc+j];
         }
     }
+
+    //printf("Carre de la fonction \n");
     
+<<<<<<< HEAD
     if(i == morpiongagne(carre)){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
+=======
+    i = morpiongagne(carre);
+    if(i){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
+>>>>>>> d8f4c1318d2c68dac0033536e85f555d5ac9f64c
         morpion[xdc/3][ydc/3] = i ;
-    }    
+    }
+
+    return i;
 }
 
 
 /*Lance la partie de morpion. 
 Prends en paramètre VRAI si une partie sauvegardée doit ếtre chargée, FAUX sinon.
 Prends en paramètre les options de jeu.*/
-void morpion (int reload, option_t opt){
+void morpion_term (int reload, option_t opt){
     int grille[N][N];
     int morpion[M][M];
 
@@ -199,7 +209,7 @@ void morpion (int reload, option_t opt){
     (* xdc) = -1 ;
 
     if (reload)
-        load("save.txt", grille, &joueur, xdc, ydc);
+        load_term("save.txt", grille, &joueur, xdc, ydc);
     else {
         init_grille(grille);
         init_morpion(morpion);
@@ -210,13 +220,13 @@ void morpion (int reload, option_t opt){
         system("clear");
         afficher_grille(grille);
 
-        carre = debut_de_tour(*xdc,*ydc,joueur,morpion);
-        tour_du_joueur(carre, &joueur, grille, xdc, ydc);
+        carre = debut_de_tour_term(*xdc,*ydc,joueur,morpion);
+        tour_du_joueur_term(carre, &joueur, grille, xdc, ydc);
 
         check_carre(grille, morpion, *xdc, *ydc);
         vainqueur = morpiongagne(morpion);
 
-        if (opt.autosave) save("save.txt", grille, joueur, *xdc, *ydc);
+        if (opt.autosave) save_term("save.txt", grille, joueur, *xdc, *ydc);
     }
 
     system("clear");
