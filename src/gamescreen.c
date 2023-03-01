@@ -12,9 +12,10 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
 
     SDL_Rect contour = SDL_CreerRect(MARGIN, MARGIN, SCREEN_H - MARGIN*2, SCREEN_W - MARGIN*2);
     SDL_Rect sauv_rec = SDL_CreerRect(SCREEN_W*8/9, MARGIN+contour.h, MARGIN, MARGIN);
+    SDL_Rect where_to_play ;
 
     SDL_Rect grille[9][9];
-    //SDL_Rect morpion[3][3];
+    SDL_Rect morpion[3][3];
 
     SDL_Texture * croix ;
     SDL_Texture * rond ;
@@ -26,6 +27,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
     int morpion_int[M][M];
     int i, j;
     int vainqueur ;
+    int carre = 0 ;
 
     int joueur = 1 ; //Tour du joueur ;
     int * xdc = malloc(sizeof(int)); //Ligne du dernier coup ;
@@ -33,7 +35,6 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
 
     if (reload){ //si reload=1, on charge le fichier de sauvegarde
         load("toto.txt",grille_int,morpion_int,&joueur,xdc,ydc);
-        afficher_morpion(morpion_int);
     }
     else{ //sinon, on initialise une nouvelle grille
         (* xdc) = -1 ;
@@ -85,7 +86,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
 
     /* ====================================== CHARGEMENT DU TEXTE =========================================*/
 
-    if( (police = TTF_OpenFont("src/font/MB-ThinkTwice_Regular.ttf", 50)) == NULL){
+    if( (police = TTF_OpenFont("src/font/Coder'sCrux.ttf", 50)) == NULL){
         SDL_ExitWithError("Echec chargement police");
     }
 
@@ -110,12 +111,18 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
         }
     }
 
-    /*
+    
     for (i = 0 ; i < 3 ; i++){
         for (j = 0 ; j < 3 ; j++){
             morpion[i][j]=SDL_CreerRect(MARGIN + i * contour.w/3, MARGIN + j * contour.h/3,contour.w/3,contour.h/3);
         }
-    }*/
+    }
+
+    where_to_play = SDL_CreerRect(MARGIN + contour.w/3 + 1,  MARGIN + contour.h/3 + 1, contour.w/3, contour.h/3);
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 242, 221, 162, 100);
+    SDL_RenderFillRect(renderer, &where_to_play);
 
     /*=================================== BOUTON DE SAUVEGARDE =============================================*/
 
@@ -124,12 +131,19 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
     /*=================================== CHARGEMENT NOUVELLE GRILLE =============================================*/
 
     if (reload){ //si reload=1, on initialise la grille chargée (affichage des X et des O)
-        for (i=0;i<N;i++){
-            for (j=0;j<N;j++){
+        for (i=0 ; i<N ; i++){
+            for (j=0 ; j<N ; j++){
                 if(grille_int[j][i]==X) SDL_ajouter_symbole_dans_case(grille[i][j],renderer,croix);
                 else if(grille_int[j][i]==O) SDL_ajouter_symbole_dans_case(grille[i][j],renderer,rond);
             }
-        } 
+        }
+        
+        for (i = 0 ; i < M ; i++){
+            for (j = 0 ; j < M ; j++){
+                    if (morpion_int[i][j] == X) SDL_ajouter_symbole_dans_case(morpion[i][j], renderer, croix);
+                    else if (morpion_int[i][j] == O) SDL_ajouter_symbole_dans_case(morpion[i][j], renderer, rond);
+            }
+        }
     }
 
     /*=================================== GESTION DES EVENEMENTS =============================================*/
@@ -152,10 +166,25 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
                                             if (joueur == X) SDL_ajouter_symbole_dans_case(grille[j][i], renderer, rond);
                                             else SDL_ajouter_symbole_dans_case(grille[j][i], renderer, croix);
 
-                                            check_carre(grille_int, morpion_int, i, j);
+                                            if (check_carre(grille_int, morpion_int, i, j)){
+                                                if (joueur == X) SDL_ajouter_symbole_dans_case(morpion[j/3][i/3], renderer, rond);
+                                                else SDL_ajouter_symbole_dans_case(morpion[j/3][i/3], renderer, croix);
+                                            }
 
+                                            //TEST SI FIN DE LA PARTIE
                                             vainqueur = morpiongagne(morpion_int);
                                             if (vainqueur != 0) program_launched = SDL_FALSE ;
+
+                                            //AFFICHAGE DU TEXTE
+                                            if (joueur == X) SDL_AfficherTexte(renderer, police, noir, "C'est au tour de X.");
+                                            else SDL_AfficherTexte(renderer, police, noir, "C'est au tour de O.");
+
+                                            //SURBRILLANCE DU CARRE OU IL FAUT
+                                            where_to_play = morpion[(*ydc)%M][(*xdc)%M];
+                                            SDL_SetRenderDrawColor(renderer, 242, 221, 162, 100);
+                                            SDL_RenderFillRect(renderer, &where_to_play);
+                                            SDL_RenderPresent(renderer);
+
                                             break;
                                         case 3 :
                                             SDL_AfficherTexte(renderer, police, noir, "Carré non valide.");
@@ -205,6 +234,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload){
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
+    menuscreen();
     exit(0);
     return 0;
 }
@@ -216,10 +246,6 @@ int menuscreen (void){
     SDL_Renderer * renderer = NULL ;
     SDL_bool program_launched = SDL_TRUE ;
     SDL_Event event ;
-
-    SDL_Surface * image = NULL ; 
-    SDL_Texture * texture = NULL ;
-    
 
     SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H+ESPACE_TEXTE);
     SDL_Rect newgame = SDL_CreerRect(SCREEN_W/3, 150, SCREEN_W/3, SCREEN_H/6);
@@ -265,7 +291,7 @@ int menuscreen (void){
     //Carrés menu
     TTF_Font *police=NULL;
     //TTF_Font *TTF_OpenFont(const char * file, int ptsize);
-    if( (police = TTF_OpenFont("src/font/ChowFun.ttf", 20)) == NULL){
+    if( (police = TTF_OpenFont("src/font/Coder'sCrux.ttf", 20)) == NULL){
         printf("erreur chargement font\n");
         exit(EXIT_FAILURE);
     }
@@ -275,32 +301,6 @@ int menuscreen (void){
 
     if (SDL_SetRenderDrawColor(renderer, 80, 200, 190, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de la couleur du rendu");
-    
-    /*image = SDL_LoadBMP("src/img/newgame.bmp");
-    if (image == NULL){ 
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de charger l'image");
-    }
-    texture = SDL_CreateTextureFromSurface(renderer, image);
-    SDL_FreeSurface(image);
-    if (texture == NULL){ 
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de créer la texture");
-    }
-    if(SDL_QueryTexture(texture, NULL, NULL, &newgame.w, &newgame.h) != 0){
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible de charger la texture");
-    }
-    newgame = SDL_CreerRect(SCREEN_W/3, 50, SCREEN_W/3, SCREEN_H/6);
-    if(SDL_RenderCopy(renderer, texture, NULL, &newgame) != 0){
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_ExitWithError("Impossible d'afficher la texture");
-    }
-    */
     
     if (SDL_RenderFillRect(renderer, &newgame) != 0){
         SDL_DestroyWindow(window);

@@ -7,6 +7,7 @@ Elle a travaillé sur le point c et sur sdl.
 Pendant cette séance on a poursuivit notre travail sur sdl notamment avec la bibliothèque ttf pour écrire du texte.
 On a fait un makefile. 
 
+
 08/02/2023
  
 installation SDL_ttf, SDL_image, SDL_mixer, sur tous les PCs
@@ -14,11 +15,36 @@ test ttf
 reorganisation des fichiers
 Nous avons fait les boutons pour notre menu en pixel art. On a essayer d'afficher nos images sur notre menu. 
 
+
 09/02/2023
 On a fait du doxygène pour commenter les fichiers.
 On a corrriger le makefile.
 On a fait des liens entre les différentes fenêtres.
 
- 
 Bourgeois Mathilde, Antout Amandine, Barbier Lucie, Boulanger Damien 
+
+
+Vendredi 17 Fev
+
+- changement de l'affichage pour alterner entre croix et rond
+- vérification qu'une case du grand morpion a été complétée + vérification de victoire
+- problème dans le traitement des données, les axes x et y sont inversés -> Débuggage fait avec succès !
+- Correction du bug qui fait qu'on ne peut pas envoyer un joueur sur une case qui a déjà été joué -> Okay, on est trop fort !
+
+
+Dimanche 26 Fev
+
+- debuggage affichage de texte (fermeture de la police alors qu'il ne fallait pas)
+- changement chartre graphique (bleu aqua)
+- création d'un bouton de sauvegarde
+- debuggage mauvais vainqueur affiché
+- debuggage le programme se termine quand le jeu se finit
+
+
+Mercredi 1 Mars
+
+- Uniformisation de la police
+- Affichage de grosses images quand un carré est gagné.
+- Documentation finie
+- Mathilde et Amandine ont servi de cobayes.
 

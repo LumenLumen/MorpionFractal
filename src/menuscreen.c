@@ -138,7 +138,6 @@ int SDL_ajouter_symbole_dans_case (SDL_Rect casegrille, SDL_Renderer * renderer,
     SDL_QueryTexture(croix, NULL, NULL, &(casegrille.w), &(casegrille.h));
     casegrille = temp ;
     SDL_RenderCopy(renderer, croix, NULL, &casegrille);
-    SDL_RenderPresent(renderer);
     return 0;
 }
 
