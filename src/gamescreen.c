@@ -1,13 +1,24 @@
 /*Pour compiler : gcc gamescreen.c -o gamescreen $(sdl2-config --cflags --libs)*/
 #include "../lib/screens.h"
-
+/**
+\file gamescreen.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
+/**
+\fn SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour)
+\brief fonction qui affiche la grille et definie sa couleur.
+*/
+//Affiche la grille.
 int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
 
     SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H);
     SDL_Rect contour1 = SDL_CreerRect(contour.x - 1, contour.y - 1, contour.w, contour.h);
     SDL_Rect contour2 = SDL_CreerRect(contour.x + 1, contour.y + 1, contour.w, contour.h);
 
-    //Fond
+    ///On commence par créer le fond.
     if (SDL_SetRenderDrawColor(renderer, 200, 200, 200, SDL_ALPHA_OPAQUE) != 0){
         return 1;
     }
@@ -16,13 +27,13 @@ int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
         return 1;
     }
 
-    //Couleur
+    /// Ensuite on définit la couleur.
     if (SDL_SetRenderDrawColor(renderer, 200, 100, 100, SDL_ALPHA_OPAQUE) != 0){
         return 1;
     }
 
 
-    //Contour de la grille.
+    //Enfin on définit le contour de la grille.
     if (SDL_RenderDrawRect(renderer, &contour) != 0){
         return 1;
     }
@@ -101,10 +112,15 @@ int SDL_AfficherGrilleVide(SDL_Renderer * renderer, SDL_Rect contour){
     if (SDL_RenderDrawLine(renderer, contour.x , MARGIN + 8*contour.h/9, contour.x + contour.w, MARGIN + 8*contour.h/9) != 0){
         return 1;
     }
-
+    /**
+    \return 0
+    */
     return 0 ;
 }
-
+/**
+\fn int  gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload)
+\brief Cette fonction gère l'ecran de jeu.
+*/
 int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
 
     //SDL_Window * window = NULL ; //on garde la fenêtre de menu, pas besoin d'en créer une nouvelle
@@ -163,7 +179,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
             switch(event.type){
 
                 case SDL_MOUSEBUTTONDOWN :
-                    if (SDL_ClickInButton(event.button.x, event.button.y, contour)){ //Si le joueur clique dans la grille.
+                    if (SDL_ClickInButton(event.button.x, event.button.y, contour)){ ///Lorsque le joueur clique dans la grille, on vérifie dans quelle case il a joué pour s'assurer que son coup est valide.
                         for (i = 0 ; i < 9 ; i++){
                             for (j = 0 ; j < 9 ; j++){
                                 if (SDL_ClickInButton(event.button.x, event.button.y,grille[i][j])){ //On checke dans quelle case il a joué.
@@ -185,9 +201,12 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer){
         }
     }
 
-    //Libération de la mémoire
+    /// On libère la mémoire à la fin de la fonction.
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    /**
+    \return 0
+    */
     return 0;
 }

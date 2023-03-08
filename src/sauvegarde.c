@@ -1,9 +1,20 @@
 #include "../lib/sauvegarde.h"
-
+/**
+\file sauvegarde.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
+/**
+\fn void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc)
+\brief fonction qui sauvegarde la grille dans un fichier.
+\brief Prends en paramètre le fichier de sauvegarde, la grille de la partie, et le joueur à qui sera le prochain tour.
+*/
 /*Sauvegarde la grille dans un fichier.
 Prends en paramètre le fichier de sauvegarde, la grille de la partie, 
 et le joueur à qui sera le prochain tour.*/
-void save (char * name, int grille[N][N], int joueur, int xdc, int ydc){
+void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc){
     FILE * slot = fopen(name, "w");
     int i, j ;
 
@@ -16,16 +27,27 @@ void save (char * name, int grille[N][N], int joueur, int xdc, int ydc){
     fprintf(slot, "%d", joueur);
     fprintf(slot, "%d", xdc);
     fprintf(slot, "%d", ydc);
+
+    for (i = 0 ; i < M ; i++){
+        for (j = 0 ; j < M ; j++){
+            fprintf(slot, "%d", morpion[i][j]);
+        }
+    }
+
     fclose(slot);
 
 }
-
+/**
+\fn void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc)
+\brief fonction qui charge une sauvegarde à partir d'un fichier.
+\brief Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.
+*/
 /*Charge une sauvegarde à partir d'un fichier.
 Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.*/
-void load (char * name, int grille[N][N], int * joueur, int * xdc, int * ydc){
+void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc){
     FILE * slot = fopen(name, "r");
     int i, j ;
-    char c[83] ;
+    char c[92] ;
 
     if (slot == NULL){ //On vérifie que le fichier a été trouvé.
         printf("Aucune sauvegarde trouvée.");
@@ -78,21 +100,17 @@ void load (char * name, int grille[N][N], int * joueur, int * xdc, int * ydc){
         default : printf("Erreur\n");
     }
 
+    for (i = 0 ; i < M ; i++){
+        for (j = 0 ; j < M ; j++){
+            switch (c[84 + i*M + j]){
+                case '0' : morpion[i][j] = 0 ; break ;
+                case '1' : morpion[i][j] = 1 ; break ;
+                case '2' : morpion[i][j] = 2 ; break ;
+                default : printf("Erreur\n");
+            } 
+        }
+    }
+
     fclose(slot);
 }
 
-/*Demande les options de jeu au joueur.
-Retourne les options.*/
-void option (option_t * opt){
-    char c;
-
-    system("clear");
-
-    do {
-        printf("Voulez-vous activer l'auto-save ? y/n");
-        scanf("%c", &c);
-    } while (! (c == 'y' || c == 'n'));
-
-    if (c == 'y') opt->autosave = 1 ;
-    else opt->autosave = 0 ;
-}

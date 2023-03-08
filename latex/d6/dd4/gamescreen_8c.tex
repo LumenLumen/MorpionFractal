@@ -1,0 +1,78 @@
+\hypertarget{gamescreen_8c}{}\doxysection{Référence du fichier gamescreen.\+c}
+\label{gamescreen_8c}\index{gamescreen.c@{gamescreen.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gamescreen_8c_a32659bda9e08d05426cc67fc7019f39d}{gamescreen}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, int reload)
+\begin{DoxyCompactList}\small\item\em Cette fonction gère l\textquotesingle{}ecran de jeu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gamescreen_8c_a6d40503d944131f17961943b2d11bb98}{menuscreen}} (void)
+\begin{DoxyCompactList}\small\item\em Cette fonction gère la création et affichage de la page. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{gamescreen_8c_a32659bda9e08d05426cc67fc7019f39d}\label{gamescreen_8c_a32659bda9e08d05426cc67fc7019f39d}} 
+\index{gamescreen.c@{gamescreen.c}!gamescreen@{gamescreen}}
+\index{gamescreen@{gamescreen}!gamescreen.c@{gamescreen.c}}
+\doxysubsubsection{\texorpdfstring{gamescreen()}{gamescreen()}}
+{\footnotesize\ttfamily int gamescreen (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{reload }\end{DoxyParamCaption})}
+
+
+
+Cette fonction gère l\textquotesingle{}ecran de jeu. 
+
+si reload=1, on charge la partie sauvegardée sinon, on initialise une nouvelle grille.
+
+Lorsque le joueur clique dans la grille, on vérifie dans quelle case il a joué pour s\textquotesingle{}assurer que son coup est valide.
+
+Si le joueur clique sur le bouton de sauvegarde, sa partie sera sauvegardée.
+
+lorsqu\textquotesingle{}un des deux joueur remporte la partie on annonce le vainqueur, puis on revient à la page d\textquotesingle{}accueil.
+
+\begin{DoxyReturn}{Renvoie}
+0 à la fin de fonction.
+\end{DoxyReturn}
+\mbox{\Hypertarget{gamescreen_8c_a6d40503d944131f17961943b2d11bb98}\label{gamescreen_8c_a6d40503d944131f17961943b2d11bb98}} 
+\index{gamescreen.c@{gamescreen.c}!menuscreen@{menuscreen}}
+\index{menuscreen@{menuscreen}!gamescreen.c@{gamescreen.c}}
+\doxysubsubsection{\texorpdfstring{menuscreen()}{menuscreen()}}
+{\footnotesize\ttfamily menuscreen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Cette fonction gère la création et affichage de la page. 
+
+On initialise SDL pour l\textquotesingle{}aspect visuel.
+
+On initialise TTF pour l\textquotesingle{}aspect textuel.
+
+On crée la fenêtre de l\textquotesingle{}accueil.
+
+Il faut cliquer sur un bouton pour charger une nouvelle partie ou reprendre celle sauvegardée ou voire les options.
+
+On libère la mémoire si l\textquotesingle{}on clique sur le bouton \char`\"{}\+Quitter\char`\"{}
+
+\begin{DoxyReturn}{Renvoie}
+0 à la fin de fonction.
+\end{DoxyReturn}

@@ -4,35 +4,57 @@
 #include <stdio.h>
 #include <SDL2/SDL_ttf.h>
 #include "../lib/screens.h"
-
+/**
+\file menuscreen.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
 
 
 #define SCREEN_H 800
 #define SCREEN_W 800
-
-//En cas d'erreur, la fonction affiche l'erreur avec le message passé en paramètre
+/**
+\fn void SDL_ExitWithError(const char * message)
+\return EXIT_FAILURE
+\brief En cas d'erreur, la fonction affiche l'erreur avec le message passé en paramètre
+*/
 void SDL_ExitWithError(const char * message){
     SDL_Log("Erreur : %s > %s\n", message, SDL_GetError());
     SDL_Quit();
     exit(EXIT_FAILURE);
 }
+/**
+\fn SDL_Rect SDL_CreerRect(int x, int y, int w, int h)
+\brief Initialise un rectangle avec les valeurs passées en paramètre
 
-//Initialise un rectangle avec les valeurs passées en paramètre
+*/
 SDL_Rect SDL_CreerRect(int x, int y, int w, int h){
     SDL_Rect rectangle;
-    rectangle.x = x ;//Coordonnées x de l'angle haut gauche
-    rectangle.y = y ;//Corddonnées y de l'angle haut gauche 
-    rectangle.w = w ;//Longueur du rectangle
-    rectangle.h = h ;//Hauteur
+    rectangle.x = x ;///Coordonnées x de l'angle haut gauche
+    rectangle.y = y ;///Corddonnées y de l'angle haut gauche 
+    rectangle.w = w ;///Longueur du rectangle
+    rectangle.h = h ;///Hauteur
     return rectangle ;
+    /**
+    \return rectangle
+    */
 }
+/**
+\fn int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button)
+\brief Prend en paramètre les coordonnés d'un clic et un rectangle.
+\brief Renvoie vrai si le click est dans le rect, non sinon.
+\return ((mousex >= button.x && mousex <= button.x + button.w) && (mousey >= button.y && mousey <= button.y + button.h))
+*/
 
-//Prend en paramètre les coordonnés d'un clic et un rectangle.
-//Renvoie vrai si le click est dans le rect, non sinon.
 int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button){
     return ((mousex >= button.x && mousex <= button.x + button.w) && (mousey >= button.y && mousey <= button.y + button.h));
 }
-
+/**
+\fn menuscreen (void)
+\brief Cette fonction gère la création et affichage de la page.
+*/
 int menuscreen (void){
 
     SDL_Window * window = NULL ;
@@ -50,18 +72,18 @@ int menuscreen (void){
     SDL_Rect quitgame = SDL_CreerRect(SCREEN_W/3, 200 + 3*SCREEN_H/6, SCREEN_W/3, SCREEN_H/6);
     // A revoir si on resize la fenêtre
 
-    //Initialise SDL pour l'aspect visuel.
+    /// On initialise SDL pour l'aspect visuel.
     if(SDL_Init(SDL_INIT_VIDEO) != 0){
         SDL_ExitWithError("Initialisation SDL");
     }
 
-    //Initialise TTF
+    ///On initialise TTF pour l'aspect textuel.
 	if(TTF_Init() == -1) {
 		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
 		exit(EXIT_FAILURE);
 	}
 
-    //Création de la fenêtre.
+    ///On crée la fenêtre de l'accueil.
     window = SDL_CreateWindow("Morpion fractal", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_H, SCREEN_W, 0);
     if (window == NULL){
         SDL_ExitWithError("Création fenêtre échouée"); 
@@ -169,7 +191,8 @@ int menuscreen (void){
         while(SDL_PollEvent(&event)){ 
 
             switch(event.type){
-                
+                ///Il faut cliquer sur un bouton pour charger une nouvelle partie ou reprendre celle sauvegardée ou voire les options.
+
                 case SDL_MOUSEBUTTONDOWN :
                     //clic sur le bouton nouvelle partie
                     if (SDL_ClickInButton(event.button.x, event.button.y, newgame)){
@@ -202,10 +225,13 @@ int menuscreen (void){
     }
 
 
-    //Libération de la mémoire
+    /// On lbère la mémoire si l'on clique sur le bouton "Quitter".
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
+    /**
+    \return  0 à la fin de fonction.
+    */
     return 0;
 }
