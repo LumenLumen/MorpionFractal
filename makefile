@@ -14,6 +14,9 @@ INCS=-I${SDL_INC_DIR}
 SRC=src/
 HDIR=lib/
 PROG=morpionfractal
+TEST=tests/
+
+
 
 all: game
 
@@ -41,9 +44,25 @@ morpionfonction.o: ${SRC}morpionfonction.c ${HDIR}morpion.h
 sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 	${CC} -c ${FLAGS} ${SRC}sauvegarde.c -o sauvegarde.o ${LIBS} ${INCS}
 
+
+
+test : test_morpionfonction
+
+test_morpionfonction : ${TEST}test_morpionfonction.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_morpionfonction.o morpionfonction.o -o test_morpionfonction
+	
+test_morpionfonction.o : ${TEST}test_morpionfonction.c
+	${CC} -c ${FLAGS} ${TEST}test_morpionfonction.c -o test_morpionfonction.o
+
+
+
+
 clean:
 	rm -f ${PROG}
 	rm -f *.o
+	rm -f ./tests/*.o
+
+
 
 cleano:
 	rm -f *.o
