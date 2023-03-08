@@ -98,69 +98,6 @@ int coog_to_carr (int x, int y){
     return -1 ;
 }
 
-/*Effectue les affichages du début de tour et vérifie où le joueur peut jouer. 
-Prend en paramètre le joueur et les coordonnées du dernier coup joué, ainsi que le morpion.
-Retourne le numéro de la case (0-8) où le joueur peut jouer, 9 si partout.*/
-int debut_de_tour_term(int xdc, int ydc, int joueur, int morpion[M][M]){
-
-    //A qui est le tour.
-    if (joueur == X)
-        printf("C'est au tour de X.\n");
-    else
-        printf("C'est au tour de O.\n");
-    
-
-    if (xdc == -1){ //C'est le premier tour.
-        printf("Vous devez jouer dans le carré central.\n");
-        return 4 ;
-    }
-    //Si le joueur est renvoyé sur une case déjà gagnée par un joueur.
-    else if ( morpion[(xdc)%M][(ydc)%M] != 0 ){
-        printf("Vous pouvez jouer sur n'importe quelle case libre.\n");
-        return 9;
-    }
-    else {
-        printf("Vous devez jouer dans le carré ligne %d, colonne %d.\n", (xdc)%M +1, (ydc)%M +1);
-        return (xdc)%M * 3 + (ydc)%M ;
-    }
-
-    return -1;
-}
-
-/*Demande le coup au joueur, vérifie qu'il est valide.
-Prend en paramètre le carré jouable, le joueur dont c'est le tour, la grille, l'adresse du dernier coup joué*/
-void tour_du_joueur_term(int carre_jouable, int * joueur, int grille[N][N], int * xdc, int * ydc){
-    int x, y ;
-
-    printf("Sur quelle ligne souhaitez-vous jouer (1-9) ? ");
-    scanf("%d", &x);
-    printf("Sur quelle colonne souhaitez-vous jouer (1-9) ?");
-    scanf("%d", &y);
-    x--;
-    y--;
-
-    if ((x<0 || x>8) && (y<0 || y>8)){
-        printf("Coordonnées non valides.\n");
-        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
-    }
-    else if((coog_to_carr(x,y) != carre_jouable) && (carre_jouable != 9)){
-        printf("Carré non valide.\n");
-        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
-    }
-    else if (grille[x][y] != 0){
-        printf("La case est déjà occupée.\n") ;
-        tour_du_joueur_term(carre_jouable,joueur,grille,xdc,ydc);
-    }
-    else {
-        *xdc = x ;
-        *ydc = y ;//Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
-        grille[x][y] = *joueur ; //On ajoute la valeur du joueur à la grille à l'endroit joué.
-        //Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.
-        if (*joueur == X) *joueur = O ;
-        else *joueur = X ;
-    }
-}
-
 /*Vérifie que si un carré a été rempli grâce au dernier coup, rempli le morpion 3*3 si nécessaire.
 Prends en paramètre la grille, le morpion, et les derniers coordonnées joués.*/
 int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
@@ -188,57 +125,113 @@ int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     return i;
 }
 
-
-/*Lance la partie de morpion. 
-Prends en paramètre VRAI si une partie sauvegardée doit ếtre chargée, FAUX sinon.
-Prends en paramètre les options de jeu.*/
-void morpion_term (int reload, option_t opt){
-    int grille[N][N];
-    int morpion[M][M];
-
-    int joueur = 1 ;
-    int * xdc = malloc(sizeof(int)); //Ligne du dernier coup ;
-    int * ydc = malloc(sizeof(int)); //Colonne du dernier coup ;
-    int carre = -1;
-    int vainqueur = 0 ;
-
-    (* xdc) = -1 ;
-
-    if (reload)
-        load_term("save.txt", grille, &joueur, xdc, ydc);
-    else {
-        init_grille(grille);
-        init_morpion(morpion);
-    }
-
-    while (! vainqueur){ //Tant qu'il n'y a pas de vainqueur.
-
-        system("clear");
-        afficher_grille(grille);
-
-        carre = debut_de_tour_term(*xdc,*ydc,joueur,morpion);
-        tour_du_joueur_term(carre, &joueur, grille, xdc, ydc);
-
-        check_carre(grille, morpion, *xdc, *ydc);
-        vainqueur = morpiongagne(morpion);
-
-        if (opt.autosave) save_term("save.txt", grille, joueur, *xdc, *ydc);
-    }
-
-    system("clear");
-    afficher_grille(grille);
-
-    free(xdc);
-    free(ydc);
-
-    if (vainqueur == X){
-        printf("Le vainqueur est X !");
-        sleep(3);
-        system("clear");
+/*Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup*/
+int predict_rect(int xdc, int ydc, int * x, int * y){
+    if (xdc == -1){ //Premier coup
+        *x = 1 ;
+        *y = 1 ;
     }
     else {
-        printf("Le vainqueur est O !");
-        sleep(3);
-        system("clear");
+        *x = xdc%M ;
+        *y = ydc%M ;
     }
+
+    return 0;
+}
+
+/*Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
+Retourne -1 si le coup n'est pas valide, 0 sinon.*/
+int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
+
+    int carre = -1 ;
+
+    if (*xdc == -1){ //C'est le premier tour.
+        carre =  4 ;
+    }
+    //Si le joueur est renvoyé sur une case déjà gagnée par un joueur.
+    else if ( morpion[(*xdc)%M][(*ydc)%M] != 0 ){
+        carre = 9;
+    }
+    else {
+        carre = (*xdc)%M * 3 + (*ydc)%M ;
+    }
+
+    //printf("Contenu de la case visée : %i en x=%i et y=%i avec carre=%i et morpion=%i ",grille[x][y],x,y,carre,morpion[x/M][y/M]);
+    if((coog_to_carr(x,y) != carre) && (carre != 9)){
+        return 3 ;
+    }
+    else if (grille[x][y] != 0){
+        return 4;
+    }
+    else if (carre == 9 && morpion[x/M][y/M] != 0){
+        return 5;
+    }
+    else {
+        *xdc = x ;
+        *ydc = y ;//Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
+        grille[x][y] = *joueur ; //On ajoute la valeur du joueur à la grille à l'endroit joué.
+        //Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.
+        if (*joueur == X) *joueur = O ;
+        else *joueur = X ;
+        return 0 ; 
+    }
+
+    return -1 ;
+}
+
+/*Prend en paramètre une matrice 3*3, retourne VRAI si le carré est plein, FAUX s'il reste de la place.*/
+int carre_plein(int grille[N][N], int x, int y){
+    int cpt = 0 ;
+
+    //On se place sur la première case du carré.
+    while (x%3 != 0) x--;
+    while (y%3 != 0) y--;
+
+    for (int i = 0 ; i < M ; i ++){
+        for(int j = 0 ; j < M ; j++){
+            if (grille[x+i][y+j] != 0) cpt++ ;
+        }
+    }
+
+    if (cpt == 9) return 1 ;
+    else return 0 ;
+}
+/*Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
+Retourne -1 si le coup n'est pas valide, 0 sinon.*/
+int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
+
+    int carre = -1 ;
+    int xx, yy ;
+    predict_rect(*xdc, *ydc, &xx, &yy);
+
+    if (*xdc == -1){ //C'est le premier tour.
+        carre =  4 ;
+    }
+    else if (carre_plein(grille,xx*M, yy*M)){
+        carre = 9;
+    }
+    else { //Sinon
+        carre = (*xdc)%M * 3 + (*ydc)%M ;
+    }
+
+    if((coog_to_carr(x,y) != carre) && (carre != 9)){// Si le coup joué n'est pas dans le bon carré
+        return 3 ;
+    }
+    else if (grille[x][y] != 0){ //Si la case n'est pas déjà prise
+        return 4;
+    }
+    else if (carre_plein(grille, x, y)){ //Si la case où veut jouer le joueur est pleine.
+        return 5 ;
+    }
+    else {
+        *xdc = x ;
+        *ydc = y ;//Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
+        grille[x][y] = *joueur ; //On ajoute la valeur du joueur à la grille à l'endroit joué.
+        //Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.
+        if (*joueur == X) *joueur = O ;
+        else *joueur = X ;
+        return 0 ; 
+    }
+
+    return -1 ;
 }
