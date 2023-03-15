@@ -66,12 +66,6 @@ test_screens : ${TEST}test_screens.o screens.o morpionfonction.o
 test_screens.o : ${TEST}test_screens.c
 	${CC} -c ${FLAGS} ${TEST}test_screens.c -o test_screens.o
 
-test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
-	${CC} ${FLAGS} ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o -o test_sauvegarde
-	
-test_sauvegarde.o : ${TEST}test_sauvegarde.c
-	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
-
 
 clean:
 	rm -f ${PROG}
