@@ -46,7 +46,7 @@ sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 
 
 
-test : test_morpionfonction
+test : test_morpionfonction test_sauvegarde
 
 test_morpionfonction : ${TEST}test_morpionfonction.o morpionfonction.o
 	${CC} ${FLAGS} ${TEST}test_morpionfonction.o morpionfonction.o -o test_morpionfonction
@@ -55,6 +55,11 @@ test_morpionfonction.o : ${TEST}test_morpionfonction.c
 	${CC} -c ${FLAGS} ${TEST}test_morpionfonction.c -o test_morpionfonction.o
 
 
+test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o -o test_sauvegarde
+	
+test_sauvegarde.o : ${TEST}test_sauvegarde.c
+	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
 
 
 clean:
