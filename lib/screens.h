@@ -17,7 +17,6 @@ typedef struct option_s {
 } option_t ;
 
 
-void SDL_ExitWithError(const char * message);
 SDL_Rect SDL_CreerRect(int x, int y, int w, int h);
 int SDL_ClickInButton(int mousex, int mousey, SDL_Rect button);
 int menuscreen (SDL_Window * window, SDL_Renderer * renderer, option_t *);

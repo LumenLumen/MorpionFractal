@@ -54,6 +54,17 @@ test_morpionfonction : ${TEST}test_morpionfonction.o morpionfonction.o
 test_morpionfonction.o : ${TEST}test_morpionfonction.c
 	${CC} -c ${FLAGS} ${TEST}test_morpionfonction.c -o test_morpionfonction.o
 
+test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o -o test_sauvegarde
+	
+test_sauvegarde.o : ${TEST}test_sauvegarde.c
+	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
+
+test_screens : ${TEST}test_screens.o screens.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_screens.o screens.o morpionfonction.o -o test_screens
+	
+test_screens.o : ${TEST}test_screens.c
+	${CC} -c ${FLAGS} ${TEST}test_screens.c -o test_screens.o
 
 test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
 	${CC} ${FLAGS} ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o -o test_sauvegarde
