@@ -19,8 +19,8 @@ int main(){
     printf("Morpion avant sauvegarde :\n");
     afficher_morpion(morpion);
     printf("Sauvegarde avec joueur=1 et (x,y) dernier coup=(3,4)\n\n");
-    save("test_save1",grille,morpion,1,3,4);
-    FILE * slot = fopen("test_save1","r");
+    save("test_save1.txt",grille,morpion,1,3,4);
+    FILE * slot = fopen("test_save1.txt","r");
     char savedata[92];
     fscanf(slot,"%s\n",savedata);
     printf("Données de sauvegarde 1 = %s\n",savedata);
@@ -38,11 +38,11 @@ int main(){
     afficher_morpion(morpion);
     int joueur,xdc,ydc;
     printf("Initialistion variables de jeu, joueur = %i et coordonnées dernier coup = (%i, %i)\n",joueur,xdc,ydc);
-    printf("Chargement avec fichier test_save2\n");
-    slot = fopen("test_save2","r");
+    printf("Chargement avec fichier test_save2.txt\n");
+    slot = fopen("test_save2.txt","r");
     fscanf(slot,"%s\n",savedata);
     printf("Données de sauvegarde 2 = %s\n",savedata);
-    load("test_save2",grille,morpion,&joueur,&xdc,&ydc);
+    load("test_save2.txt",grille,morpion,&joueur,&xdc,&ydc);
     printf("Nouvelles variables de jeu, joueur = %i et coordonnées dernier coup = (%i, %i)\n",joueur,xdc,ydc);
     printf("Grille après chargement :\n");
     afficher_grille(grille);
