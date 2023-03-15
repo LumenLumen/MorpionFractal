@@ -67,3 +67,7 @@ Lundi 6 Mars
 
 - Fenêtre des options opérationnelle.
 
+Mercredi 8 Mars
+
+- Début de tests unitaires (sauvegarde et fonctions morpions)
+- Suite commentaires doxy
