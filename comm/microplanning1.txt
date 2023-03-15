@@ -1,0 +1,73 @@
+MICROPLANNING
+
+07/02/2023
+
+Lucie avait commencer le projet chez elle.
+Elle a travaillé sur le point c et sur sdl.
+Pendant cette séance on a poursuivit notre travail sur sdl notamment avec la bibliothèque ttf pour écrire du texte.
+On a fait un makefile. 
+
+
+08/02/2023
+ 
+installation SDL_ttf, SDL_image, SDL_mixer, sur tous les PCs
+test ttf
+reorganisation des fichiers
+Nous avons fait les boutons pour notre menu en pixel art. On a essayer d'afficher nos images sur notre menu. 
+
+
+09/02/2023
+On a fait du doxygène pour commenter les fichiers.
+On a corrriger le makefile.
+On a fait des liens entre les différentes fenêtres.
+
+Bourgeois Mathilde, Antout Amandine, Barbier Lucie, Boulanger Damien 
+
+
+Vendredi 17 Fev
+
+- changement de l'affichage pour alterner entre croix et rond
+- vérification qu'une case du grand morpion a été complétée + vérification de victoire
+- problème dans le traitement des données, les axes x et y sont inversés -> Débuggage fait avec succès !
+- Correction du bug qui fait qu'on ne peut pas envoyer un joueur sur une case qui a déjà été joué -> Okay, on est trop fort !
+
+
+Dimanche 26 Fev
+
+- debuggage affichage de texte (fermeture de la police alors qu'il ne fallait pas)
+- changement chartre graphique (bleu aqua)
+- création d'un bouton de sauvegarde
+- debuggage mauvais vainqueur affiché
+- debuggage le programme se termine quand le jeu se finit
+
+
+Mercredi 1 Mars
+
+- Uniformisation de la police
+- Affichage de grosses images quand un carré est gagné.
+- Documentation finie
+- Mathilde et Amandine ont servi de cobayes.
+
+Vendredi 3 Mars
+
+- Renommage de quelques fichiers.
+- Séparation des fonctions menuscreen et gamescreen en deux fichiers (-> modification du makefile). J'ai également déplacé quelques fonctions (valideCase & predict initialement dans screens.c (anciennement menuscreen.c) vers morpionfonctions.c).
+- Finition de l'affichage du menu (ajout des textes manquants).
+- Une fois une partie finie, le jeu revient à l'écran d'accueil après qu'un clic ait été effectué.
+- Suppression des fonctions *_term du code. 
+
+Samedi 4 Mars
+
+- Ajout d'un fichier contenant la fonction qui gère les options (pas fini).
+- J'ai mis à jour le type option_t, il contient deux booléens (auto-sauvegarde & variante) et deux char * (pour les noms des images pour les croix et les ronds).
+- Edition de certains morceaux de fonction pour éviter les redondances. J'ai aussi ajouté beaucoup de return (j'ai essayé de les faire cohérents mais je pense qu'il faudra revérifier). 
+- Ajout de plusieurs .png
+
+Lundi 6 Mars
+
+- Fenêtre des options opérationnelle.
+
+Mercredi 8 Mars
+
+- Début de tests unitaires (sauvegarde et fonctions morpions)
+- Suite commentaires doxy
