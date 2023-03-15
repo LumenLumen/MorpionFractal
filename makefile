@@ -6,7 +6,7 @@ SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
 
-fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o
+fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o
 
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
@@ -44,9 +44,12 @@ morpionfonction.o: ${SRC}morpionfonction.c ${HDIR}morpion.h
 sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 	${CC} -c ${FLAGS} ${SRC}sauvegarde.c -o sauvegarde.o ${LIBS} ${INCS}
 
+ia.o: ${SRC}ia.c ${HDIR}morpion.h
+	${CC} -c ${FLAGS} ${SRC}ia.c -o ia.o ${LIBS} ${INCS}
 
 
-test : test_morpionfonction test_sauvegarde
+
+test : test_morpionfonction test_sauvegarde test_ia
 
 test_morpionfonction : ${TEST}test_morpionfonction.o morpionfonction.o
 	${CC} ${FLAGS} ${TEST}test_morpionfonction.o morpionfonction.o -o test_morpionfonction
@@ -60,11 +63,11 @@ test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
 test_sauvegarde.o : ${TEST}test_sauvegarde.c
 	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
 
-test_screens : ${TEST}test_screens.o screens.o morpionfonction.o
-	${CC} ${FLAGS} ${TEST}test_screens.o screens.o morpionfonction.o -o test_screens
+test_ia : ${TEST}test_ia.o ia.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_ia.o ia.o morpionfonction.o -o test_ia
 	
-test_screens.o : ${TEST}test_screens.c
-	${CC} -c ${FLAGS} ${TEST}test_screens.c -o test_screens.o
+test_ia.o : ${TEST}test_ia.c
+	${CC} -c ${FLAGS} ${TEST}test_ia.c -o test_ia.o
 
 
 clean:
@@ -76,3 +79,4 @@ clean:
 
 cleano:
 	rm -f *.o
+	rm -f ./tests/*.o
