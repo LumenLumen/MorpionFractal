@@ -1,0 +1,131 @@
+\hypertarget{menuscreen_8c}{}\doxysection{Référence du fichier menuscreen.\+c}
+\label{menuscreen_8c}\index{menuscreen.c@{menuscreen.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}{SDL\+\_\+\+Exit\+With\+Error}} (const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em En cas d\textquotesingle{}erreur, la fonction affiche l\textquotesingle{}erreur avec le message passé en paramètre. \end{DoxyCompactList}\item 
+SDL\+\_\+\+Rect \mbox{\hyperlink{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}{SDL\+\_\+\+Creer\+Rect}} (int x, int y, int w, int h)
+\begin{DoxyCompactList}\small\item\em Initialise un rectangle avec les valeurs passées en paramètre. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}{SDL\+\_\+\+Click\+In\+Button}} (int mousex, int mousey, SDL\+\_\+\+Rect button)
+\begin{DoxyCompactList}\small\item\em Prend en paramètre les coordonnés d\textquotesingle{}un clic et un rectangle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{menuscreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}\label{menuscreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}} 
+int \mbox{\hyperlink{menuscreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}{SDL\+\_\+\+Afficher\+Grille\+Vide}} (SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Rect contour)
+\begin{DoxyCompactList}\small\item\em fonction qui affiche la grille et definie sa couleur. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_a6ede9c3ee7801b274c4aff905c49c7e8}{SDL\+\_\+ajouter\+\_\+symbole\+\_\+dans\+\_\+case}} (SDL\+\_\+\+Rect casegrille, SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Texture $\ast$croix)
+\begin{DoxyCompactList}\small\item\em fonction qui prends en paramètre la case, le rendu et le symbole à afficher pour ajouter un symbole dans la grille. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_aab976b507dfaeee5b3adb0f59dd6e392}{SDL\+\_\+\+Afficher\+Texte}} (SDL\+\_\+\+Renderer $\ast$renderer, TTF\+\_\+\+Font $\ast$police, SDL\+\_\+\+Color couleur, char $\ast$chaine)
+\begin{DoxyCompactList}\small\item\em affiche du texte en dessous de la grille lors de la partie. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_a40684ed46fd41bccc384146d928798e9}{valide\+Case}} (int $\ast$joueur, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$xdc, int $\ast$ydc, int x, int y)
+\begin{DoxyCompactList}\small\item\em Fonction qui prends en paramètre le joueur dont c\textquotesingle{}est le tour, la grille 9$\ast$9, le morpion 3$\ast$3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{menuscreen_8c_aab976b507dfaeee5b3adb0f59dd6e392}\label{menuscreen_8c_aab976b507dfaeee5b3adb0f59dd6e392}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_AfficherTexte@{SDL\_AfficherTexte}}
+\index{SDL\_AfficherTexte@{SDL\_AfficherTexte}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_AfficherTexte()}{SDL\_AfficherTexte()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Afficher\+Texte (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{TTF\+\_\+\+Font $\ast$}]{police,  }\item[{SDL\+\_\+\+Color}]{couleur,  }\item[{char $\ast$}]{chaine }\end{DoxyParamCaption})}
+
+
+
+affiche du texte en dessous de la grille lors de la partie. 
+
+\begin{DoxyReturn}{Renvoie}
+un entier 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_a6ede9c3ee7801b274c4aff905c49c7e8}\label{menuscreen_8c_a6ede9c3ee7801b274c4aff905c49c7e8}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_ajouter\_symbole\_dans\_case@{SDL\_ajouter\_symbole\_dans\_case}}
+\index{SDL\_ajouter\_symbole\_dans\_case@{SDL\_ajouter\_symbole\_dans\_case}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ajouter\_symbole\_dans\_case()}{SDL\_ajouter\_symbole\_dans\_case()}}
+{\footnotesize\ttfamily SDL\+\_\+ajouter\+\_\+symbole\+\_\+dans\+\_\+case (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect}]{casegrille,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{SDL\+\_\+\+Texture $\ast$}]{croix }\end{DoxyParamCaption})}
+
+
+
+fonction qui prends en paramètre la case, le rendu et le symbole à afficher pour ajouter un symbole dans la grille. 
+
+\begin{DoxyReturn}{Renvoie}
+0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}\label{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_ClickInButton@{SDL\_ClickInButton}}
+\index{SDL\_ClickInButton@{SDL\_ClickInButton}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ClickInButton()}{SDL\_ClickInButton()}}
+{\footnotesize\ttfamily int SDL\+\_\+\+Click\+In\+Button (\begin{DoxyParamCaption}\item[{int}]{mousex,  }\item[{int}]{mousey,  }\item[{SDL\+\_\+\+Rect}]{button }\end{DoxyParamCaption})}
+
+
+
+Prend en paramètre les coordonnés d\textquotesingle{}un clic et un rectangle. 
+
+Renvoie vrai si le click est dans le rect, non sinon. \begin{DoxyReturn}{Renvoie}
+((mousex $>$= button.\+x \&\& mousex $<$= button.\+x + button.\+w) \&\& (mousey $>$= button.\+y \&\& mousey $<$= button.\+y + button.\+h)) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}\label{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_CreerRect@{SDL\_CreerRect}}
+\index{SDL\_CreerRect@{SDL\_CreerRect}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_CreerRect()}{SDL\_CreerRect()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect SDL\+\_\+\+Creer\+Rect (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+
+
+Initialise un rectangle avec les valeurs passées en paramètre. 
+
+\begin{DoxyReturn}{Renvoie}
+rectangle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}\label{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_ExitWithError@{SDL\_ExitWithError}}
+\index{SDL\_ExitWithError@{SDL\_ExitWithError}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ExitWithError()}{SDL\_ExitWithError()}}
+{\footnotesize\ttfamily void SDL\+\_\+\+Exit\+With\+Error (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+En cas d\textquotesingle{}erreur, la fonction affiche l\textquotesingle{}erreur avec le message passé en paramètre. 
+
+\begin{DoxyReturn}{Renvoie}
+EXIT\+\_\+\+FAILURE 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_a40684ed46fd41bccc384146d928798e9}\label{menuscreen_8c_a40684ed46fd41bccc384146d928798e9}} 
+\index{menuscreen.c@{menuscreen.c}!valideCase@{valideCase}}
+\index{valideCase@{valideCase}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{valideCase()}{valideCase()}}
+{\footnotesize\ttfamily valide\+Case (\begin{DoxyParamCaption}\item[{int $\ast$}]{joueur,  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int $\ast$}]{xdc,  }\item[{int $\ast$}]{ydc,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Fonction qui prends en paramètre le joueur dont c\textquotesingle{}est le tour, la grille 9$\ast$9, le morpion 3$\ast$3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée. 
+
+Si le joueur est renvoyé sur une case déjà gagnée par un joueur il peut jouer ou il veut.
+
+On ajoute la valeur valide du joueur à la grille à l\textquotesingle{}endroit joué.
+
+Si le joueur du coup est X, alors on passe au tour de O, sinon c\textquotesingle{}est le tour de X.
+
+\begin{DoxyReturn}{Renvoie}
+-\/1 si le coup n\textquotesingle{}est pas valide, 0 sinon
+\end{DoxyReturn}

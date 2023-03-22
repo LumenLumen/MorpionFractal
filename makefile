@@ -6,7 +6,7 @@ SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
 
-fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o
+fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o screen_rdj.o
 
 LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
 INCS=-I${SDL_INC_DIR}
@@ -47,6 +47,8 @@ sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 ia.o: ${SRC}ia.c ${HDIR}morpion.h
 	${CC} -c ${FLAGS} ${SRC}ia.c -o ia.o ${LIBS} ${INCS}
 
+screen_rdj.o: ${SRC}screen_rdj.c ${HDIR}screens.h
+	${CC} -c ${FLAGS} ${SRC}screen_rdj.c -o screen_rdj.o ${LIBS} ${INCS}
 
 
 test : test_morpionfonction test_sauvegarde test_ia
