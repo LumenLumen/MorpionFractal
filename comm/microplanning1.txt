@@ -15,7 +15,6 @@ test ttf
 reorganisation des fichiers
 Nous avons fait les boutons pour notre menu en pixel art. On a essayer d'afficher nos images sur notre menu. 
 
-
 09/02/2023
 On a fait du doxygène pour commenter les fichiers.
 On a corrriger le makefile.

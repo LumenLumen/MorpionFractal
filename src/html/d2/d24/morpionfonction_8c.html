@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>morpion fractal: Référence du fichier morpionfonction.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">morpion fractal
+   </div>
+   <div id="projectbrief">C&#39;est une partie de morpion divisée en partie qui sont des versions réduites de la forme initiale.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search",'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle"><div class="title">Référence du fichier morpionfonction.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>programme ...  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;../lib/morpion.h&quot;</code><br />
+<code>#include &quot;../lib/sauvegarde.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ad7762f1ca42c772c167565501097242a"><td class="memItemLeft" align="right" valign="top"><a id="ad7762f1ca42c772c167565501097242a" name="ad7762f1ca42c772c167565501097242a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_grille</b> (int grille[N][N])</td></tr>
+<tr class="memdesc:ad7762f1ca42c772c167565501097242a"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui initialise la grille . <br /></td></tr>
+<tr class="separator:ad7762f1ca42c772c167565501097242a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e3b794123276a2aaaf6f3a67a55ca1"><td class="memItemLeft" align="right" valign="top"><a id="a38e3b794123276a2aaaf6f3a67a55ca1" name="a38e3b794123276a2aaaf6f3a67a55ca1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_morpion</b> (int grille[M][M])</td></tr>
+<tr class="memdesc:a38e3b794123276a2aaaf6f3a67a55ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui initialise le morpion. <br /></td></tr>
+<tr class="separator:a38e3b794123276a2aaaf6f3a67a55ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57450dff5b909082c00f08319704a7ca"><td class="memItemLeft" align="right" valign="top"><a id="a57450dff5b909082c00f08319704a7ca" name="a57450dff5b909082c00f08319704a7ca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_grille</b> (int grille[N][N])</td></tr>
+<tr class="memdesc:a57450dff5b909082c00f08319704a7ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui affiche la grille. <br /></td></tr>
+<tr class="separator:a57450dff5b909082c00f08319704a7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace760c9d0d3508248877ae94a1c0b94"><td class="memItemLeft" align="right" valign="top"><a id="aace760c9d0d3508248877ae94a1c0b94" name="aace760c9d0d3508248877ae94a1c0b94"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_morpion</b> (int grille[M][M])</td></tr>
+<tr class="memdesc:aace760c9d0d3508248877ae94a1c0b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui affiche le morpion. <br /></td></tr>
+<tr class="separator:aace760c9d0d3508248877ae94a1c0b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3833ce7e8b303bef773a076bee0bee21"><td class="memItemLeft" align="right" valign="top"><a id="a3833ce7e8b303bef773a076bee0bee21" name="a3833ce7e8b303bef773a076bee0bee21"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>morpiongagne</b> (int grille[M][M])</td></tr>
+<tr class="separator:a3833ce7e8b303bef773a076bee0bee21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a853967109ff35bd916cb24ca6050aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#a9a853967109ff35bd916cb24ca6050aa">coog_to_carr</a> (int x, int y)</td></tr>
+<tr class="memdesc:a9a853967109ff35bd916cb24ca6050aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui prends en paramètre des coordonnées [0;8][0;8].  <a href="../../d2/d24/morpionfonction_8c.html#a9a853967109ff35bd916cb24ca6050aa">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9a853967109ff35bd916cb24ca6050aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc8e5940d9e5c0e9085887760bd529c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#abc8e5940d9e5c0e9085887760bd529c7">check_carre</a> (int grille[N][N], int morpion[M][M], int xdc, int ydc)</td></tr>
+<tr class="memdesc:abc8e5940d9e5c0e9085887760bd529c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3*3 si nécessaire.  <a href="../../d2/d24/morpionfonction_8c.html#abc8e5940d9e5c0e9085887760bd529c7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abc8e5940d9e5c0e9085887760bd529c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a7c310c9897a6eb1bd3efb064ac9b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#ae3a7c310c9897a6eb1bd3efb064ac9b5">predict_rect</a> (int xdc, int ydc, int *x, int *y)</td></tr>
+<tr class="memdesc:ae3a7c310c9897a6eb1bd3efb064ac9b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup.  <a href="../../d2/d24/morpionfonction_8c.html#ae3a7c310c9897a6eb1bd3efb064ac9b5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae3a7c310c9897a6eb1bd3efb064ac9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a151226b7305c52940001ed87ac80bba5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#a151226b7305c52940001ed87ac80bba5">valideCase</a> (int *joueur, int grille[N][N], int morpion[M][M], int *xdc, int *ydc, int x, int y)</td></tr>
+<tr class="memdesc:a151226b7305c52940001ed87ac80bba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée.  <a href="../../d2/d24/morpionfonction_8c.html#a151226b7305c52940001ed87ac80bba5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a151226b7305c52940001ed87ac80bba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a5e7013bc8496684d2c2c08ef24f4bd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#a0a5e7013bc8496684d2c2c08ef24f4bd">carre_plein</a> (int grille[N][N], int x, int y)</td></tr>
+<tr class="memdesc:a0a5e7013bc8496684d2c2c08ef24f4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prend en paramètre une matrice 3*3.  <a href="../../d2/d24/morpionfonction_8c.html#a0a5e7013bc8496684d2c2c08ef24f4bd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0a5e7013bc8496684d2c2c08ef24f4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487e7c8b8444008314825f06cd44c8db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d24/morpionfonction_8c.html#a487e7c8b8444008314825f06cd44c8db">valideCase_var</a> (int *joueur, int grille[N][N], int morpion[M][M], int *xdc, int *ydc, int x, int y)</td></tr>
+<tr class="memdesc:a487e7c8b8444008314825f06cd44c8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée.  <a href="../../d2/d24/morpionfonction_8c.html#a487e7c8b8444008314825f06cd44c8db">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a487e7c8b8444008314825f06cd44c8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p >programme ... </p>
+<dl class="section author"><dt>Auteur</dt><dd>Groupe morpion fractal </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>9 février 2023 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a0a5e7013bc8496684d2c2c08ef24f4bd" name="a0a5e7013bc8496684d2c2c08ef24f4bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a5e7013bc8496684d2c2c08ef24f4bd">&#9670;&nbsp;</a></span>carre_plein()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int carre_plein </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>grille</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prend en paramètre une matrice 3*3. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>VRAI si le carré est plein, FAUX s'il reste de la place. </dd></dl>
+
+</div>
+</div>
+<a id="abc8e5940d9e5c0e9085887760bd529c7" name="abc8e5940d9e5c0e9085887760bd529c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc8e5940d9e5c0e9085887760bd529c7">&#9670;&nbsp;</a></span>check_carre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int check_carre </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>grille</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>morpion</em>[M][M], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xdc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ydc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3*3 si nécessaire. </p>
+<p >Prends en paramètre la grille, le morpion, et les derniers coordonnées joués. </p>
+<p >On se place sur la première case du carré où le dernier coup a été joué.</p>
+<p >On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.</p>
+<dl class="section return"><dt>Renvoie</dt><dd>la valeur de i</dd></dl>
+
+</div>
+</div>
+<a id="a9a853967109ff35bd916cb24ca6050aa" name="a9a853967109ff35bd916cb24ca6050aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a853967109ff35bd916cb24ca6050aa">&#9670;&nbsp;</a></span>coog_to_carr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int coog_to_carr </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui prends en paramètre des coordonnées [0;8][0;8]. </p>
+<p >On suppose les coordonnés corrects. </p><dl class="section return"><dt>Renvoie</dt><dd>le carré (0-8) dans lequel elles se trouvent. </dd></dl>
+
+</div>
+</div>
+<a id="ae3a7c310c9897a6eb1bd3efb064ac9b5" name="ae3a7c310c9897a6eb1bd3efb064ac9b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3a7c310c9897a6eb1bd3efb064ac9b5">&#9670;&nbsp;</a></span>predict_rect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int predict_rect </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xdc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ydc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>0 </dd></dl>
+
+</div>
+</div>
+<a id="a151226b7305c52940001ed87ac80bba5" name="a151226b7305c52940001ed87ac80bba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a151226b7305c52940001ed87ac80bba5">&#9670;&nbsp;</a></span>valideCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int valideCase </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>grille</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>morpion</em>[M][M], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>xdc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>ydc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée. </p>
+<p >Si le joueur est renvoyé sur une case déjà gagnée par un joueur.</p>
+<p >Les coordonnées sont valides et deviennent le nouveau dernier coup joué.</p>
+<p >On ajoute la valeur du joueur à la grille à l'endroit joué.</p>
+<p >Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.</p>
+<dl class="section return"><dt>Renvoie</dt><dd>-1 si le coup n'est pas valide, 0 sinon</dd></dl>
+
+</div>
+</div>
+<a id="a487e7c8b8444008314825f06cd44c8db" name="a487e7c8b8444008314825f06cd44c8db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487e7c8b8444008314825f06cd44c8db">&#9670;&nbsp;</a></span>valideCase_var()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int valideCase_var </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>grille</em>[N][N], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>morpion</em>[M][M], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>xdc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>ydc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée. </p>
+<p >Si le coup joué n'est pas dans le bon carré</p>
+<p >Si la case n'est pas déjà prise</p>
+<p >Si la case où veut jouer le joueur est pleine.</p>
+<p >Les coordonnées sont valides et deviennent le nouveau dernier coup joué.</p>
+<p >On ajoute la valeur du joueur à la grille à l'endroit joué.</p>
+<p >Si le joueur du coup est X, alors on passe au tour de O, sinon c'est le tour de X.</p>
+<dl class="section return"><dt>Renvoie</dt><dd>-1 si le coup n'est pas valide, 0 sinon.</dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>

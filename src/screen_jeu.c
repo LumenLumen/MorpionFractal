@@ -1,6 +1,13 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
+/**
+\file sreen_jeu.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
 
 int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[3][3], SDL_Rect grille[9][9], SDL_Texture * croix, SDL_Texture * rond, int i, int j, int * xdc, int * ydc, int * joueur, option_t * options, int (*fonction) (int *, int(*)[9], int(*)[3], int *, int *, int, int)){
     
@@ -47,6 +54,11 @@ int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[
     return vainqueur;
 }
 
+/**
+\fn int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option_t * options)
+\brief Cette fonction gère l'ecran de jeu avec les options.
+
+*/
 int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option_t * options){
 
     //On efface le rendu.

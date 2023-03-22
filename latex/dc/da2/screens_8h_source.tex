@@ -1,0 +1,20 @@
+\hypertarget{screens_8h_source}{}\doxysection{screens.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <SDL2/SDL.h>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <SDL2/SDL\_ttf.h>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <SDL2/SDL\_image.h>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SCREEN\_H 800}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define SCREEN\_W 800}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define MARGIN 50}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keywordtype}{void} SDL\_ExitWithError(\textcolor{keyword}{const} \textcolor{keywordtype}{char} * message);}
+\DoxyCodeLine{11 SDL\_Rect SDL\_CreerRect(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{12 \textcolor{keywordtype}{int} SDL\_ClickInButton(\textcolor{keywordtype}{int} mousex, \textcolor{keywordtype}{int} mousey, SDL\_Rect button);}
+\DoxyCodeLine{13 \textcolor{keywordtype}{int} menuscreen (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{14 \textcolor{keywordtype}{int} SDL\_AfficherGrilleVide(SDL\_Renderer * renderer, SDL\_Rect contour);}
+\DoxyCodeLine{15 \textcolor{keywordtype}{int} gamescreen (\textcolor{keywordtype}{void});}
+
+\end{DoxyCode}

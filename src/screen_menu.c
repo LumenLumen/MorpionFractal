@@ -1,6 +1,13 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
+/**
+\file screen_menu.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
 
 #define TAILLE_DU_TEXTE 50
 
@@ -214,6 +221,11 @@ int ecran_sauv (SDL_Window * window, SDL_Renderer * renderer, option_t * options
     return 0;
 }
 
+/**
+\fn int menuscreen (SDL_Window * window, SDL_Renderer * renderer, option_t * options)
+\brief Fonction qui gère les boutons.
+
+*/
 int menuscreen (SDL_Window * window, SDL_Renderer * renderer, option_t * options){
 
     SDL_bool program_launched = SDL_TRUE ;

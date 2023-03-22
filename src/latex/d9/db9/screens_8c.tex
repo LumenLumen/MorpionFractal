@@ -1,0 +1,89 @@
+\hypertarget{screens_8c}{}\doxysection{Référence du fichier screens.\+c}
+\label{screens_8c}\index{screens.c@{screens.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{screens_8c_abed124ab111ee095d48f08e2a3ea4446}\label{screens_8c_abed124ab111ee095d48f08e2a3ea4446}} 
+void {\bfseries SDL\+\_\+\+Exit\+With\+Error} (const char $\ast$message)
+\item 
+\mbox{\Hypertarget{screens_8c_af1b63dc4633ca59fca19c5a1e40e113a}\label{screens_8c_af1b63dc4633ca59fca19c5a1e40e113a}} 
+SDL\+\_\+\+Rect {\bfseries SDL\+\_\+\+Creer\+Rect} (int x, int y, int w, int h)
+\item 
+\mbox{\Hypertarget{screens_8c_a3ba7b427b2f4ee2ed717f56a0576afad}\label{screens_8c_a3ba7b427b2f4ee2ed717f56a0576afad}} 
+int {\bfseries SDL\+\_\+\+Click\+In\+Button} (int mousex, int mousey, SDL\+\_\+\+Rect button)
+\item 
+\mbox{\Hypertarget{screens_8c_ae4c72b455f5feecb7dfa077f2f351ccc}\label{screens_8c_ae4c72b455f5feecb7dfa077f2f351ccc}} 
+int {\bfseries SDL\+\_\+\+Afficher\+Grille\+Vide} (SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Rect contour)
+\item 
+int \mbox{\hyperlink{screens_8c_a6ede9c3ee7801b274c4aff905c49c7e8}{SDL\+\_\+ajouter\+\_\+symbole\+\_\+dans\+\_\+case}} (SDL\+\_\+\+Rect casegrille, SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Texture $\ast$croix)
+\begin{DoxyCompactList}\small\item\em fonction qui prends en paramètre la case, le rendu et le symbole à afficher pour ajouter un symbole dans la grille. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{screens_8c_ac6f8c31d22c34cd32b1c017c8857c56c}\label{screens_8c_ac6f8c31d22c34cd32b1c017c8857c56c}} 
+int {\bfseries SDL\+\_\+\+Afficher\+Texte} (SDL\+\_\+\+Renderer $\ast$renderer, TTF\+\_\+\+Font $\ast$police, char $\ast$chaine)
+\item 
+int \mbox{\hyperlink{screens_8c_afff44d57253ae50281116d61929f6e8e}{SDL\+\_\+\+Mise\+AJour\+Renderer}} (SDL\+\_\+\+Renderer $\ast$renderer, int grille\+\_\+int\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\+\_\+int\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, SDL\+\_\+\+Rect grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, SDL\+\_\+\+Texture $\ast$croix, SDL\+\_\+\+Texture $\ast$rond, int xdc, int ydc, int var)
+\begin{DoxyCompactList}\small\item\em On initialise la grille et met en surbrillance la case dans laquelle on va jouer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{screens_8c_a6ede9c3ee7801b274c4aff905c49c7e8}\label{screens_8c_a6ede9c3ee7801b274c4aff905c49c7e8}} 
+\index{screens.c@{screens.c}!SDL\_ajouter\_symbole\_dans\_case@{SDL\_ajouter\_symbole\_dans\_case}}
+\index{SDL\_ajouter\_symbole\_dans\_case@{SDL\_ajouter\_symbole\_dans\_case}!screens.c@{screens.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ajouter\_symbole\_dans\_case()}{SDL\_ajouter\_symbole\_dans\_case()}}
+{\footnotesize\ttfamily SDL\+\_\+ajouter\+\_\+symbole\+\_\+dans\+\_\+case (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Rect}]{casegrille,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{SDL\+\_\+\+Texture $\ast$}]{croix }\end{DoxyParamCaption})}
+
+
+
+fonction qui prends en paramètre la case, le rendu et le symbole à afficher pour ajouter un symbole dans la grille. 
+
+\begin{DoxyReturn}{Renvoie}
+0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{screens_8c_afff44d57253ae50281116d61929f6e8e}\label{screens_8c_afff44d57253ae50281116d61929f6e8e}} 
+\index{screens.c@{screens.c}!SDL\_MiseAJourRenderer@{SDL\_MiseAJourRenderer}}
+\index{SDL\_MiseAJourRenderer@{SDL\_MiseAJourRenderer}!screens.c@{screens.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_MiseAJourRenderer()}{SDL\_MiseAJourRenderer()}}
+{\footnotesize\ttfamily int SDL\+\_\+\+Mise\+AJour\+Renderer (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{grille\+\_\+int\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\+\_\+int\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{SDL\+\_\+\+Texture $\ast$}]{croix,  }\item[{SDL\+\_\+\+Texture $\ast$}]{rond,  }\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int}]{var }\end{DoxyParamCaption})}
+
+
+
+On initialise la grille et met en surbrillance la case dans laquelle on va jouer. 
+
+Initialisation de la grilles de rectangle.
+
+Affichage du prochain rectangle où jouer.
+
+Variante \+: La case est déjà remplie et on ne peut plus y jouer.
+
+Variante \+: On affiche les carrés pris sous la grille.
+
+Affichage de la grille
+
+Chargement de la disquette de sauvegarde.
+
+\begin{DoxyReturn}{Renvoie}
+0
+\end{DoxyReturn}

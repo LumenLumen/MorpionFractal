@@ -1,0 +1,66 @@
+\hypertarget{screen__menu_8c}{}\doxysection{Référence du fichier screen\+\_\+menu.\+c}
+\label{screen__menu_8c}\index{screen\_menu.c@{screen\_menu.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{screen__menu_8c_a6227e020c609da00d212b0d10a8a2157}\label{screen__menu_8c_a6227e020c609da00d212b0d10a8a2157}} 
+\#define {\bfseries TAILLE\+\_\+\+DU\+\_\+\+TEXTE}~50
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{screen__menu_8c_a88ce748f39601864a7a9b0ce584f51fe}{menuscreen}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, option\+\_\+t $\ast$options)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère les boutons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{screen__menu_8c_a88ce748f39601864a7a9b0ce584f51fe}\label{screen__menu_8c_a88ce748f39601864a7a9b0ce584f51fe}} 
+\index{screen\_menu.c@{screen\_menu.c}!menuscreen@{menuscreen}}
+\index{menuscreen@{menuscreen}!screen\_menu.c@{screen\_menu.c}}
+\doxysubsubsection{\texorpdfstring{menuscreen()}{menuscreen()}}
+{\footnotesize\ttfamily int menuscreen (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{option\+\_\+t $\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère les boutons. 
+
+Création des boutons
+
+Chargement de la partie.
+
+On a plusieur boutons sur la page d\textquotesingle{}acceuil. ~\newline
+
+
+On peut cliquer sur le bouton nouvelle partie.
+
+On peut cliquer sur chargement d\textquotesingle{}une partie.
+
+On peut cliquer sur options.
+
+On peut cliquer sur quitter.
+
+\begin{DoxyReturn}{Renvoie}
+0
+\end{DoxyReturn}

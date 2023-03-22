@@ -1,7 +1,18 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 #include "../lib/screens.h"
+/**
+\file morpion.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
+/**
+\fn int main (int argc, char * argv[]){
 
+\brief On appelle les fonctions.
+*/
 int main (int argc, char * argv[]){
     option_t * options = malloc(sizeof(option_t)) ;
     SDL_Window * window = NULL ;

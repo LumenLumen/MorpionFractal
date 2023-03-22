@@ -1,0 +1,121 @@
+\hypertarget{menuscreen_8c}{}\doxysection{Référence du fichier menuscreen.\+c}
+\label{menuscreen_8c}\index{menuscreen.c@{menuscreen.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menuscreen_8c_a27cddfd509d28b4b2b0b44c093fac090}\label{menuscreen_8c_a27cddfd509d28b4b2b0b44c093fac090}} 
+\#define {\bfseries SCREEN\+\_\+H}~800
+\item 
+\mbox{\Hypertarget{menuscreen_8c_a9b6bc9242882d1e758e06ed751a2e8ec}\label{menuscreen_8c_a9b6bc9242882d1e758e06ed751a2e8ec}} 
+\#define {\bfseries SCREEN\+\_\+W}~800
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}{SDL\+\_\+\+Exit\+With\+Error}} (const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em En cas d\textquotesingle{}erreur, la fonction affiche l\textquotesingle{}erreur avec le message passé en paramètre. \end{DoxyCompactList}\item 
+SDL\+\_\+\+Rect \mbox{\hyperlink{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}{SDL\+\_\+\+Creer\+Rect}} (int x, int y, int w, int h)
+\begin{DoxyCompactList}\small\item\em Initialise un rectangle avec les valeurs passées en paramètre. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}{SDL\+\_\+\+Click\+In\+Button}} (int mousex, int mousey, SDL\+\_\+\+Rect button)
+\begin{DoxyCompactList}\small\item\em Prend en paramètre les coordonnés d\textquotesingle{}un clic et un rectangle. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menuscreen_8c_a6d40503d944131f17961943b2d11bb98}{menuscreen}} (void)
+\begin{DoxyCompactList}\small\item\em Cette fonction gère la création et affichage de la page. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{menuscreen_8c_a6d40503d944131f17961943b2d11bb98}\label{menuscreen_8c_a6d40503d944131f17961943b2d11bb98}} 
+\index{menuscreen.c@{menuscreen.c}!menuscreen@{menuscreen}}
+\index{menuscreen@{menuscreen}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{menuscreen()}{menuscreen()}}
+{\footnotesize\ttfamily menuscreen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Cette fonction gère la création et affichage de la page. 
+
+On initialise SDL pour l\textquotesingle{}aspect visuel.
+
+On initialise TTF pour l\textquotesingle{}aspect textuel.
+
+On crée la fenêtre de l\textquotesingle{}accueil.
+
+Il faut cliquer sur un bouton pour charger une nouvelle partie ou reprendre celle sauvegardée ou voire les options.
+
+On lbère la mémoire si l\textquotesingle{}on clique sur le bouton \char`\"{}\+Quitter\char`\"{}.
+
+\begin{DoxyReturn}{Renvoie}
+0 à la fin de fonction.
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}\label{menuscreen_8c_a3ba7b427b2f4ee2ed717f56a0576afad}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_ClickInButton@{SDL\_ClickInButton}}
+\index{SDL\_ClickInButton@{SDL\_ClickInButton}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ClickInButton()}{SDL\_ClickInButton()}}
+{\footnotesize\ttfamily int SDL\+\_\+\+Click\+In\+Button (\begin{DoxyParamCaption}\item[{int}]{mousex,  }\item[{int}]{mousey,  }\item[{SDL\+\_\+\+Rect}]{button }\end{DoxyParamCaption})}
+
+
+
+Prend en paramètre les coordonnés d\textquotesingle{}un clic et un rectangle. 
+
+Renvoie vrai si le click est dans le rect, non sinon. \begin{DoxyReturn}{Renvoie}
+((mousex \texorpdfstring{$>$}{>}= button.\+x \&\& mousex \texorpdfstring{$<$}{<}= button.\+x + button.\+w) \&\& (mousey \texorpdfstring{$>$}{>}= button.\+y \&\& mousey \texorpdfstring{$<$}{<}= button.\+y + button.\+h)) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}\label{menuscreen_8c_af1b63dc4633ca59fca19c5a1e40e113a}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_CreerRect@{SDL\_CreerRect}}
+\index{SDL\_CreerRect@{SDL\_CreerRect}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_CreerRect()}{SDL\_CreerRect()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect SDL\+\_\+\+Creer\+Rect (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+
+
+Initialise un rectangle avec les valeurs passées en paramètre. 
+
+\begin{DoxyReturn}{Renvoie}
+rectangle 
+\end{DoxyReturn}
+Coordonnées x de l\textquotesingle{}angle haut gauche
+
+Corddonnées y de l\textquotesingle{}angle haut gauche
+
+Longueur du rectangle
+
+Hauteur
+
+\begin{DoxyReturn}{Renvoie}
+rectangle
+\end{DoxyReturn}
+\mbox{\Hypertarget{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}\label{menuscreen_8c_abed124ab111ee095d48f08e2a3ea4446}} 
+\index{menuscreen.c@{menuscreen.c}!SDL\_ExitWithError@{SDL\_ExitWithError}}
+\index{SDL\_ExitWithError@{SDL\_ExitWithError}!menuscreen.c@{menuscreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ExitWithError()}{SDL\_ExitWithError()}}
+{\footnotesize\ttfamily void SDL\+\_\+\+Exit\+With\+Error (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+En cas d\textquotesingle{}erreur, la fonction affiche l\textquotesingle{}erreur avec le message passé en paramètre. 
+
+\begin{DoxyReturn}{Renvoie}
+EXIT\+\_\+\+FAILURE 
+\end{DoxyReturn}

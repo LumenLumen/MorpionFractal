@@ -1,5 +1,16 @@
 #include "../lib/sauvegarde.h"
-
+/**
+\file sauvegarde.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
+/**
+\fn void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc)
+\brief fonction qui sauvegarde la grille dans un fichier.
+\brief Prends en paramètre le fichier de sauvegarde, la grille de la partie, et le joueur à qui sera le prochain tour.
+*/
 /*Sauvegarde la grille dans un fichier.
 Prends en paramètre le fichier de sauvegarde, la grille de la partie, 
 et le joueur à qui sera le prochain tour.*/
@@ -28,7 +39,11 @@ void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc
     fclose(slot);
 
 }
-
+/**
+\fn void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc)
+\brief fonction qui charge une sauvegarde à partir d'un fichier.
+\brief Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.
+*/
 /*Charge une sauvegarde à partir d'un fichier.
 Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.*/
 int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc, int * var){

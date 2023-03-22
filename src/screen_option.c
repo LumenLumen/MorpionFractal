@@ -1,9 +1,19 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
-
+/**
+\file screen_option.c
+\brief programme ...
+\author Groupe morpion fractal
+\version 1
+\date 9 février 2023
+*/
 #define NB_IMG 12
+/**
+\fn void init_option(option_t * options)
+\brief Initialise les options à false et logo de base
 
+*/
 /*Initialise les options à false et logo de base*/
 void init_option(option_t * options){
     options->autosave = 0 ;
@@ -15,6 +25,11 @@ void init_option(option_t * options){
     options->b = 238 ; options->bs = 190 ;
 }
 
+/**
+\fn int SDL_TextInRect (SDL_Renderer * renderer, SDL_Rect boite, char * message)
+\brief Ajoute du texte dans le rectangle passé en paramètre.
+\return retourne 0 si on réussi sinon 1. 
+*/
 /*Ajoute du texte dans le rectangle passé en paramètre*/
 int SDL_TextInRect (SDL_Renderer * renderer, SDL_Rect boite, char * message){
 
@@ -46,7 +61,13 @@ int SDL_TextInRect (SDL_Renderer * renderer, SDL_Rect boite, char * message){
     return 0;
 }
 
-/*Charge une image dans la texture passée en paramètre*/
+
+/**
+\fn int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** texture)
+\brief Charge une image dans la surface passée en paramètre.
+\return 0 si on réussi sinon 1.
+
+/*Charge une image dans la surface passée en paramètre*/
 int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** texture){
     SDL_Surface * image ;
 
@@ -172,6 +193,10 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     return 0;
 }
 
+/**
+\fn int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * options)
+\brief Options d'affichage.
+*/
 int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * options){
     
     SDL_bool program_launched = SDL_TRUE ;
@@ -204,7 +229,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
 
                 case SDL_MOUSEBUTTONDOWN :
 
-                    //Sauvegarde automatique.
+                    ///Sauvegarde automatique.
                     if (SDL_ClickInButton(event.button.x, event.button.y, valid_auto)){
 
                         if (options->autosave == 0){
@@ -310,6 +335,8 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
             }
         }
     }
-
+/**
+\return 0
+*/
     return 0 ;
 }
