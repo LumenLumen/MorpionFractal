@@ -3,7 +3,7 @@
 /*Sauvegarde la grille dans un fichier.
 Prends en paramètre le fichier de sauvegarde, la grille de la partie, 
 et le joueur à qui sera le prochain tour.*/
-void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc){
+void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc, int var){
     FILE * slot = fopen(name, "w");
     int i, j ;
 
@@ -23,23 +23,29 @@ void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc
         }
     }
 
+    fprintf(slot, "%d", var);
+
     fclose(slot);
 
 }
 
 /*Charge une sauvegarde à partir d'un fichier.
 Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.*/
-void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc){
+int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc, int * var){
     FILE * slot = fopen(name, "r");
     int i, j ;
-    char c[92] ;
+    char c[93] ;
 
     if (slot == NULL){ //On vérifie que le fichier a été trouvé.
-        printf("Aucune sauvegarde trouvée.");
-        return;
+        printf("Aucune sauvegarde trouvée.\n");
+        return 0;
     }
 
     fscanf(slot, "%s \n", c);
+    if (strlen(c) != 94){ //On vérifie la longueur du fichier
+        printf("Fichier invalide.\n");
+        return 0;
+    }
 
     for (i = 0 ; i < N ; i++){
         for (j = 0 ; j < N ; j++){
@@ -72,7 +78,7 @@ void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int *
     }
 
 
-    switch (c[83]){ //Le ydc est indiqué au 83ème caractère.
+    switch (c[83]){ //Le ydc est indiqué au 84ème caractère.
         case '0' : *ydc = 0 ; break ;
         case '1' : *ydc = 1 ; break ;
         case '2' : *ydc = 2 ; break ;
@@ -96,6 +102,13 @@ void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int *
         }
     }
 
+    switch (c[93]){ //Si la variante est activée.
+        case '0' : *var = 0 ; break ;
+        case '1' : *joueur = 1 ; break ;
+        default : printf("Erreur\n");
+    }    
+
     fclose(slot);
+    return 1 ;
 }
 

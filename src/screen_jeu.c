@@ -2,6 +2,50 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 
+int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[3][3], SDL_Rect grille[9][9], SDL_Texture * croix, SDL_Texture * rond, int i, int j, int * xdc, int * ydc, int * joueur, option_t * options, int (*fonction) (int *, int(*)[9], int(*)[3], int *, int *, int, int)){
+    
+    int vainqueur = -1 ;
+    SDL_Rect boite_de_texte = SDL_CreerRect(10, SCREEN_H, SCREEN_W, ESPACE_TEXTE);
+
+    SDL_SetRenderDrawColor(renderer, options->r, options->g, options->b, SDL_ALPHA_OPAQUE);
+    
+    switch (fonction(joueur, grille_int, morpion_int, xdc, ydc, i, j)){
+        case 0 :
+            check_carre(grille_int, morpion_int, i, j);
+            SDL_MiseAJourRenderer(renderer, grille_int, morpion_int, grille, croix, rond, i, j, options);
+
+            //TEST SI FIN DE LA PARTIE
+            vainqueur = morpiongagne(morpion_int);
+            if (vainqueur == 0){
+
+                //AFFICHAGE DU TEXTE
+                if (*joueur == X) SDL_TextInRect(renderer, boite_de_texte, "C'est au tour de X.");
+                else SDL_TextInRect(renderer, boite_de_texte, "C'est au tour de 0.");
+
+                if(options->autosave && vainqueur == 0){
+                    save("auto.txt",grille_int,morpion_int,*joueur,*xdc,*ydc, options->variante);
+                }
+            }
+            return vainqueur ; //0 si partie non finie, sinon le num du vainqueur
+
+            break;
+        case 3 :
+            SDL_RenderFillRect(renderer, &boite_de_texte);
+            SDL_TextInRect(renderer, boite_de_texte, "Carré non valide.");
+            break ;
+        case 4 :
+            SDL_RenderFillRect(renderer, &boite_de_texte);
+            SDL_TextInRect(renderer, boite_de_texte, "La case est déjà occupée.");
+            break ;
+        case 5 :
+            SDL_RenderFillRect(renderer, &boite_de_texte);
+            SDL_TextInRect(renderer, boite_de_texte, "Le carré est déjà complété.");
+            break ;
+        default : return -1 ;
+        }
+
+    return vainqueur;
+}
 
 int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option_t * options){
 
@@ -15,26 +59,35 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
     SDL_Rect grille[9][9];
     SDL_Rect contour = SDL_CreerRect(MARGIN, MARGIN, SCREEN_H - MARGIN*2, SCREEN_W - MARGIN*2);
     SDL_Rect sauv_rec = SDL_CreerRect(SCREEN_W*8/9, MARGIN+contour.h, MARGIN, MARGIN);
+    SDL_Rect boite_de_texte = SDL_CreerRect(10, SCREEN_H, SCREEN_W, ESPACE_TEXTE);
 
     //Définition des textures.
     SDL_Texture * croix ;
     SDL_Texture * rond ;
     SDL_Surface * image ;
-    TTF_Font *police = NULL;
 
     //Définition des entiers.    
     int grille_int[N][N];
     int morpion_int[M][M];
     int i, j;
-    int vainqueur ;
+    int vainqueur = 0;
 
     int joueur = 1 ; //Tour du joueur ;
     int * xdc = malloc(sizeof(int)); //Ligne du dernier coup ;
     int * ydc = malloc(sizeof(int)); //Colonne du dernier coup ;
 
 
-    if (reload){ //si reload=1, on charge le fichier de sauvegarde
-        load("toto.txt", grille_int, morpion_int, &joueur, xdc, ydc);
+    if (reload == 1){ //si reload=1, on charge le fichier de sauvegarde
+        if (load("auto.txt", grille_int, morpion_int, &joueur, xdc, ydc, &(options->variante)) == 0){
+            free(xdc); free(ydc);
+            return 1;
+        }
+    }
+    else if (reload == 2){
+        if (load("save.txt", grille_int, morpion_int, &joueur, xdc, ydc, &(options->variante)) == 0){
+            free(xdc); free(ydc);
+            return 1 ;
+        }
     }
     else{ //sinon, on initialise une nouvelle grille
         (* xdc) = -1 ;
@@ -48,33 +101,31 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
     //Chargement de croix.
     image = IMG_Load(options->croiximg);
     if(!image){
+        free(xdc); free(ydc);
         return 2;
     }
 
     croix = SDL_CreateTextureFromSurface(renderer, image);
     if (croix == NULL){
+        free(xdc); free(ydc);
         return 2;
     }
 
     //Chargement de rond.
     image = IMG_Load(options->rondimg);
     if(!image){
+        free(xdc); free(ydc);
         return 2;
     }
 
     rond = SDL_CreateTextureFromSurface(renderer, image);
     if (rond == NULL){
+        free(xdc); free(ydc);
         return 2;
     }
 
     //On libère l'image.
     SDL_FreeSurface(image);
-
-    /* ================================ CHARGEMENT DU TEXTE (POLICE + COULEUR) ==============================*/
-
-    if( (police = TTF_OpenFont("src/font/Coder'sCrux.ttf", 50)) == NULL){
-        return 2;
-    }
 
     /*==================================== AFFICHAGE GRILLE VIDE =================================================*/
 
@@ -84,11 +135,13 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
         }
     }
 
-    if(SDL_MiseAJourRenderer(renderer, grille_int, morpion_int, grille, croix, rond, *xdc, *ydc, options->variante) != 0){
+    if(SDL_MiseAJourRenderer(renderer, grille_int, morpion_int, grille, croix, rond, *xdc, *ydc, options) != 0){
+        free(xdc); free(ydc);
         return 2;
     }
 
-    SDL_AfficherTexte(renderer, police, "Début de la partie !");
+    SDL_TextInRect(renderer, boite_de_texte, "Début de la partie !");
+    SDL_RenderPresent(renderer);
 
     /*=================================== GESTION DES EVENEMENTS =============================================*/
 
@@ -107,76 +160,23 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
                                 if (SDL_ClickInButton(event.button.y, event.button.x,grille[i][j])){ //On checke dans quelle case il a joué.
 
 
-                                    if (options->variante){
-                                        switch (valideCase_var(&joueur, grille_int, morpion_int, xdc, ydc, i, j)){
-                                            case 0 :
-                                                check_carre(grille_int, morpion_int, i, j);
-                                                SDL_MiseAJourRenderer(renderer, grille_int, morpion_int, grille, croix, rond, i, j, options->variante);
-
-                                                //TEST SI FIN DE LA PARTIE
-                                                vainqueur = morpiongagne(morpion_int);
-                                                if (vainqueur != 0) program_launched = SDL_FALSE ;
-
-                                                //AFFICHAGE DU TEXTE
-                                                if (joueur == X) SDL_AfficherTexte(renderer, police, "C'est au tour de X.");
-                                                else SDL_AfficherTexte(renderer, police, "C'est au tour de O.");
-
-                                                if(options->autosave && vainqueur == 0){
-                                                    save("auto.txt",grille_int,morpion_int,joueur,*xdc,*ydc);
-                                                }
-
-                                                break;
-                                            case 3 :
-                                                SDL_AfficherTexte(renderer, police, "Carré non valide.");
-                                                break ;
-                                            case 4 :
-                                                SDL_AfficherTexte(renderer, police, "La case est déjà occupée.");
-                                                break ;
-                                            default : program_launched = SDL_FALSE ;
-                                        }
+                                    if (options->variante){ // Si variante
+                                        vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase_var);
                                     }
-
-                                    else {
-                                        switch (valideCase(&joueur, grille_int, morpion_int, xdc, ydc, i, j)){
-                                            case 0 :
-                                                check_carre(grille_int, morpion_int, i, j);
-                                                SDL_MiseAJourRenderer(renderer, grille_int, morpion_int, grille, croix, rond, i, j, options->variante);
-
-                                                //TEST SI FIN DE LA PARTIE
-                                                vainqueur = morpiongagne(morpion_int);
-                                                if (vainqueur != 0) program_launched = SDL_FALSE ;
-
-                                                //AFFICHAGE DU TEXTE
-                                                if (joueur == X) SDL_AfficherTexte(renderer, police, "C'est au tour de X.");
-                                                else SDL_AfficherTexte(renderer, police, "C'est au tour de O.");
-
-                                                if(options->autosave && vainqueur == 0){
-                                                    save("auto.txt",grille_int,morpion_int,joueur,*xdc,*ydc);
-                                                }
-
-                                                break;
-                                            case 3 :
-                                                SDL_AfficherTexte(renderer, police, "Carré non valide.");
-                                                break ;
-                                            case 4 :
-                                                SDL_AfficherTexte(renderer, police, "La case est déjà occupée.");
-                                                break ;
-                                            case 5 :
-                                                SDL_AfficherTexte(renderer, police, "Le carré est déjà complété.");
-                                                break ;
-                                            default : program_launched = SDL_FALSE ;
-                                        }
+                                    else { //Sinon
+                                        vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase);
                                     }
-
+                                    if (vainqueur > 0) program_launched = SDL_FALSE ;
                                     
                                 }
                             }
                         }
 
+                        SDL_RenderPresent(renderer);
                     }
                     if (SDL_ClickInButton(event.button.x, event.button.y, sauv_rec)){ //SI le joueur clique sur le bouton de sauvegarde
-                        SDL_AfficherTexte(renderer, police, "Partie sauvegardée !");
-                        save("toto.txt",grille_int,morpion_int,joueur,*xdc,*ydc); //sauvegarde
+                        SDL_TextInRect(renderer, boite_de_texte, "Partie sauvegardée !");
+                        save("save.txt", grille_int, morpion_int, joueur, *xdc, *ydc, options->variante); //sauvegarde
                     }
                     continue;
                 
@@ -193,8 +193,9 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
     }
 
     //Annonce du vainqueur
-    if (vainqueur == O) SDL_AfficherTexte(renderer, police, "Le vainqueur est O.");
-    else SDL_AfficherTexte(renderer, police, "Le vainqueur est X.");
+    if (vainqueur == O) SDL_TextInRect(renderer, boite_de_texte, "Le vainqueur est O.");
+    else SDL_TextInRect(renderer, boite_de_texte, "Le vainqueur est X.");
+    SDL_RenderPresent(renderer);
 
     /*============ FIN DE LA PARTIE ================*/
     program_launched = SDL_TRUE;

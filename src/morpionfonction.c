@@ -79,7 +79,7 @@ int morpiongagne(int grille[M][M]){
 /*Prends en paramètre des coordonnées [0;8][0;8]. On suppose les coordonnés corrects.
 Retourne le carré (0-8) dans lequel elles se trouvent.*/
 int coog_to_carr (int x, int y){
-    if (x < 0) return -1;
+    if (x < 0 || y < 0) return -1;
     if (x <= 2){
         if (y <= 2) return 0 ;
         if (y <= 5) return 1 ;
@@ -118,14 +118,14 @@ int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     //printf("Carre de la fonction \n");
     
     i = morpiongagne(carre);
-    if(i){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
+    if(i && morpion[xdc/3][ydc/3] == 0){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
         morpion[xdc/3][ydc/3] = i ;
     }
 
     return i;
 }
 
-/*Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup*/
+/*Prends en paramètres le dernier coup joué, retourne les coordonnées du carré dans lequel devra jouer le joueur au prochain coup*/
 int predict_rect(int xdc, int ydc, int * x, int * y){
     if (xdc == -1){ //Premier coup
         *x = 1 ;

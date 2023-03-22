@@ -67,3 +67,23 @@ Lundi 6 Mars
 
 - Fenêtre des options opérationnelle.
 
+Mercredi 8 Mars
+
+- Début de tests unitaires (sauvegarde et fonctions morpions)
+- Suite commentaires doxy
+
+Mercredi 15 Mars
+
+- Début de la rédaction du compte-rendu
+- Fin des tests sur les fonctions
+
+Samedi 18 Mars 
+
+- Ajout de deux écrans intermédiaires (un pour choisir comment jouer et l'autre pour sélectionner un fichier de sauvegarde). Les fonctions associées sont dans menuscreen.c.
+- Ajout de vérification à la fonction load (existence du fichier + vérification intégrité des informations) -> revoir les tests sur cette fonction en conséquence.
+- Personnalisation de la couleur de la fenêtre ajoutée au menu des options.
+
+Dimanche 19 Mars
+- Modification des fonctions de sauvegarde & chargement pour savoir si la partie est en mode variante ou pas.
+- Création d'une fonction tour_de_jeu pour éviter la redondance de code.
+
