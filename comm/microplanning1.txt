@@ -86,3 +86,9 @@ Dimanche 19 Mars
 - Modification des fonctions de sauvegarde & chargement pour savoir si la partie est en mode variante ou pas.
 - Création d'une fonction tour_de_jeu pour éviter la redondance de code.
 
+Mercredi 22 Mars
+
+- Règles du jeu finies
+- Continuation du compte rendu
+- Possibilité de jouer contre l'IA (plusieurs bugs)
+

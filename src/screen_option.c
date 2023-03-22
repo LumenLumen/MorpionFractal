@@ -23,6 +23,7 @@ void init_option(option_t * options){
     options->r = 187 ; options->rs = 80 ;
     options->g = 238 ; options->gs = 200 ;
     options->b = 238 ; options->bs = 190 ;
+    options->vsia = 0 ;
 }
 
 /**

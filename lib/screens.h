@@ -16,6 +16,7 @@ typedef struct option_s {
     char * croiximg ;
     int r, g, b, rs, gs, bs ; //rgb principal+rgb secondaire
     //char * theme ;
+    int vsia ;
 } option_t ;
 
 
