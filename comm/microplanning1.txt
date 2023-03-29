@@ -75,6 +75,7 @@ Mercredi 15 Mars
 
 - Début de la rédaction du compte-rendu
 - Fin des tests sur les fonctions
+- Début d'écriture d'un joueur ordi aléatoire
 
 Samedi 18 Mars 
 
@@ -90,5 +91,10 @@ Mercredi 22 Mars
 
 - Règles du jeu finies
 - Continuation du compte rendu
-- Possibilité de jouer contre l'IA (plusieurs bugs)
+- Possibilité de jouer contre l'ordi (plusieurs bugs)
 
+Mercredi 29 Mars
+
+- Correction des bugs pour jouer contre l'ordi
+- Autre IA (plein de bugs)
+- Musique ajoutée

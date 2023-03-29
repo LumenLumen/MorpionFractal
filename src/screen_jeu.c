@@ -157,14 +157,21 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
 
     /*=================================== GESTION DES EVENEMENTS =============================================*/
 
+    int cpt=0;
+
     while(program_launched){ 
         
-        if(options->vsia==1 && joueur==2){ //Si l'IA est activée
-            if(options->variante) vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, ia_random);
-            else vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, ia_random_var);
+        cpt=0;
+
+        while(options->vsia==1 && joueur==2 && cpt<100){ //Si l'IA est activée
+            ia_random_2(*xdc,*ydc,&i,&j,morpion_int,grille_int);
+            if(options->variante) vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase_var);
+            else vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase);
             if (vainqueur > 0) program_launched = SDL_FALSE ;
             SDL_RenderPresent(renderer);
+            cpt++;
         }
+        SDL_Delay(1000);
         
         //On attends un événement.
         while(SDL_PollEvent(&event)){ 

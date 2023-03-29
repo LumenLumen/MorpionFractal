@@ -1,6 +1,7 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 #include "../lib/screens.h"
+#include <time.h>
 /**
 \file morpion.c
 \brief programme ...
@@ -14,6 +15,9 @@
 \brief On appelle les fonctions.
 */
 int main (int argc, char * argv[]){
+
+    srand(time(NULL));
+
     option_t * options = malloc(sizeof(option_t)) ;
     SDL_Window * window = NULL ;
     SDL_Renderer * renderer = NULL ;
