@@ -106,7 +106,7 @@ int morpiongagne(int grille[M][M]){
 /*Prends en paramètre des coordonnées [0;8][0;8]. On suppose les coordonnés corrects.
 Retourne le carré (0-8) dans lequel elles se trouvent.*/
 int coog_to_carr (int x, int y){
-    if (x < 0) return -1;
+    if (x < 0 || y < 0) return -1;
     if (x <= 2){
         if (y <= 2) return 0 ;
         if (y <= 5) return 1 ;

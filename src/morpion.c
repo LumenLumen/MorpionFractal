@@ -20,26 +20,34 @@ int main (int argc, char * argv[]){
 
     //Initialise SDL pour l'aspect visuel.
     if(SDL_Init(SDL_INIT_VIDEO) != 0){
-        SDL_ExitWithError("Initialisation SDL");
+        free(options);
+        return 0;
     }
 
     //Initialise TTF
 	if(TTF_Init() == -1) {
-		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
-		exit(EXIT_FAILURE);
+        free(options);
+        SDL_Quit();
+        return 0;
 	}
 
     //Création de la fenêtre.
     window = SDL_CreateWindow("Morpion fractal", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_H, SCREEN_W + ESPACE_TEXTE, 0);
     if (window == NULL){
-        SDL_ExitWithError("Création fenêtre échouée"); 
+        free(options);
+        TTF_Quit();
+        SDL_Quit();
+        return 0;
     }
 
     //Création du rendu.
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (renderer == NULL){
         SDL_DestroyWindow(window);
-        SDL_ExitWithError("Création rendu échouée");
+        free(options);
+        TTF_Quit();
+        SDL_Quit();
+        return 0;
     }
 
     init_option(options);
