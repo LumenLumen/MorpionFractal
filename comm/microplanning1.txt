@@ -97,4 +97,11 @@ Mercredi 29 Mars
 
 - Correction des bugs pour jouer contre l'ordi
 - Autre IA (plein de bugs)
-- Musique ajoutée
+- Musique ajoutée (pas encore dans les options)
+
+Jeudi 30 Mars
+
+- Correction des bugs contre l'IA numéro 2 
+- Ajout d'une 3ème IA 
+- Ajout de choix de musiques dans les options
+- Ajout de thèmes visuels et skins

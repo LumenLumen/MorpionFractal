@@ -77,10 +77,6 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
                     if(petit_morpion[rdx][rdy]==0){
                         petit_morpion[rdx][rdy]=joueur;
 
-                        //printf("\n");   
-                        //afficher_morpion(petit_morpion);
-                        //printf("\n");
-
                         if(!morpiongagne(petit_morpion)){
                             petit_morpion[rdx][rdy]=0;
                             cpt--;
@@ -104,8 +100,6 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
             else{
                 cpt2--;
             }
-
-            printf("joiv l & k = %d, %d rdx=%i rdy=%i morpiongagne=%i, cpt1=%i cpt2=%i\n",l, k, k*3+rdx,l*3+rdy,morpiongagne(petit_morpion),cpt,cpt2);
 
         } while (cpt2);
 
@@ -152,27 +146,6 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //fait jouer le joueur "joueur" en utilisant une méthode aléatoire (fonction pour tester)
 int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
