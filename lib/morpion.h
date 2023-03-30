@@ -24,6 +24,6 @@ int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc
 //fonction coups ordinateurs
 void ia_random(int * x, int * y);
 void ia_random_2(int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
-void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int grille[N][N]);
+void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
 int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y);
 int ia_random_var_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y);
