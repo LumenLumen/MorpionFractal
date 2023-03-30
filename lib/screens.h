@@ -19,6 +19,7 @@ typedef struct option_s {
     int r, g, b, rs, gs, bs ; //rgb principal+rgb secondaire
     //char * theme ;
     char * musique;
+    int vsia ;
 } option_t ;
 
 

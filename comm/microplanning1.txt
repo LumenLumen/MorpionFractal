@@ -75,6 +75,7 @@ Mercredi 15 Mars
 
 - Début de la rédaction du compte-rendu
 - Fin des tests sur les fonctions
+- Début d'écriture d'un joueur ordi aléatoire
 
 Samedi 18 Mars 
 
@@ -86,3 +87,21 @@ Dimanche 19 Mars
 - Modification des fonctions de sauvegarde & chargement pour savoir si la partie est en mode variante ou pas.
 - Création d'une fonction tour_de_jeu pour éviter la redondance de code.
 
+Mercredi 22 Mars
+
+- Règles du jeu finies
+- Continuation du compte rendu
+- Possibilité de jouer contre l'ordi (plusieurs bugs)
+
+Mercredi 29 Mars
+
+- Correction des bugs pour jouer contre l'ordi
+- Autre IA (plein de bugs)
+- Musique ajoutée (pas encore dans les options)
+
+Jeudi 30 Mars
+
+- Correction des bugs contre l'IA numéro 2 
+- Ajout d'une 3ème IA 
+- Ajout de choix de musiques dans les options
+- Ajout de thèmes visuels et skins

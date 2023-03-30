@@ -107,7 +107,9 @@ int ecran_inter (SDL_Window * window, SDL_Renderer * renderer, option_t * option
                     }
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, iaVsJoueur)){
-                        printf("Pas encore implémenté !\n");
+                        //printf("Pas encore implémenté !\n");
+                        options->vsia = 1 ;
+                        gamescreen(window, renderer, 0, options);
                         return 0 ;
                     }
 

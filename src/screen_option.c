@@ -26,6 +26,7 @@ void init_option(option_t * options){
     options->g = 238 ; options->gs = 200 ;
     options->b = 238 ; options->bs = 190 ;
     options->musique = "./src/musique/test.wav";
+    options->vsia = 0 ;
 }
 
 /**

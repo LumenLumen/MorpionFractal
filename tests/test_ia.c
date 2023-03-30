@@ -1,6 +1,9 @@
 #include "../lib/morpion.h"
+#include <time.h>
 
 int main(){
+    
+    srand(time(NULL));
 
     int grille[N][N];
     int morpion[M][M];
@@ -26,7 +29,7 @@ int main(){
     int x, y;
 
     printf("xdc=%i ydc=%i\n",xdc,ydc);
-    ia_random(&joueur,grille,morpion,&xdc,&ydc,&x,&y);
+    ia_random_test(&joueur,grille,morpion,&xdc,&ydc,&x,&y);
     check_carre(grille,morpion,x,y);
     printf("x=%i y=%i\n\n",x,y);
 
@@ -42,7 +45,7 @@ int main(){
     ydc=0;
     int i = 0;
     while(vainqueur==0 && i<75){
-        ia_random(&joueur,grille,morpion,&xdc,&ydc,&x,&y);
+        ia_random_test(&joueur,grille,morpion,&xdc,&ydc,&x,&y);
         check_carre(grille,morpion,x,y);
         vainqueur=morpiongagne(morpion);
         i++;
