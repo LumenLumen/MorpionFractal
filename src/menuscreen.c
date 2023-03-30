@@ -1,5 +1,3 @@
-/*Pour compiler : gcc menuscreen.c -o menuscreen $(sdl2-config --cflags --libs)*/
-
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <SDL2/SDL_ttf.h>
@@ -28,7 +26,6 @@ void SDL_ExitWithError(const char * message){
 /**
 \fn SDL_Rect SDL_CreerRect(int x, int y, int w, int h)
 \brief Initialise un rectangle avec les valeurs passées en paramètre
-
 */
 SDL_Rect SDL_CreerRect(int x, int y, int w, int h){
     SDL_Rect rectangle;

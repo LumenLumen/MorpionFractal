@@ -8,7 +8,7 @@ SDL_INC_DIR=${SDL_DIR}/include
 
 fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o screen_rdj.o
 
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
 SRC=src/

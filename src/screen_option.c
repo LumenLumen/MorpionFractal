@@ -1,6 +1,7 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
+
 /**
 \file screen_option.c
 \brief programme ...
@@ -8,7 +9,8 @@
 \version 1
 \date 9 février 2023
 */
-#define NB_IMG 12
+#define NB_IMG 19
+#define NB_musique 10
 /**
 \fn void init_option(option_t * options)
 \brief Initialise les options à false et logo de base
@@ -23,6 +25,7 @@ void init_option(option_t * options){
     options->r = 187 ; options->rs = 80 ;
     options->g = 238 ; options->gs = 200 ;
     options->b = 238 ; options->bs = 190 ;
+    options->musique = "./src/musique/test.wav";
 }
 
 /**
@@ -66,8 +69,7 @@ int SDL_TextInRect (SDL_Renderer * renderer, SDL_Rect boite, char * message){
 \fn int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** texture)
 \brief Charge une image dans la surface passée en paramètre.
 \return 0 si on réussi sinon 1.
-
-/*Charge une image dans la surface passée en paramètre*/
+*/
 int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** texture){
     SDL_Surface * image ;
 
@@ -85,7 +87,7 @@ int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** tex
     return 0;
 }
 
-int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options, int rcurr, int ccurr){
+int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options, int rcurr, int ccurr, int music){
 
     // ==== Déclaration des rectangles
     SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H+ESPACE_TEXTE);
@@ -108,17 +110,21 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     SDL_Rect valid_auto = SDL_CreerRect(600, 50, 100, 100);
     SDL_Rect valid_var = SDL_CreerRect(600, 175, 100, 100);
     SDL_Rect couleur = SDL_CreerRect(500, 712, 100, 100);
-
+    SDL_Rect musique = SDL_CreerRect(650, 712, 100, 100);
 
     // ==== Déclaration des images
     SDL_Texture * images [NB_IMG] = {NULL};
     SDL_Texture * flecheg = NULL ;
     SDL_Texture * fleched = NULL;
-    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png"};
-
-
+    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
+   /* SDL_SetRenderDrawColor(renderer,100,200,40,SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(renderer,&musique);
+    SDL_RenderPresent(renderer);*/
     SDL_RenderClear(renderer);
-
+    SDL_Texture * mu [NB_musique] = {NULL};
+    SDL_Texture * test = NULL ;
+    //SDL_Texture * fleched = NULL;
+    char * fich [NB_musique] ={"./src/musique/test.mp3","./src/musique/audio.mp3","./src/musique/ES.mp3","./src/musique/noel.mp3","./src/musique/barbie.mp3","./src/musique/ok.mp3","./src/musique/calme.mp3","./src/musique/pokemon.mp3","./src/musique/urss.mp3"};
     //Fond
     if (SDL_SetRenderDrawColor(renderer, options->r, options->g, options->b, SDL_ALPHA_OPAQUE) != 0)
         return 1;
@@ -188,6 +194,12 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     }
     if (SDL_RenderFillRect(renderer, &couleur) != 0)
         return 4 ;
+
+    if (SDL_SetRenderDrawColor(renderer, options->rs, options->gs, options->bs, SDL_ALPHA_OPAQUE) != 0){
+        return 4 ;
+    }
+    if (SDL_RenderFillRect(renderer, &musique) != 0)
+        return 4 ;
     
     SDL_RenderPresent(renderer);
     return 0;
@@ -204,6 +216,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
     int rondcurr = 1 ;
     int croixcurr = 0 ;
     int themecurr = 0 ;
+    int music = 0;
 
     //Images
     SDL_Rect flecheg1 = SDL_CreerRect(150, 400, 50, 50);
@@ -213,12 +226,17 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
     SDL_Rect valid_auto = SDL_CreerRect(600, 50, 100, 100);
     SDL_Rect valid_var = SDL_CreerRect(600, 175, 100, 100);
     SDL_Rect couleur = SDL_CreerRect(500, 712, 100, 100);
+    SDL_Rect musique = SDL_CreerRect(650, 712, 100, 100);
     SDL_Rect valider = SDL_CreerRect(100, 870, 100, 200);
     SDL_Rect invalide = SDL_CreerRect(5, valider.y + 30, 100, 200);
 
-    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png"};
-    int themes[3][6] = {{187, 238, 238, 80, 200, 190},{130, 194, 122, 83, 122, 92}, {240, 120, 130 ,232, 56, 126}};
-    MAJ_option(window, renderer, options, rondcurr, croixcurr);
+    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
+    int themes[4][6] = {{187, 238, 238, 80, 200, 190},{130, 194, 122, 83, 122, 92}, {240, 120, 130 ,232, 56, 126}, {218, 133, 0 ,204, 50, 0}};
+    MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
+    char * fich [NB_musique] = {"./src/musique/test.mp3","./src/musique/audio.mp3","./src/musique/ES.mp3","./src/musique/noel.mp3","./src/musique/barbie.mp3","./src/musique/ok.mp3","./src/musique/calme.mp3","./src/musique/pokemon.mp3","./src/musique/urss.mp3"};
+    SDL_SetRenderDrawColor(renderer,options->rs,options->gs,options->bs,SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(renderer,&musique);
+    SDL_RenderPresent(renderer);
 
     while(program_launched){ 
         
@@ -238,7 +256,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         else {
                             options->autosave = 0 ;                         
                         }
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
 
                     }
 
@@ -251,7 +269,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         else {
                             options->variante = 0 ;                         
                         }
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
                     }
 
                     //Clic sur la fleche gauche de rond.
@@ -261,7 +279,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (rondcurr < 0) rondcurr = NB_IMG - 1 ;
                         options->rondimg = fichiers[rondcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
                     }
 
                     //Clic sur la fleche droite de rond.
@@ -271,7 +289,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (rondcurr >= NB_IMG) rondcurr = 0 ;
                         options->rondimg = fichiers[rondcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
                         
                     }
 
@@ -282,7 +300,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (croixcurr < 0) croixcurr = NB_IMG - 1 ;
                         options->croiximg = fichiers[croixcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);                        
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);                        
                     }
 
                     //Clic sur la fleche droite de croix.
@@ -292,19 +310,19 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (croixcurr >= NB_IMG) croixcurr = 0 ;                        
                         options->croiximg = fichiers[croixcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr);                        
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);                        
                     }
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, couleur)){
                         themecurr ++ ;
-                        if (themecurr > 2) themecurr = 0 ;
+                        if (themecurr > 3) themecurr = 0 ;
                         options->r = themes[themecurr][0] ;
                         options->g = themes[themecurr][1] ;
                         options->b = themes[themecurr][2] ;
                         options->rs = themes[themecurr][3] ;
                         options->gs = themes[themecurr][4] ;
                         options->bs = themes[themecurr][5] ;
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr); 
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music); 
                     }
 
                     //Clic sur valider.
@@ -321,6 +339,15 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                             }
                             SDL_RenderPresent(renderer);
                         
+                    }
+                    if (SDL_ClickInButton(event.button.x, event.button.y, musique)){
+                        music++ ;
+                        if (music >= NB_musique) music = 0 ;                        
+                        options->musique = fich[music] ;
+                        Mix_Music *musiques; //Création d'un pointeur de type Mix_Music
+                        musiques = Mix_LoadMUS(options->musique); //Chargement de la musique
+                        Mix_PlayMusic(musiques, -1); 
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music); 
                     }
                     continue ;
 
