@@ -2,12 +2,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include "../lib/morpion.h"
 
 #define SCREEN_H 800
 #define SCREEN_W 800
 #define MARGIN 50
 #define ESPACE_TEXTE 150
+
 
 typedef struct option_s {
     int autosave ;
@@ -16,6 +18,7 @@ typedef struct option_s {
     char * croiximg ;
     int r, g, b, rs, gs, bs ; //rgb principal+rgb secondaire
     //char * theme ;
+    char * musique;
     int vsia ;
 } option_t ;
 

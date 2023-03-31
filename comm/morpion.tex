@@ -23,7 +23,7 @@
  \includegraphics[height=2.2cm]{logo_IC2.png}
  \end{center}
  \end{figure}
-\title{\color{blue}Le Mans université \\\color{black} License Informatique 2eme année\\ Module 174UP02 Conduite de projets\\\textbf {Projet Morpion fractal}}
+\title{\color{blue}Le Mans université \\\color{black} Licence Informatique 2e année\\ Module 174UP02 Conduite de projets\\\textbf {Projet Morpion fractal}}
 \author{\textit{B. Lucie B. Damien A. Amandine et B. Mathilde}}
 \date{\today}
 \maketitle
@@ -32,18 +32,107 @@
 \tableofcontents
     \newpage
     \section{Introduction}
-    Nous avons décidé de réaliser un Morpion Fractal. Il s'agit d'un jeu à deux joueurs dans lequel le but est d'alligner avant son adversaire 3 symboles identiques. Notre version étant une version fractale chaque cases est subdivisées en jeu de morpion. Ainsi pour gagner il faut remporter plusieurs partie de morpion et remporter 3 cases. L'alignement peut être, horizontal, vertical ou en diagonale. L'issue du jeu peut être la victoire de l'un des deux joueurs ou une partie nulle.
-    Lors de la parite, l'endroit où le joeur joue detrmine la position que va jouer l'adversaire. En effet si le premier joueur joue dans une des cases situé au milieu d'un des morpion alors l'adversaire devra jouer dans le morpion central.
+Le morpion est un jeu classique qui a été joué pendant des décennies. Cependant, dans notre projet, nous avons cherché à créer une version différente de ce jeu classique en utilisant des fractales pour augmenter la difficulté de notre jeu.
 
-    image 
+Notre objectif était de développer un morpion fractal qui soit à la fois intéressant et agréable à jouer.
+Pour cela, nous avons exploré différentes options visuelles, telles que des options sur les symboles ou bien encore sur la couleur du fond, ainsi que des effets sonores uniques qui ajoutent une dimension supplémentaire à l'expérience de jeu.
 
-    \section{Analyse}
-        toutes les fonction 
-    \subsection{morpion.c}
+Dans ce rapport, nous allons décrire le processus de développement du morpion fractal, les techniques de programmation que nous avons utilisées pour le créer, les choix de conception que nous avons faits et les défis que nous avons rencontrés en cours de route. Nous allons également présenter les résultats de nos tests avec des joueurs pour évaluer l'efficacité de notre morpion fractal en tant que jeu amusant et stimulant.
     
+    \section{Conception}
+    
+\subsection{Présentatiopn du jeu}
 
-    \section{Tests effectués et résultats obtenus}
+    Nous avons décidé de réaliser un Morpion Fractal. Il s'agit d'un jeu à deux joueurs où chaque joueur place alternativement des "X" ou des "O" sur la grille fractale, le but étant d'aligner avant son adversaire trois symboles identiques. Contrairement au morpion traditionnel qui se joue sur une grille rectangulaire de 3x3 cases, le morpion fractal se joue sur une grille de forme fractale. Cela signifie que la grille elle-même est constituée de plusieurs copies plus petites de la grille principale, qui sont répétées à différentes échelles. Ainsi pour gagner il faut remporter plusieurs parties de morpion et remporter trois cases. L'alignement peut être horizontal, vertical ou en diagonale. L'issue du jeu peut être la victoire de l'un des deux joueurs ou une partie nulle.
+    Lors de la partie, l'endroit où le joueur joue détermine la position où va jouer l'adversaire. En effet si le premier joueur joue dans une des cases situées au milieu d'un des morpion alors l'adversaire devra jouer dans le morpion central.
+    \begin{figure}[h!]
+    \begin{center}
+    \includegraphics[height=9cm]{coup.png}\\
+    \caption{{\emph{Façon dont laquelle est défini le coup de l'adversaire}}}
+    \label{Regroupement (ou clustering)}
+    \end{center}
+    \end{figure}
+    \newpage
+    Il faut aussi préciser que le premier joueur à placer son symbole est toujours le joueur <<X>>. D'autre part le premier coup de la partie devra  être impérativement jouer dans la casse centrale.
 
+    \begin{figure}[h!]
+    \begin{center}
+    \includegraphics[height=9cm]{debut.png}\\
+    \caption{{\emph{Exemple de debut de partie}}}
+    \label{Regroupement (ou clustering)}
+    \end{center}
+    \end{figure}
+\newpage
+    \subsection{Fonctionnalités attendus}
+    Nos objectifs principaux était d'avoir un jeu fonctionnel dans lequel nous pourrions sauvegarder les parties de notre jeu. Le but est qu'un des deux joueurs puisse remporter la partie ou bien qu'ils fassent tout deux un match nulle. De plus nous voulions éviter les coup impossible ainsi que les plantages.
+    D'autre part, nous souhaitions créer une interface graphique qui permettrait de jouer en local ainsi qu'en lignes, ainsi qu'une option qui pourrait nous expliquer les différentes règles du jeu.
+
+    Par ailleurs nous avions des objectifs secondaires qui pourraient améliorer l'expérience de jeu des utilisateurs.
+    Pour cela, nous souhaitions réaliser un algorithme qui permettrait de jouer contre la machine ainsi que différents options de personnalisation tels que :\\
+    \begin{itemize}
+   
+    \item La possibilité de choisir ses <<skins>>, c'est à dire les symboles utilisés par les deux joueurs ainsi que les colories choisies pour l'interface;
+    \\
+	\item La possibilité de choisir une musique parmi celles proposées ainsi que des effets sonores lors de la partie pour annoncer par exemple la victoire d'un des joueurs;
+ \\
+	\item La possibilité pour chaque joueur d'avoir un minuteur comme au échec pour limiter le temps de réflexion de chacun;
+ \\
+	\item La possibilité de rejouer dans une case préalablement gagnée;
+ \\
+    \item Ainsi que la possibilité lors du jeu, si le besoin se fait ressentir, d'obtenir de l'aide pour choisir le prochain coup.
+    \end{itemize}
+\\
+    En outre, en fonction de l'état de l'avancement, nous avions l'intention de réaliser un tutoriel qui permettrait de choisir différentes personnalités qui nous expliquerait le fonctionnement du jeu avec des façon de parler différentes. De plus, lors de la partie une aide de jeu pourrait aider le joueur quand il est en difficulté ou ne sait pas où jouer. En effet il y aurait différents niveaux de difficultés à choisir dans les options.
+    De même nous pourrions éditer par nous-même nos <<skins>>.
+    Ensuite, nous voulions réaliser une variante du jeu qui nous permettrais de rejouer dans une case déjà gagné ainsi qu'un minuteur qui nous laisserait un temps pour jouer.
+	Nous avions également l'intention de laisser la possibilité au joueur d'augmenter la profondeur du plateau, c'est à dire que chaque cases de chaque morpions seraient de nouveau subdivisés en nouveaux morpions.
+    Enfin nous souhaitions créer une version de notre jeu qui donnerait la possibilité à trois joueur de faire une partie ensemble.
+
+    \section{Organisation du travail}
+    Pour réaliser notre projet de création d'un morpion fractal , nous avons définie dans un premier temps un planning à respecter durant la totalité de notre projet. Cependant nous ne l'avons en vérité pas réellement utilisé, en effet nous avons préféré avancer à notre rythme tout en tenant compte de l'échéance finale. Nous avons  tout d'abord commencé par établir une liste des fonctionnalités que nous souhaitions inclure dans le jeu, telles que des <<skins>>, des effets sonores et un ordinateur contre lequel jouer.
+    
+    Nous avons ensuite réparti les tâches entre les membres de l'équipe en fonction de leurs compétences et de leur disponibilité. Par exemple, un membre de l'équipe s'est concentré sur la programmation des fonctionnalités de base, tandis que d'autre se sont occupés des options du jeu. Nous avons fait en sorte de mettre notre avancement régulièrement sur github pour que tout le monde sachent en temps réel l'avancement du projet.
+
+    Nous avons travaillé conjointement tout au long du projet, en communicant le plus régulièrement possible pour discuter des progrès et des problèmes rencontrés. Nous avons également effectué des tests réguliers du jeu pour nous assurer que les différentes fonctionnalités ajoutées fonctionnaient .
+
+    Bien que nous ayons rencontré des difficultés en cours de projet, tels que des erreurs de programmation et la visualisation dans l'espace des différents axes, nous avons réussi à les surmonter grâce à notre collaboration.
+
+    \begin{figure}[h!]
+    \begin{center}
+    \includegraphics[height=5.5cm]{organisation.png}\\
+    \caption{{\emph{Répartition des tâches sur l'entièreté du projet}}}
+    \label{Regroupement (ou clustering)}
+    \end{center}
+    \end{figure}
+
+    \section{Développement}
+
+    \subsection{L'algorithme du morpion}
+    \subsection{Affichage x menus}
+    \subsection{Jeu contre la machine (+ aide de jeu)}
+    \subsection{Options x sauvegarde}
+    \subsection{Jeux de test}
+
+
+
+    \section{Résultats}
+    \subsection{Résultats attendus}
+
+
+
+     
+    \subsection{Résultats obtenus}
 
     \section{Conclusion}
+
+
+
+    En conclusion, le projet de jeu sur le Morpion fractal est un défi passionnant pour les amateurs de jeux de société. Il offre une nouvelle façon de jouer au jeu classique du Morpion en introduisant une version fractales qui augmente la difficulté de chaque partie. Les joueurs peuvent découvrir les stratégies de jeu et affronter l'ordinateur pour tester leurs compétences tout en s'amusant.
+    Ce jeu est divertissent et stimulant pour les joueurs de tous âges et niveaux de compétence, et peut aider à développer des compétences en stratégie et en réflexion. La possibilité de personnaliser ce jeu permettra de plaire au plus grand nombre. 
+    
+    En résumé, le Morpion fractal est un jeu innovant  qui offre une expérience de jeu unique. Ce jeu est un excellent choix pour les personnes qui cherchent à se divertir tout en apprenant quelque chose de nouveau.
+
+    \section{Annexes}
+
+
 \end{document}
