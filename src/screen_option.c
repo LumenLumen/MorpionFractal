@@ -122,10 +122,7 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     SDL_RenderFillRect(renderer,&musique);
     SDL_RenderPresent(renderer);*/
     SDL_RenderClear(renderer);
-    SDL_Texture * mu [NB_musique] = {NULL};
-    SDL_Texture * test = NULL ;
     //SDL_Texture * fleched = NULL;
-    char * fich [NB_musique] ={"./src/musique/test.mp3","./src/musique/audio.mp3","./src/musique/ES.mp3","./src/musique/noel.mp3","./src/musique/barbie.mp3","./src/musique/ok.mp3","./src/musique/calme.mp3","./src/musique/pokemon.mp3","./src/musique/urss.mp3"};
     //Fond
     if (SDL_SetRenderDrawColor(renderer, options->r, options->g, options->b, SDL_ALPHA_OPAQUE) != 0)
         return 1;

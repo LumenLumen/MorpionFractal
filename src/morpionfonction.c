@@ -66,12 +66,11 @@ void afficher_morpion(int grille[M][M]){
 /**
 \fn int morpiongagne(int grille[M][M]
 \brief Fonction qui vérifie s'il y a un gagnant dans une grille 3*3 et qui prend en paramètre la grille.
-
 */
 /*Vérifie s'il y a un gagnant dans une grille 3*3.
 Prend en paramètre la grille, retourne la valeur du vainqueur sinon 0.*/
 int morpiongagne(int grille[M][M]){
-    int i, centre ;
+    int i, j, cpt = 0, centre ;
 
     //Vérification des colonnes.
     for (i=0 ; i<M ; i++){
@@ -94,6 +93,15 @@ int morpiongagne(int grille[M][M]){
             return centre ;
         if ((grille[0][2] == centre) && (centre == grille[2][0]))
             return centre ;
+    }
+
+    for (i = 0 ; i < M ; i ++){
+        for(j = 0 ; j < M ; j++){
+            if (grille[i][j] != 0) cpt++ ;
+        }
+    }
+    if (cpt == 9){//Le carré est plein
+        return -1;
     }
 
     return 0;
@@ -146,19 +154,19 @@ int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     //printf("Carre de la fonction \n");
     
     i = morpiongagne(carre);
-    if(i){ ///On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
+    if(i && morpion[xdc/3][ydc/3] == 0 ){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
         morpion[xdc/3][ydc/3] = i ;
     }
-    /** 
+/** 
     \return la valeur de i 
-    */
+*/
     return i;
 }
-    /**
+/**
     \fn int predict_rect(int xdc, int ydc, int * x, int * y)
     \brief Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup
     \return 0
-    */
+*/
 /*Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup*/
 int predict_rect(int xdc, int ydc, int * x, int * y){
     if (xdc == -1){ //Premier coup
@@ -189,7 +197,7 @@ int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, in
         carre =  4 ;
     }
     ///Si le joueur est renvoyé sur une case déjà gagnée par un joueur.
-    else if ( morpion[(*xdc)%M][(*ydc)%M] != 0 ){
+    else if ( morpion[(*xdc)%M][(*ydc)%M] != 0 || carre_plein(grille, *xdc, *ydc)){
         carre = 9;
     }
     else {

@@ -23,7 +23,7 @@ int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[
 
             //TEST SI FIN DE LA PARTIE
             vainqueur = morpiongagne(morpion_int);
-            if (vainqueur == 0){
+            if (vainqueur <= 0){
 
                 //AFFICHAGE DU TEXTE
                 if (*joueur == X) SDL_TextInRect(renderer, boite_de_texte, "C'est au tour de X.");
@@ -87,7 +87,6 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
     int joueur = 1 ; //Tour du joueur ;
     int * xdc = malloc(sizeof(int)); //Ligne du dernier coup ;
     int * ydc = malloc(sizeof(int)); //Colonne du dernier coup ;
-
 
     if (reload == 1){ //si reload=1, on charge le fichier de sauvegarde
         if (load("auto.txt", grille_int, morpion_int, &joueur, xdc, ydc, &(options->variante)) == 0){
@@ -157,22 +156,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
 
     /*=================================== GESTION DES EVENEMENTS =============================================*/
 
-    int cpt=0;
-
-    while(program_launched){ 
-        
-        cpt=0;
-
-        while(options->vsia==1 && joueur==2 && cpt<100){ //Si l'IA est activée
-            ia_random_completionniste(joueur,*xdc,*ydc,&i,&j,morpion_int,grille_int);
-            printf("i=%i j=%i\n",i,j);
-            if(options->variante) vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase_var);
-            else vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase);
-            if (vainqueur > 0) program_launched = SDL_FALSE ;
-            SDL_RenderPresent(renderer);
-            cpt++;
-        }
-        SDL_Delay(1000);
+    while(program_launched){
         
         //On attends un événement.
         while(SDL_PollEvent(&event)){ 
@@ -192,7 +176,17 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
                                     }
                                     else { //Sinon
                                         vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase);
+
+                                        if (vainqueur > 0) program_launched = SDL_FALSE ;
+
+                                        if(options->vsia){ // Si on joue contre l'ordinateur
+                                            /* ================ A FAIRE =======================
+                                            ia_random_completionniste(joueur, *xdc, *ydc, &i, &j, morpion_int, grille_int);
+                                            vainqueur = tour_de_jeu (renderer, grille_int, morpion_int, grille, croix, rond, i, j, xdc, ydc, &joueur, options, valideCase);
+                                            SDL_RenderPresent(renderer);*/
+                                        }
                                     }
+
                                     if (vainqueur > 0) program_launched = SDL_FALSE ;
                                     
                                 }
@@ -201,6 +195,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
 
                         SDL_RenderPresent(renderer);
                     }
+
                     if (SDL_ClickInButton(event.button.x, event.button.y, sauv_rec)){ //SI le joueur clique sur le bouton de sauvegarde
                         SDL_TextInRect(renderer, boite_de_texte, "Partie sauvegardée !");
                         save("save.txt", grille_int, morpion_int, joueur, *xdc, *ydc, options->variante); //sauvegarde
@@ -221,6 +216,30 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
 
     //Annonce du vainqueur
     if (vainqueur == O) SDL_TextInRect(renderer, boite_de_texte, "Le vainqueur est O.");
+    else if (vainqueur == -1){
+        SDL_TextInRect(renderer, boite_de_texte, "Match nul !");
+        SDL_RenderPresent(renderer);
+        wait_a_click();
+        SDL_RenderFillRect(renderer, &boite_de_texte);
+        SDL_TextInRect(renderer, boite_de_texte, "Vous n'avez pas lu les règles ?");
+        SDL_RenderPresent(renderer);
+        wait_a_click();
+        SDL_RenderFillRect(renderer, &boite_de_texte);
+        SDL_TextInRect(renderer, boite_de_texte, "C'est interdit les égalités !!");
+        SDL_RenderPresent(renderer);
+        wait_a_click();
+        SDL_RenderFillRect(renderer, &boite_de_texte);
+        SDL_TextInRect(renderer, boite_de_texte, "Vous êtes nuls !");
+        SDL_RenderPresent(renderer);
+        wait_a_click();
+        SDL_RenderFillRect(renderer, &boite_de_texte);
+        SDL_TextInRect(renderer, boite_de_texte, "Puisque c'est comme ça, j'me tire !");
+        SDL_RenderPresent(renderer);
+        wait_a_click();
+        free(xdc);
+        free(ydc);
+        return 0 ;
+    }
     else SDL_TextInRect(renderer, boite_de_texte, "Le vainqueur est X.");
     SDL_RenderPresent(renderer);
 

@@ -39,3 +39,5 @@ int ecran_inter (SDL_Window * window, SDL_Renderer * renderer, option_t * option
 int ecran_sauv (SDL_Window * window, SDL_Renderer * renderer, option_t * options);
 int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[3][3], SDL_Rect grille[9][9], SDL_Texture * croix, SDL_Texture * rond, int i, int j, int * xdc, int * ydc, int * joueur, option_t * options, int (*fonction) (int *, int(*)[9], int(*)[3], int *, int *, int, int));
 int regles_du_jeu (SDL_Window * window, SDL_Renderer * renderer, option_t * options);
+int wait_a_click (void);
+int ecran_choix_machine (SDL_Window * window, SDL_Renderer * renderer, option_t * options);

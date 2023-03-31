@@ -2,11 +2,11 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 /**
-\file screen_menu.c
-\brief programme ...
-\author Groupe morpion fractal
-\version 1
-\date 9 février 2023
+    \file screen_menu.c
+    \brief programme ...
+    \author Groupe morpion fractal
+    \version 1
+    \date 9 février 2023
 */
 
 #define TAILLE_DU_TEXTE 50
@@ -109,7 +109,7 @@ int ecran_inter (SDL_Window * window, SDL_Renderer * renderer, option_t * option
                     if (SDL_ClickInButton(event.button.x, event.button.y, iaVsJoueur)){
                         //printf("Pas encore implémenté !\n");
                         options->vsia = 1 ;
-                        gamescreen(window, renderer, 0, options);
+                        ecran_choix_machine(window, renderer, options);
                         return 0 ;
                     }
 
@@ -208,6 +208,121 @@ int ecran_sauv (SDL_Window * window, SDL_Renderer * renderer, option_t * options
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, manualsave)){
                         gamescreen(window, renderer, 2, options);
+                        return 0 ;
+                    }
+
+                    continue ;
+
+                //La croix en haut à droite est pressée.
+                case SDL_QUIT : 
+                    return 0 ;
+                    break ;
+            }
+        }
+    }
+    return 0;
+}
+
+int ecran_choix_machine (SDL_Window * window, SDL_Renderer * renderer, option_t * options){
+    SDL_bool program_launched = SDL_TRUE ;
+    SDL_Event event ;
+
+    SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H+ESPACE_TEXTE);
+    SDL_Rect facile = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 150, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    SDL_Rect facile1 = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 200 + SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    SDL_Rect facile2 = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 250 + 2*SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    SDL_Rect moyen = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 300 + 3*SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+
+    //Fond
+    if (SDL_SetRenderDrawColor(renderer, options->r, options->g, options->b, SDL_ALPHA_OPAQUE) != 0)
+        return 1;
+    
+    if (SDL_RenderFillRect(renderer, &background) != 0){
+        return 1;
+    }
+
+    //Création des boutons
+    if (SDL_SetRenderDrawColor(renderer, options->rs, options->gs, options->bs, SDL_ALPHA_OPAQUE) != 0)
+        return 1;
+    
+    if (SDL_RenderFillRect(renderer, &facile) != 0){
+        return 1;
+    }
+
+    if (SDL_RenderFillRect(renderer, &facile1) != 0){
+        return 1;
+    }
+
+    if (SDL_RenderFillRect(renderer, &facile2) != 0){
+        return 1;
+    }
+
+    if (SDL_RenderFillRect(renderer, &moyen) != 0){
+        return 1;
+    }
+
+    //Texte
+
+    facile.x = facile.x + 100;
+    facile.y = facile.y + 55 ;
+    if (SDL_TextInRect(renderer, facile, "FACILE") !=  0){
+        return 2 ;
+    }
+    facile1.x = facile1.x + 85;
+    facile1.y = facile1.y + 55 ;
+    if (SDL_TextInRect(renderer, facile1, "- FACILE") !=  0){
+        return 2 ;
+    }
+    facile2.x = facile2.x + 70;
+    facile2.y = facile2.y + 55 ;
+    if (SDL_TextInRect(renderer, facile2, "-- FACILE") !=  0){
+        return 2 ;
+    }
+    moyen.x = moyen.x + 10;
+    moyen.y = moyen.y + 55 ;
+    if (SDL_TextInRect(renderer, moyen, "TU VAS PERDRE !!") !=  0){
+        return 2 ;
+    }
+
+    facile = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 150, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    facile1 = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 200 + SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    facile2 = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 250 + 2*SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+    moyen = SDL_CreerRect(SCREEN_W/3 - MARGIN/2, 300 + 3*SCREEN_H/6, SCREEN_W/3 + MARGIN, SCREEN_H/6);
+
+
+    SDL_RenderPresent(renderer);
+
+    //DEBUT DES EVENTS
+    while(program_launched){ 
+        
+        //On attends un événement.
+        while(SDL_PollEvent(&event)){ 
+
+            switch(event.type){
+                
+                case SDL_MOUSEBUTTONDOWN :
+                    //clic sur le bouton nouvelle partie
+                    if (SDL_ClickInButton(event.button.x, event.button.y, facile)){
+                        options->vsia = 1 ;
+                        gamescreen(window, renderer, 0, options);
+                        return 0 ;
+                    }
+
+                    if (SDL_ClickInButton(event.button.x, event.button.y, facile1)){
+                        options->vsia = 2 ;
+                        gamescreen(window, renderer, 0, options);
+                        return 0 ;
+                    }
+
+                    if (SDL_ClickInButton(event.button.x, event.button.y, facile2)){
+                        options->vsia = 3 ;
+                        gamescreen(window, renderer, 0, options);
+                        return 0 ;
+                    }
+
+                    if (SDL_ClickInButton(event.button.x, event.button.y, moyen)){
+                        options->vsia = 4 ;
+                        gamescreen(window, renderer, 0, options);
                         return 0 ;
                     }
 

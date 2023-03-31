@@ -26,7 +26,6 @@ int regles_du_jeu (SDL_Window * window, SDL_Renderer * renderer, option_t * opti
 
     SDL_Rect grille[9][9];
     SDL_Rect contour = SDL_CreerRect(MARGIN, MARGIN, SCREEN_H - MARGIN*2, SCREEN_W - MARGIN*2);
-    SDL_Rect sauv_rec = SDL_CreerRect(SCREEN_W*8/9, MARGIN+contour.h, MARGIN, MARGIN);
     SDL_Rect boite_de_texte_l1 = SDL_CreerRect(10, SCREEN_H, SCREEN_W, ESPACE_TEXTE);
     SDL_Rect boite_de_texte_l2 = SDL_CreerRect(10, SCREEN_H + 50, SCREEN_W, ESPACE_TEXTE);
     SDL_Rect boite_de_texte_l3 = SDL_CreerRect(10, SCREEN_H + 100, SCREEN_W, ESPACE_TEXTE);
@@ -43,9 +42,6 @@ int regles_du_jeu (SDL_Window * window, SDL_Renderer * renderer, option_t * opti
     int grille_int[N][N];
     int morpion_int[M][M];
     int i, j;
-    int vainqueur = 0;
-
-    int joueur = 1 ; //Tour du joueur ;
     int * xdc = malloc(sizeof(int)) ; //Ligne du dernier coup ;
     int * ydc = malloc(sizeof(int)); //Colonne du dernier coup ;
 
