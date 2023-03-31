@@ -17,7 +17,7 @@ Nous avons fait les boutons pour notre menu en pixel art. On a essayer d'affiche
 
 09/02/2023
 On a fait du doxygène pour commenter les fichiers.
-On a corrriger le makefile.
+On a corriger le makefile.
 On a fait des liens entre les différentes fenêtres.
 
 Bourgeois Mathilde, Antout Amandine, Barbier Lucie, Boulanger Damien 
@@ -84,6 +84,7 @@ Samedi 18 Mars
 - Personnalisation de la couleur de la fenêtre ajoutée au menu des options.
 
 Dimanche 19 Mars
+
 - Modification des fonctions de sauvegarde & chargement pour savoir si la partie est en mode variante ou pas.
 - Création d'une fonction tour_de_jeu pour éviter la redondance de code.
 
@@ -96,12 +97,21 @@ Mercredi 22 Mars
 Mercredi 29 Mars
 
 - Correction des bugs pour jouer contre l'ordi
-- Autre IA (plein de bugs)
+- Autre algo pour l'ordi (plein de bugs)
 - Musique ajoutée (pas encore dans les options)
 
 Jeudi 30 Mars
 
-- Correction des bugs contre l'IA numéro 2 
-- Ajout d'une 3ème IA 
+- Correction des bugs contre l'algo numéro 2 
+- Ajout d'un 3ème algo
 - Ajout de choix de musiques dans les options
 - Ajout de thèmes visuels et skins
+
+Vendredi 31 Mars
+
+- Ajout d'un 4ème algo pseudo-déterministe
+- Résolution du cas d'égalité
+- Correction d'un bug si une case est remplie mais pas gagnée
+- Avancé sur le compte-rendu
+- Menu pour choisir la difficulté de l'ordi
+- Diagramme de Gantt

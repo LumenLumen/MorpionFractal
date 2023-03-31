@@ -47,6 +47,7 @@ int main(){
     while(vainqueur==0 && i<75){
         ia_random_test(&joueur,grille,morpion,&xdc,&ydc,&x,&y);
         check_carre(grille,morpion,x,y);
+    afficher_grille(grille);
         vainqueur=morpiongagne(morpion);
         i++;
     }
