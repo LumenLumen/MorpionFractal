@@ -2,8 +2,8 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 
-//donne des coordonnées aléatoire
-void ia_random(int * x, int * y){
+//donne des coordonnées aléatoires
+void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     int rdx= rand() % 9;
     int rdy= rand() % 9;
     *x=rdx;
@@ -11,7 +11,7 @@ void ia_random(int * x, int * y){
 }
 
 //donne des coordonnées aléatoires en évitant de renvoyer l'adversaire sur une case où il peut jouer où il veut
-void ia_random_2(int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
+void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     
     int rdx; //coordonnées random 
     int rdy;
@@ -147,8 +147,95 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
 
 }
 
+//donne des coordonnées basées sur le coup qui donne le "meilleur" tableau pour le joueur immédiatement après le coup
+void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
+    
+    float max=-20.0,temp;
+    int maxx=0, maxy=0;
+    int i,j;
+
+    //cas où on joue où on veut
+    if(morpion[xdc%M][ydc%M]!=0){
+        printf("joov\n");
+        for(i=0;i<N;i++){
+            for(j=0;j<N;j++){
+
+                if(morpion[i%M][j%M]==0){
+                    if(grille[i][j]==0){
+
+                        grille[i][j]=joueur;
+                        temp=eval_morpion(joueur,morpion,grille);
+                        grille[i][j]=0;
+
+                        if(temp>max){
+                            max=temp;
+                            maxx=i;
+                            maxy=j;
+                        }
+                        else if(temp==max){
+                            if(rand()%10<2){
+                            max=temp;
+                            maxx=i;
+                            maxy=j;
+                            }
+                        }
+
+                        printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
+
+                    }
+                }
+            }
+        }
+    }
+
+    //cas où on joue dans une case spécifique
+    else{
+        printf("jduc\n");
+        int temp_morpion[M][M];
+        predict_rect(xdc,ydc,x,y);
+
+        for(i=0;i<M;i++){
+            for(j=0;j<M;j++){
+                temp_morpion[i][j]=grille[*x*3+i][*y*3+j];
+            }
+        }
+
+        for(i=0;i<M;i++){
+            for(j=0;j<M;j++){
+
+                    if(temp_morpion[i][j]==0){
+
+                        grille[*x*3+i][*y*3+j]=joueur;
+                        temp=eval_morpion(joueur,morpion,grille);
+                        grille[*x*3+i][*y*3+j]=0;
+
+                        if(temp>max){
+                            max=temp;
+                            maxx=*x*3+i;
+                            maxy=*y*3+j;
+                        }
+                        else if(temp==max){
+                            if(rand()%10<2){
+                            max=temp;
+                            maxx=*x*3+i;
+                            maxy=*y*3+j;
+                            }
+                        }
+
+                        printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
+
+                    }
+                }
+            }
+    }
+
+    *x=maxx;
+    *y=maxy;
+
+}
+
 //fait jouer le joueur "joueur" en utilisant une méthode aléatoire (fonction pour tester)
-int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
+int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int * x, int * y){
     int rdx= rand() % 9;
     int rdy= rand() % 9;
     int val=valideCase(joueur,grille,morpion,xdc,ydc,rdx,rdy);
@@ -162,11 +249,13 @@ int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc,
     }
 
     printf("IArand : x=%i y=%i val=%i\n",rdx,rdy,val);
+    *x=rdx;
+    *y=rdy;
     return 0;
 }
 
 //fait jouer le joueur "joueur" en utilisant une méthode aléatoire (fonction pour tester)
-int ia_random_var_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
+int ia_random_var_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int * x, int * y){
     int rdx= rand() % 9;
     int rdy= rand() % 9;
     int val=valideCase_var(joueur,grille,morpion,xdc,ydc,rdx,rdy);
@@ -180,5 +269,7 @@ int ia_random_var_test(int * joueur, int grille[N][N], int morpion[M][M], int * 
     }
 
     printf("IArand : x=%i y=%i val=%i\n",rdx,rdy,val);
+    *x=rdx;
+    *y=rdy;
     return 0;
 }
