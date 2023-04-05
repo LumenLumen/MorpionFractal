@@ -1,19 +1,24 @@
 #include "../lib/sauvegarde.h"
+
 /**
-\file sauvegarde.c
-\brief programme ...
-\author Groupe morpion fractal
-\version 1
-\date 9 février 2023
+    \file sauvegarde.c
+    \brief Fonctions qui gèrent la sauvegarde ou le chargement de partie.
+    \author Groupe morpion fractal
+    \version 1
+    \date 9 février 2023
 */
+
 /**
-\fn void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc)
-\brief fonction qui sauvegarde la grille dans un fichier.
-\brief Prends en paramètre le fichier de sauvegarde, la grille de la partie, et le joueur à qui sera le prochain tour.
+    \fn void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc, int var)
+    \brief fonction qui sauvegarde la grille dans un fichier.
+    \param name nom du fichier de sauvegarde
+    \param grille matrice 9*9
+    \param morpion matrice 3*3
+    \param joueur joueur dont ce sera le tour au chargement de la partie
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonnée dernier coup joué
+    \param var VRAI si on joue selon les règles de la variante, sinon FAUX.
 */
-/*Sauvegarde la grille dans un fichier.
-Prends en paramètre le fichier de sauvegarde, la grille de la partie, 
-et le joueur à qui sera le prochain tour.*/
 void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc, int ydc, int var){
     FILE * slot = fopen(name, "w");
     int i, j ;
@@ -39,13 +44,19 @@ void save (char * name, int grille[N][N], int morpion[M][M], int joueur, int xdc
     fclose(slot);
 
 }
+
 /**
-\fn void load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc)
-\brief fonction qui charge une sauvegarde à partir d'un fichier.
-\brief Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.
+    \fn int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc, int * var)
+    \brief fonction qui charge la grille d'un fichier.
+    \param name nom du fichier de sauvegarde
+    \param grille matrice 9*9
+    \param morpion matrice 3*3
+    \param joueur pointeur vers le joueur dont ce sera le tour au chargement de la partie
+    \param xdc pointeur vers abscisse dernier coup joué
+    \param ydc pointeur vers ordonnée dernier coup joué
+    \param var pointeur vers la variable qui indique si on joue en variante ou non.
+    \return 0 si échoue, 1 si succès.
 */
-/*Charge une sauvegarde à partir d'un fichier.
-Prends en paramètre le fichier source, la grille et l'adresse du prochain joueur.*/
 int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * xdc, int * ydc, int * var){
     FILE * slot = fopen(name, "r");
     int i, j ;
@@ -68,7 +79,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
                 case '0' : grille[i][j] = 0 ; break ;
                 case '1' : grille[i][j] = 1 ; break ;
                 case '2' : grille[i][j] = 2 ; break ;
-                default : printf("Erreur\n");
+                default : printf("Erreur\n"); return 0;
             } 
         }
     }
@@ -76,7 +87,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
     switch (c[81]){ //Le prochain joueur est indiqué au 82ème caractère.
         case '1' : *joueur = 1 ; break ;
         case '2' : *joueur = 2 ; break ;
-        default : printf("Erreur\n");
+        default : printf("Erreur\n"); return 0;
     }
 
     switch (c[82]){ //Le xdc est indiqué au 83ème caractère.
@@ -89,7 +100,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
         case '6' : *xdc = 6 ; break ;
         case '7' : *xdc = 7 ; break ;
         case '8' : *xdc = 8 ; break ;
-        default : printf("Erreur\n");
+        default : printf("Erreur\n"); return 0;
     }
 
 
@@ -103,7 +114,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
         case '6' : *ydc = 6 ; break ;
         case '7' : *ydc = 7 ; break ;
         case '8' : *ydc = 8 ; break ;
-        default : printf("Erreur\n");
+        default : printf("Erreur\n"); return 0;
     }
 
     for (i = 0 ; i < M ; i++){
@@ -112,7 +123,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
                 case '0' : morpion[i][j] = 0 ; break ;
                 case '1' : morpion[i][j] = 1 ; break ;
                 case '2' : morpion[i][j] = 2 ; break ;
-                default : printf("Erreur\n");
+                default : printf("Erreur\n"); return 0;
             } 
         }
     }
@@ -120,7 +131,7 @@ int load (char * name, int grille[N][N], int morpion[M][M], int * joueur, int * 
     switch (c[93]){ //Si la variante est activée.
         case '0' : *var = 0 ; break ;
         case '1' : *joueur = 1 ; break ;
-        default : printf("Erreur\n");
+        default : printf("Erreur\n"); return 0;
     }    
 
     fclose(slot);

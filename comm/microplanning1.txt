@@ -112,6 +112,18 @@ Vendredi 31 Mars
 - Ajout d'un 4ème algo pseudo-déterministe
 - Résolution du cas d'égalité
 - Correction d'un bug si une case est remplie mais pas gagnée
-- Avancé sur le compte-rendu
+- Avancée sur le compte-rendu
 - Menu pour choisir la difficulté de l'ordi
 - Diagramme de Gantt
+
+Lundi 03 avril
+
+- Fin de l'implentation des parties joueurs vs ia.
+- Ajout de l'option machine vs machine, et correction des noooombreux soucis que cela à créer
+- Ajout de nouveaux thèmes, égalisation des musiques, redimension des images.
+
+Mardi 04 avril
+
+- Correction de quelques bugs
+- Tests de fonctionnement
+- Mise à jour de la documentation - reste à faire : deux dernières fonctions de ia.c ; screen_menu.c ; screen_option.c ; screen_rdj.c ; screens.c ; toutes les fonctions de tests.

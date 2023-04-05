@@ -1,15 +1,17 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 /**
-\file morpionfonction.c
-\brief programme ...
-\author Groupe morpion fractal
-\version 1
-\date 9 février 2023
+    \file morpionfonction.c
+    \brief contient toutes les fonctions utiles à une partie de morpion
+    \author Groupe morpion fractal
+    \version 1
+    \date 9 février 2023
 */
+
 /**
-\fn void init_grille(int grille[N][N])
-\brief fonction qui initialise la grille .
+    \fn void init_grille(int grille[N][N])
+    \brief fonction qui initialise la grille avec des 0.
+    \param matrice 9*9
 */
 void init_grille(int grille[N][N]){
     int i, j;
@@ -17,9 +19,11 @@ void init_grille(int grille[N][N]){
         for(j=0 ; j<N ; j++)
             grille[i][j]=0 ;
 }
+
 /**
-\fn void init_morpion(int grille[M][M])
-\brief fonction qui initialise le morpion.
+    \fn void init_morpion(int grille[M][M])
+    \brief fonction qui initialise le morpion avec des 0.
+    \param grille matrice 3*3
 */
 void init_morpion(int grille[M][M]){
     int i, j;
@@ -27,22 +31,17 @@ void init_morpion(int grille[M][M]){
         for(j=0 ; j<M ; j++)
             grille[i][j]=0 ;
 }
+
 /**
-\fn void afficher_grille(int grille[N][N])
-\brief Fonction qui affiche la  grille.
+    \fn void afficher_grille(int grille[N][N])
+    \brief Fonction qui affiche la  grille.
+    \param grille matrice 9*9
 */
 void afficher_grille(int grille[N][N]){
     int i, j;
     for (i=0 ; i<N ; i++){
         for(j=0 ; j<N ; j++){
-            /*
-            switch (grille[i][j]){
-                case 0 : printf("0 ") ; break ;
-                case O : printf("o ") ; break ;
-                case X : printf("x ") ; break ;
-            }*/
             printf("%i ", grille[i][j]);
-
             if ((j%3 == 2) && (j != 8)) printf ("| ");
         }
 
@@ -51,9 +50,11 @@ void afficher_grille(int grille[N][N]){
         if ((i%3 == 2) && (i != 8)) printf("----------------------\n");
     }
 }
+
 /**
-\fn void afficher_morpion(int grille[M][M])
-\brief Fonction qui affiche le morpion.
+    \fn void afficher_morpion(int grille[M][M])
+    \brief Fonction qui affiche le morpion.
+    \param grille matrice 3*3
 */
 void afficher_morpion(int grille[M][M]){
     int i, j;
@@ -63,12 +64,13 @@ void afficher_morpion(int grille[M][M]){
         printf("\n");
     }
 }
+
 /**
-\fn int morpiongagne(int grille[M][M]
-\brief Fonction qui vérifie s'il y a un gagnant dans une grille 3*3 et qui prend en paramètre la grille.
+    \fn int morpiongagne(int grille[M][M]
+    \brief Fonction qui vérifie s'il y a un gagnant dans une grille 3*3
+    \param grille matrice 3*3
+    \return -1 si match nul, 0 pas de vainqueur, 1 X gagne, 2 O gagne.
 */
-/*Vérifie s'il y a un gagnant dans une grille 3*3.
-Prend en paramètre la grille, retourne la valeur du vainqueur sinon 0.*/
 int morpiongagne(int grille[M][M]){
     int i, j, cpt = 0, centre ;
 
@@ -106,13 +108,14 @@ int morpiongagne(int grille[M][M]){
 
     return 0;
 }
+
 /**
-\fn int coog_to_carr (int x, int y)
-\brief Fonction qui prends en paramètre des coordonnées [0;8][0;8]. On suppose les coordonnés corrects.
-\return le carré (0-8) dans lequel elles se trouvent.
+    \fn int coog_to_carr (int x, int y)
+    \brief Donne le sous-morpion dans lequel se trouve un coup.
+    \param x abscisse du coup à vérifier
+    \param y ordonné du coup à vérifier
+    \return le carré (0-8) dans lequel elles se trouvent selon le tableau suivant : ((0,1,2),(3,4,5),(6,7,8)).
 */
-/*Prends en paramètre des coordonnées [0;8][0;8]. On suppose les coordonnés corrects.
-Retourne le carré (0-8) dans lequel elles se trouvent.*/
 int coog_to_carr (int x, int y){
     if (x < 0 || y < 0) return -1;
     if (x <= 2){
@@ -132,13 +135,17 @@ int coog_to_carr (int x, int y){
     }
     return -1 ;
 }
+
 /**
-\fn int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc)
-\brief Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3*3 si nécessaire. Prends en paramètre la grille, le morpion, et les derniers coordonnées joués.
+    \fn int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc)
+    \brief Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3*3 si nécessaire.
+    \param grille matrice 9*9
+    \param morpion matrice 3*3
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonné dernier coup joué
 */
 int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     int carre[M][M] ; //On recopie le contenu du carré où le dernier coup a été joué dans carre
-    //int num_carre = coog_to_carr(xdc, ydc);
     int i,j ;
 
     ///On se place sur la première case du carré où le dernier coup a été joué.
@@ -150,18 +157,17 @@ int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
             carre[i][j]=grille[xdc+i][ydc+j];
         }
     }
-
-    //printf("Carre de la fonction \n");
     
     i = morpiongagne(carre);
     if(i && morpion[xdc/3][ydc/3] == 0 ){ //On place dans i la valeur du vainqueur s'il existe, sinon i = 0 et la condition ne se lance pas.
         morpion[xdc/3][ydc/3] = i ;
     }
-/** 
-    \return la valeur de i 
-*/
+    /** 
+        \return la valeur de i 
+    */
     return i;
 }
+
 /**
     \fn int predict_rect(int xdc, int ydc, int * x, int * y)
     \brief Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup
@@ -182,13 +188,17 @@ int predict_rect(int xdc, int ydc, int * x, int * y){
 }
 
 /**
-\fn  int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y)
-\brief Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
-
+    \fn  int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y)
+    \brief Vérifie si le coup est valide. S'il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant
+    \param joueur pointeur vers le joueur dont c'est le tour
+    \param grille matrice 9*9
+    \param morpion matrice 3*3
+    \param xdc pointeur vers abscisse dernier coup joué
+    \param ydc pointeur vers ordonnée dernier coup joué
+    \param x abscisse coup à vérifier
+    \param y ordonnée coup à vérifier
+    \return 0 si le coup est okay, 3 si carré non valide, 4 si case déjà prise, 5 si carré déjà complété, -1 si erreur
 */
-
-/*Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
-Retourne -1 si le coup n'est pas valide, 0 sinon.*/
 int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
 
     int carre = -1 ;
@@ -204,17 +214,16 @@ int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, in
         carre = (*xdc)%M * 3 + (*ydc)%M ;
     }
 
-    //printf("Contenu de la case visée : %i en x=%i et y=%i avec carre=%i et morpion=%i ",grille[x][y],x,y,carre,morpion[x/M][y/M]);
-    if((coog_to_carr(x,y) != carre) && (carre != 9)){
+    if((coog_to_carr(x,y) != carre) && (carre != 9)){ //Carré non valide
         return 3 ;
     }
-    else if (grille[x][y] != 0){
+    else if (grille[x][y] != 0){ //Case prise
         return 4;
     }
-    else if (carre == 9 && morpion[x/M][y/M] != 0){
+    else if (carre == 9 && morpion[x/M][y/M] != 0){ //Carré complet
         return 5;
     }
-    else {
+    else { //Coup okay
         *xdc = x ;
         *ydc = y ;///Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
         grille[x][y] = *joueur ; ///On ajoute la valeur du joueur à la grille à l'endroit joué.
@@ -223,17 +232,17 @@ int valideCase (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, in
         else *joueur = X ;
         return 0 ; 
     }
-    /**
-    \return -1 si le coup n'est pas valide, 0 sinon
-    */
     return -1 ;
 }
+
 /**
-\fn int carre_plein(int grille[N][N], int x, int y)
-\brief Prend en paramètre une matrice 3*3.
-\return VRAI si le carré est plein, FAUX s'il reste de la place.
+    \fn int carre_plein(int grille[N][N], int x, int y)
+    \brief Vérifie si un sous-morpion est plein.
+    \param grille matrice 9*9
+    \param i ordonné d'un coup dans le sous-morpion à vérifier
+    \param j abscisse d'un coup dans le sous-morpion à vérifier
+    \return VRAI si le carré est plein, FAUX s'il reste de la place.
 */
-/*Prend en paramètre une matrice 3*3, retourne VRAI si le carré est plein, FAUX s'il reste de la place.*/
 int carre_plein(int grille[N][N], int x, int y){
     int cpt = 0 ;
 
@@ -253,11 +262,17 @@ int carre_plein(int grille[N][N], int x, int y){
 
 
 /**
-\fn int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y)
-\brief Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
+    \fn  int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y)
+    \brief Vérifie si le coup est valide en suivant les règles de la variante. S'il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant
+    \param joueur pointeur vers le joueur dont c'est le tour
+    \param grille matrice 9*9
+    \param morpion matrice 3*3
+    \param xdc pointeur vers abscisse dernier coup joué
+    \param ydc pointeur vers ordonnée dernier coup joué
+    \param x abscisse coup à vérifier
+    \param y ordonnée coup à vérifier
+    \return 0 si le coup est okay, 3 si carré non valide, 4 si case déjà prise, 5 si carré déjà complété, -1 si erreur
 */
-/*Prends en paramètre le joueur dont c'est le tour, la grille 9*9, le morpion 3*3, les coordonnées de la dernière case jouée, et les coordonnées de la case jouée
-Retourne -1 si le coup n'est pas valide, 0 sinon.*/
 int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y){
 
     int carre = -1 ;
@@ -292,9 +307,6 @@ int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc
         else *joueur = X ;
         return 0 ; 
     }
-    /**
-    \return -1 si le coup n'est pas valide, 0 sinon.
-    */
 
     return -1 ;
 }

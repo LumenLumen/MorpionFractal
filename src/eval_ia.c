@@ -1,7 +1,20 @@
 #include "../lib/screens.h"
 #include "../lib/morpion.h"
+/**
+    \file eval_ia.c
+    \brief Programme contenant toutes les fonctions nécessaires aux estimations des coups de la machine.
+    \author Groupe morpion fractal
+    \version 1
+    \date 22 mars 2023
+*/
 
-//donne le nombre de coups gagnants possible pour le joueur dans le morpion, donne -1 si le morpion est déjà gagné
+/**
+    \fn float nb_coups_gagnants(int joueur, int morpion[M][M])
+    \brief donne le nombre de coups gagnants possible pour le joueur dans le morpion, donne -1 si le morpion est déjà gagné
+    \param joueur le joueur dont on évalue le coup
+    \param morpion le morpion 3*3 dans lequel le joueur doit jouer
+    \return -1 si le morpion est déjà gagnée, sinon un réel indiquant le nombre de coup gagnant possible
+*/
 float nb_coups_gagnants(int joueur, int morpion[M][M]){
     if(!morpiongagne(morpion)){
         
@@ -26,10 +39,16 @@ float nb_coups_gagnants(int joueur, int morpion[M][M]){
     else return -1.0;
 }
 
-//donne la "valeur stratégique" du morpion de coordonnées (i,j) selon le tableau suivant
-// 3 1 3
-// 1 2 1
-// 3 1 3
+/**
+    \fn float strat_val(int i, int j)
+    \brief donne la "valeur stratégique" du morpion de coordonnées (i,j) selon le tableau suivant
+            3 1 3
+            1 2 1
+            3 1 3
+    \param i abscisse du coup à évaluer
+    \param j ordonnée du coup à évaluer
+    \return une des valeurs du tableau
+*/
 float strat_val(int i, int j){
     if(i==1 && j==1) return 2.0;
     else if(i==1 && j!=1) return 1.0;
@@ -37,7 +56,14 @@ float strat_val(int i, int j){
     else return 3.0;
 }
 
-//évalue si la position courante du morpion est favorable pour le joueur, négatif signifie défavorable et positif signifie favorable
+/**
+    \fn float eval_morpion(int joueur, int morpion[M][M], int grille[N][N])
+    \brief évalue si la position courante du morpion est favorable pour le joueur, négatif signifie défavorable et positif signifie favorable
+    \param joueur joueur dont on évalue le coup
+    \param morpion matrice 3*3
+    \param grille matrice 9*9
+    \return estimation si le coup est favorable ou non (float)
+*/
 float eval_morpion(int joueur, int morpion[M][M], int grille[N][N]){
 
     float eval_grille[9];

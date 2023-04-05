@@ -18,7 +18,7 @@ TEST=tests/
 
 
 
-all: game
+all: game test
 
 game: ${fich_jeu_complet}
 	${CC} ${FLAGS} ${fich_jeu_complet} -o ${PROG} ${LIBS} ${INCS}
@@ -82,6 +82,10 @@ test_eval_ia.o : ${TEST}test_eval_ia.c
 
 clean:
 	rm -f ${PROG}
+	rm -f test_morpionfonction 
+	rm -f test_sauvegarde 
+	rm -f test_ia 
+	rm -f test_eval_ia
 	rm -f *.o
 	rm -f ./tests/*.o
 

@@ -2,7 +2,25 @@
 #include "../lib/morpion.h"
 #include "../lib/sauvegarde.h"
 
-//donne des coordonnées aléatoires
+/**
+    \file ia.c
+    \brief Programme contenant toutes les fonctions nécessaires à la génération des coups de la machine.
+    \author Groupe morpion fractal
+    \version 1
+    \date 22 mars 2023
+*/
+
+/**
+    \fn ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N])
+    \brief donne des coordonnées aléatoires
+    \param joueur le jouer dont c'est le tour
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonnée dernier coup joué
+    \param x pointeur vers l'abscisse que va retourner la fonction
+    \param y pointeur vers l'ordonnée que va retourner la fonction
+    \param morpion matrice 3*3
+    \param grille matrice 9*9
+*/
 void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     int rdx= rand() % 9;
     int rdy= rand() % 9;
@@ -10,7 +28,17 @@ void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M]
     *y=rdy;
 }
 
-//donne des coordonnées aléatoires en évitant de renvoyer l'adversaire sur une case où il peut jouer où il veut
+/**
+    \fn void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N])
+    \brief donne des coordonnées aléatoires en évitant de renvoyer l'adversaire sur une case où il peut jouer où il veut
+    \param joueur le jouer dont c'est le tour
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonnée dernier coup joué
+    \param x pointeur vers l'abscisse que va retourner la fonction
+    \param y pointeur vers l'ordonnée que va retourner la fonction
+    \param morpion matrice 3*3
+    \param grille matrice 9*9
+*/
 void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     
     int rdx; //coordonnées random 
@@ -44,7 +72,17 @@ void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][
     }
 }
 
-//donne des coordonnées aléatoires, en essayant de compléter un morpion quand c'est possible
+/**
+    \fn void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N])
+    \brief donne des coordonnées aléatoires, en essayant de compléter un morpion quand c'est possible
+    \param joueur le jouer dont c'est le tour
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonnée dernier coup joué
+    \param x pointeur vers l'abscisse que va retourner la fonction
+    \param y pointeur vers l'ordonnée que va retourner la fonction
+    \param morpion matrice 3*3
+    \param grille matrice 9*9
+*/
 void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     
     int rdx, rdy;
@@ -136,8 +174,6 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
                 cpt--;
             }
 
-            printf("jduc rdx=%i rdy=%i morpiongagne=%i, cpt=%i\n",*x*3+rdx,*y*3+rdy,morpiongagne(petit_morpion),cpt);
-
         } while(cpt);
 
         *x=*x*3+rdx;
@@ -147,7 +183,17 @@ void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, i
 
 }
 
-//donne des coordonnées basées sur le coup qui donne le "meilleur" tableau pour le joueur immédiatement après le coup
+/**
+    \fn void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N])
+    \brief donne des coordonnées basées sur le coup qui donne le "meilleur" tableau pour le joueur immédiatement après le coup
+    \param joueur le joueur dont c'est le tour
+    \param xdc abscisse dernier coup joué
+    \param ydc ordonnée dernier coup joué
+    \param x pointeur vers l'abscisse que va retourner la fonction
+    \param y pointeur vers l'ordonnée que va retourner la fonction
+    \param morpion matrice 3*3
+    \param grille matrice 9*9
+*/
 void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     
     float max=-20.0,temp;
@@ -156,7 +202,7 @@ void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[
 
     //cas où on joue où on veut
     if(morpion[xdc%M][ydc%M]!=0){
-        printf("joov\n");
+        //printf("joov\n");
         for(i=0;i<N;i++){
             for(j=0;j<N;j++){
 
@@ -180,7 +226,7 @@ void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[
                             }
                         }
 
-                        printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
+                        //printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
 
                     }
                 }
@@ -190,7 +236,7 @@ void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[
 
     //cas où on joue dans une case spécifique
     else{
-        printf("jduc\n");
+        //printf("jduc\n");
         int temp_morpion[M][M];
         predict_rect(xdc,ydc,x,y);
 
@@ -222,7 +268,7 @@ void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[
                             }
                         }
 
-                        printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
+                        //printf("i=%i j=%i max=%f temp=%f\n",i,j,max,temp);
 
                     }
                 }

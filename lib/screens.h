@@ -41,3 +41,4 @@ int tour_de_jeu (SDL_Renderer * renderer, int grille_int[9][9], int morpion_int[
 int regles_du_jeu (SDL_Window * window, SDL_Renderer * renderer, option_t * options);
 int wait_a_click (void);
 int ecran_choix_machine (SDL_Window * window, SDL_Renderer * renderer, option_t * options);
+int iavsia (SDL_Window * window, SDL_Renderer * renderer, option_t * options);

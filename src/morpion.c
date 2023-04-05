@@ -3,25 +3,25 @@
 #include "../lib/screens.h"
 #include <time.h>
 /**
-\file morpion.c
-\brief programme ...
-\author Groupe morpion fractal
-\version 1
-\date 9 février 2023
+    \file morpion.c
+    \brief Programme principal (main), initialise les bibliothèques et les éléments nécessaires.
+    \author Groupe morpion fractal
+    \version 1
+    \date 9 février 2023
 */
+
 /**
-\fn int main (int argc, char * argv[]){
-\brief On appelle les fonctions.
+    \fn int main (int argc, char * argv[]){
+    \brief Initialisation des variables nécessaires tout au long du programme et appelle du menu.
+    \return 0
 */
 int main (int argc, char * argv[]){
-    int continuer = 1;
 
     srand(time(NULL));
 
     option_t * options = malloc(sizeof(option_t)) ;
     SDL_Window * window = NULL ;
     SDL_Renderer * renderer = NULL ;
-    SDL_Event event;
 
     //Initialise SDL pour l'aspect visuel.
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0){
@@ -65,27 +65,7 @@ int main (int argc, char * argv[]){
     Mix_Music *musique; //Création d'un pointeur de type Mix_Music
     musique = Mix_LoadMUS("./src/musique/test.mp3"); //Chargement de la musique
     Mix_PlayMusic(musique, -1); //Jouer infiniment la musique
-   /* do{
-   SDL_PollEvent(&event);
-      switch(event.type)
-      {
-         case SDL_QUIT:
-            continuer = 0;
-            break;
-         case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-                case SDLK_BACKSPACE:
-                    Mix_RewindMusic(); //Revient au début de la musique
-                    break;
-                case SDLK_ESCAPE:
-                    Mix_HaltMusic(); //Arrête la musique
-                    break;
-            }
-            break;
-      }
-   }while(continuer!=0);
-  */
+
     init_option(options);
 
     menuscreen(window, renderer, options);

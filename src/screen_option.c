@@ -9,8 +9,9 @@
 \version 1
 \date 9 février 2023
 */
-#define NB_IMG 19
+#define NB_IMG 18
 #define NB_musique 10
+#define NB_THEME 7
 /**
 \fn void init_option(option_t * options)
 \brief Initialise les options à false et logo de base
@@ -25,7 +26,7 @@ void init_option(option_t * options){
     options->r = 187 ; options->rs = 80 ;
     options->g = 238 ; options->gs = 200 ;
     options->b = 238 ; options->bs = 190 ;
-    options->musique = "./src/musique/test.wav";
+    options->musique = "./src/musique/test.mp3";
     options->vsia = 0 ;
 }
 
@@ -62,6 +63,7 @@ int SDL_TextInRect (SDL_Renderer * renderer, SDL_Rect boite, char * message){
 
     SDL_DestroyTexture(texte_tex);
     SDL_FreeSurface(texte);
+    TTF_CloseFont(police);
     return 0;
 }
 
@@ -117,7 +119,8 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     SDL_Texture * images [NB_IMG] = {NULL};
     SDL_Texture * flecheg = NULL ;
     SDL_Texture * fleched = NULL;
-    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
+    SDL_Texture * couleurtex = NULL, * musiquetex = NULL ;
+    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
    /* SDL_SetRenderDrawColor(renderer,100,200,40,SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer,&musique);
     SDL_RenderPresent(renderer);*/
@@ -166,6 +169,11 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     if (SDL_ChargerImage(renderer, "./src/img/flechedroite.png", & fleched) != 0)
         return 2 ;
 
+    if (SDL_ChargerImage(renderer, "./src/img/musique_logo.png", &musiquetex) != 0)
+        return 2 ;
+    if (SDL_ChargerImage(renderer, "./src/img/couleur_logo.png", &couleurtex) != 0)
+        return 2 ;
+
     /* =========== AJOUT DES IMAGES ========== */
     
     if (SDL_ajouter_symbole_dans_case(valid_auto, renderer, images[options->autosave]) != 0)
@@ -198,6 +206,14 @@ int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options,
     }
     if (SDL_RenderFillRect(renderer, &musique) != 0)
         return 4 ;
+
+    if(SDL_ajouter_symbole_dans_case(musique, renderer, musiquetex) != 0){
+        return 3 ;
+    }
+
+    if(SDL_ajouter_symbole_dans_case(couleur, renderer, couleurtex) != 0){
+        return 3;
+    }
     
     SDL_RenderPresent(renderer);
     return 0;
@@ -228,13 +244,11 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
     SDL_Rect valider = SDL_CreerRect(100, 870, 100, 200);
     SDL_Rect invalide = SDL_CreerRect(5, valider.y + 30, 100, 200);
 
-    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/mary_lyft.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
-    int themes[4][6] = {{187, 238, 238, 80, 200, 190},{130, 194, 122, 83, 122, 92}, {240, 120, 130 ,232, 56, 126}, {218, 133, 0 ,204, 50, 0}};
-    MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
+    char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
+    int themes[NB_THEME][6] = {{187, 238, 238, 80, 200, 190},{130, 194, 122, 83, 122, 92}, {126, 147, 191 ,83, 72, 156}, {222, 191, 106,186, 120, 73}, {201, 133, 160,148, 80, 143}, {64, 143, 43, 209, 17, 17}, {218, 133, 0 ,204, 50, 0}};
     char * fich [NB_musique] = {"./src/musique/test.mp3","./src/musique/audio.mp3","./src/musique/ES.mp3","./src/musique/noel.mp3","./src/musique/barbie.mp3","./src/musique/ok.mp3","./src/musique/calme.mp3","./src/musique/pokemon.mp3","./src/musique/urss.mp3"};
-    SDL_SetRenderDrawColor(renderer,options->rs,options->gs,options->bs,SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer,&musique);
-    SDL_RenderPresent(renderer);
+    MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
+
 
     while(program_launched){ 
         
@@ -313,7 +327,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, couleur)){
                         themecurr ++ ;
-                        if (themecurr > 3) themecurr = 0 ;
+                        if (themecurr > NB_THEME - 1) themecurr = 0 ;
                         options->r = themes[themecurr][0] ;
                         options->g = themes[themecurr][1] ;
                         options->b = themes[themecurr][2] ;
