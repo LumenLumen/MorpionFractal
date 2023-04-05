@@ -68,8 +68,8 @@ test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
 test_sauvegarde.o : ${TEST}test_sauvegarde.c
 	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
 
-test_ia : ${TEST}test_ia.o ia.o morpionfonction.o
-	${CC} ${FLAGS} ${TEST}test_ia.o ia.o morpionfonction.o -o test_ia
+test_ia : ${TEST}test_ia.o ia.o eval_ia.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_ia.o ia.o eval_ia.o morpionfonction.o -o test_ia
 	
 test_ia.o : ${TEST}test_ia.c
 	${CC} -c ${FLAGS} ${TEST}test_ia.c -o test_ia.o
