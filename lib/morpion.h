@@ -27,7 +27,7 @@ float nb_coups_gagnants(int joueur, int morpion[M][M]);
 float eval_morpion(int joueur, int morpion[M][M], int grille[N][N]);
 
 void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
-void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
+void ia_random_prudent(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
 void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
 void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
 

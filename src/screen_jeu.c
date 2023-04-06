@@ -210,7 +210,7 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
                                         do {
                                             switch (options->vsia){
                                                 case 1 : ia_random(joueur, *xdc, *ydc, &x, &y, morpion_int, grille_int); break ;
-                                                case 2 : ia_random_2(joueur, *xdc, *ydc, &x, &y, morpion_int, grille_int); break ;
+                                                case 2 : ia_random_prudent(joueur, *xdc, *ydc, &x, &y, morpion_int, grille_int); break ;
                                                 case 3 : ia_random_completionniste(joueur, *xdc, *ydc, &x, &y, morpion_int, grille_int); break ;
                                                 case 4 : ia_eval_simple(joueur, *xdc, *ydc, &x, &y, morpion_int, grille_int); break ;
                                                 default : return 4 ;
@@ -229,7 +229,9 @@ int gamescreen (SDL_Window * window, SDL_Renderer * renderer, int reload, option
                     }
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, sauv_rec)){ //SI le joueur clique sur le bouton de sauvegarde
+                        SDL_RenderFillRect(renderer, &boite_de_texte);
                         SDL_TextInRect(renderer, boite_de_texte, "Partie sauvegardée !");
+                        SDL_RenderPresent(renderer);
                         save("save.txt", grille_int, morpion_int, joueur, *xdc, *ydc, options->variante); //sauvegarde
                     }
                     continue;

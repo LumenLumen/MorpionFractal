@@ -76,21 +76,21 @@ int morpiongagne(int grille[M][M]){
 
     //Vérification des colonnes.
     for (i=0 ; i<M ; i++){
-        if ((grille[i][0] == grille[i][1]) && (grille[i][1] == grille[i][2]) &&(grille[i][1] != 0)){
+        if ((grille[i][0] == grille[i][1]) && (grille[i][1] == grille[i][2]) &&(grille[i][1] != 0) && (grille[i][1] != -1)){
             return grille[i][0];
         }
     }
 
     //Verification des lignes.
     for (i=0 ; i<M ; i++){
-        if ((grille[0][i] == grille[1][i]) && (grille[1][i] == grille[2][i]) && (grille[1][i] != 0)){
+        if ((grille[0][i] == grille[1][i]) && (grille[1][i] == grille[2][i]) && (grille[1][i] != 0) && (grille[1][i] != -1)){
             return grille[0][i];
         }
     }
 
     //Si la case centrale est prise, on vérifie les diagonales.
     centre = grille[1][1];
-    if (centre){
+    if (centre == X || centre == O){
         if ((grille[0][0] == centre) && (centre == grille[2][2]))
             return centre ;
         if ((grille[0][2] == centre) && (centre == grille[2][0]))
@@ -173,7 +173,6 @@ int check_carre(int grille[N][N], int morpion[M][M], int xdc, int ydc){
     \brief Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup
     \return 0
 */
-/*Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup*/
 int predict_rect(int xdc, int ydc, int * x, int * y){
     if (xdc == -1){ //Premier coup
         *x = 1 ;

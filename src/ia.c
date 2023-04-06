@@ -39,7 +39,7 @@ void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M]
     \param morpion matrice 3*3
     \param grille matrice 9*9
 */
-void ia_random_2(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
+void ia_random_prudent(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]){
     
     int rdx; //coordonnées random 
     int rdy;

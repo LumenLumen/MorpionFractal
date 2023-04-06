@@ -90,7 +90,7 @@ int SDL_ChargerImage(SDL_Renderer * renderer, char * fichier, SDL_Texture ** tex
     return 0;
 }
 
-int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options, int rcurr, int ccurr, int music){
+int MAJ_option(SDL_Window * window, SDL_Renderer * renderer, option_t * options, int rcurr, int ccurr){
 
     // ==== Déclaration des rectangles
     SDL_Rect background = SDL_CreerRect(0, 0, SCREEN_W, SCREEN_H+ESPACE_TEXTE);
@@ -247,7 +247,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
     char * fichiers [NB_IMG] = {"./src/img/croix.png","./src/img/rond.png","./src/img/AmongUs.png","./src/img/bob.png","./src/img/chochodile.png","./src/img/KanGourou.png","./src/img/minecraft.png","./src/img/Piplup.png","./src/img/TortueGeniale.png","./src/img/stop.png","./src/img/AuSecours.png","./src/img/l.png","./src/img/Rondoudou.png","./src/img/pika.png","./src/img/citrouille.png","./src/img/epouvantaille.png","./src/img/candy.png","./src/img/bougie.png"};
     int themes[NB_THEME][6] = {{187, 238, 238, 80, 200, 190},{130, 194, 122, 83, 122, 92}, {126, 147, 191 ,83, 72, 156}, {222, 191, 106,186, 120, 73}, {201, 133, 160,148, 80, 143}, {64, 143, 43, 209, 17, 17}, {218, 133, 0 ,204, 50, 0}};
     char * fich [NB_musique] = {"./src/musique/test.mp3","./src/musique/audio.mp3","./src/musique/ES.mp3","./src/musique/noel.mp3","./src/musique/barbie.mp3","./src/musique/ok.mp3","./src/musique/calme.mp3","./src/musique/pokemon.mp3","./src/musique/urss.mp3"};
-    MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
+    MAJ_option(window, renderer, options, rondcurr, croixcurr);
 
 
     while(program_launched){ 
@@ -268,7 +268,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         else {
                             options->autosave = 0 ;                         
                         }
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr, music);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
 
                     }
 
@@ -281,7 +281,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         else {
                             options->variante = 0 ;                         
                         }
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
                     }
 
                     //Clic sur la fleche gauche de rond.
@@ -291,7 +291,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (rondcurr < 0) rondcurr = NB_IMG - 1 ;
                         options->rondimg = fichiers[rondcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
                     }
 
                     //Clic sur la fleche droite de rond.
@@ -301,7 +301,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (rondcurr >= NB_IMG) rondcurr = 0 ;
                         options->rondimg = fichiers[rondcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);
                         
                     }
 
@@ -312,7 +312,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (croixcurr < 0) croixcurr = NB_IMG - 1 ;
                         options->croiximg = fichiers[croixcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);                        
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);                        
                     }
 
                     //Clic sur la fleche droite de croix.
@@ -322,7 +322,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         if (croixcurr >= NB_IMG) croixcurr = 0 ;                        
                         options->croiximg = fichiers[croixcurr] ;
 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music);                        
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr);                        
                     }
 
                     if (SDL_ClickInButton(event.button.x, event.button.y, couleur)){
@@ -334,7 +334,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         options->rs = themes[themecurr][3] ;
                         options->gs = themes[themecurr][4] ;
                         options->bs = themes[themecurr][5] ;
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music); 
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr); 
                     }
 
                     //Clic sur valider.
@@ -359,7 +359,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
                         Mix_Music *musiques; //Création d'un pointeur de type Mix_Music
                         musiques = Mix_LoadMUS(options->musique); //Chargement de la musique
                         Mix_PlayMusic(musiques, -1); 
-                        MAJ_option(window, renderer, options, rondcurr, croixcurr,music); 
+                        MAJ_option(window, renderer, options, rondcurr, croixcurr); 
                     }
                     continue ;
 
@@ -367,7 +367,7 @@ int optionscreen(SDL_Window * window, SDL_Renderer * renderer, option_t * option
 
                 //La croix en haut à droite est pressée.
                 case SDL_QUIT : 
-                    return -1;
+                    return 0;
                     break ;
 
                 default : break ;
