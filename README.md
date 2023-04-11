@@ -18,6 +18,6 @@ Sous Linux, ouvrir un terminal dans le dossier du projet. Entrer les deux comman
 
 # Équipe de développement 
 
-Amandine ANTOUT (Amandineant), Lucie BARBIER (LumenLumen), Damien BOULANGER (DamiBoul), Mathile BOURGEOIS (MathildeBoo)
+Amandine ANTOUT (Amandineant), Lucie BARBIER (LumenLumen), Damien BOULANGER (DamiBoul), Mathilde BOURGEOIS (MathildeBoo)
 
 
