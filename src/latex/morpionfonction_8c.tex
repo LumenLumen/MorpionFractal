@@ -1,0 +1,270 @@
+\hypertarget{morpionfonction_8c}{}\doxysection{morpionfonction.\+c File Reference}
+\label{morpionfonction_8c}\index{morpionfonction.c@{morpionfonction.c}}
+
+
+contient toutes les fonctions utiles à une partie de morpion  
+
+
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{morpionfonction_8c_ad7762f1ca42c772c167565501097242a}{init\+\_\+grille}} (int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction qui initialise la grille avec des 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{morpionfonction_8c_a38e3b794123276a2aaaf6f3a67a55ca1}{init\+\_\+morpion}} (int grille\mbox{[}M\mbox{]}\mbox{[}M\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction qui initialise le morpion avec des 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{morpionfonction_8c_a57450dff5b909082c00f08319704a7ca}{afficher\+\_\+grille}} (int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche la grille. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{morpionfonction_8c_aace760c9d0d3508248877ae94a1c0b94}{afficher\+\_\+morpion}} (int grille\mbox{[}M\mbox{]}\mbox{[}M\mbox{]})
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche le morpion. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{morpionfonction_8c_a3833ce7e8b303bef773a076bee0bee21}\label{morpionfonction_8c_a3833ce7e8b303bef773a076bee0bee21}} 
+int {\bfseries morpiongagne} (int grille\mbox{[}M\mbox{]}\mbox{[}M\mbox{]})
+\item 
+int \mbox{\hyperlink{morpionfonction_8c_a9a853967109ff35bd916cb24ca6050aa}{coog\+\_\+to\+\_\+carr}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Donne le sous-\/morpion dans lequel se trouve un coup. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{morpionfonction_8c_abc8e5940d9e5c0e9085887760bd529c7}{check\+\_\+carre}} (int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int xdc, int ydc)
+\begin{DoxyCompactList}\small\item\em Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3$\ast$3 si nécessaire. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{morpionfonction_8c_ae3a7c310c9897a6eb1bd3efb064ac9b5}{predict\+\_\+rect}} (int xdc, int ydc, int $\ast$x, int $\ast$y)
+\begin{DoxyCompactList}\small\item\em Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{morpionfonction_8c_a151226b7305c52940001ed87ac80bba5}{valide\+Case}} (int $\ast$joueur, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$xdc, int $\ast$ydc, int x, int y)
+\begin{DoxyCompactList}\small\item\em Vérifie si le coup est valide. S\textquotesingle{}il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{morpionfonction_8c_a0a5e7013bc8496684d2c2c08ef24f4bd}{carre\+\_\+plein}} (int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int x, int y)
+\begin{DoxyCompactList}\small\item\em Vérifie si un sous-\/morpion est plein. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{morpionfonction_8c_a487e7c8b8444008314825f06cd44c8db}{valide\+Case\+\_\+var}} (int $\ast$joueur, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$xdc, int $\ast$ydc, int x, int y)
+\begin{DoxyCompactList}\small\item\em Vérifie si le coup est valide en suivant les règles de la variante. S\textquotesingle{}il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+contient toutes les fonctions utiles à une partie de morpion 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{morpionfonction_8c_a57450dff5b909082c00f08319704a7ca}\label{morpionfonction_8c_a57450dff5b909082c00f08319704a7ca}} 
+\index{morpionfonction.c@{morpionfonction.c}!afficher\_grille@{afficher\_grille}}
+\index{afficher\_grille@{afficher\_grille}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_grille()}{afficher\_grille()}}
+{\footnotesize\ttfamily void afficher\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche la grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{morpionfonction_8c_aace760c9d0d3508248877ae94a1c0b94}\label{morpionfonction_8c_aace760c9d0d3508248877ae94a1c0b94}} 
+\index{morpionfonction.c@{morpionfonction.c}!afficher\_morpion@{afficher\_morpion}}
+\index{afficher\_morpion@{afficher\_morpion}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_morpion()}{afficher\_morpion()}}
+{\footnotesize\ttfamily void afficher\+\_\+morpion (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche le morpion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grille} & matrice 3$\ast$3 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{morpionfonction_8c_a0a5e7013bc8496684d2c2c08ef24f4bd}\label{morpionfonction_8c_a0a5e7013bc8496684d2c2c08ef24f4bd}} 
+\index{morpionfonction.c@{morpionfonction.c}!carre\_plein@{carre\_plein}}
+\index{carre\_plein@{carre\_plein}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{carre\_plein()}{carre\_plein()}}
+{\footnotesize\ttfamily int carre\+\_\+plein (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Vérifie si un sous-\/morpion est plein. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em i} & ordonné d\textquotesingle{}un coup dans le sous-\/morpion à vérifier \\
+\hline
+{\em j} & abscisse d\textquotesingle{}un coup dans le sous-\/morpion à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+VRAI si le carré est plein, FAUX s\textquotesingle{}il reste de la place. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{morpionfonction_8c_abc8e5940d9e5c0e9085887760bd529c7}\label{morpionfonction_8c_abc8e5940d9e5c0e9085887760bd529c7}} 
+\index{morpionfonction.c@{morpionfonction.c}!check\_carre@{check\_carre}}
+\index{check\_carre@{check\_carre}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{check\_carre()}{check\_carre()}}
+{\footnotesize\ttfamily int check\+\_\+carre (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{xdc,  }\item[{int}]{ydc }\end{DoxyParamCaption})}
+
+
+
+Fonction qui vérifie que si un carré a été rempli grâce au dernier coup, on rempli le morpion 3$\ast$3 si nécessaire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em xdc} & abscisse dernier coup joué \\
+\hline
+{\em ydc} & ordonné dernier coup joué \\
+\hline
+\end{DoxyParams}
+On se place sur la première case du carré où le dernier coup a été joué.
+
+\begin{DoxyReturn}{Returns}
+la valeur de i
+\end{DoxyReturn}
+\mbox{\Hypertarget{morpionfonction_8c_a9a853967109ff35bd916cb24ca6050aa}\label{morpionfonction_8c_a9a853967109ff35bd916cb24ca6050aa}} 
+\index{morpionfonction.c@{morpionfonction.c}!coog\_to\_carr@{coog\_to\_carr}}
+\index{coog\_to\_carr@{coog\_to\_carr}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{coog\_to\_carr()}{coog\_to\_carr()}}
+{\footnotesize\ttfamily int coog\+\_\+to\+\_\+carr (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Donne le sous-\/morpion dans lequel se trouve un coup. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & abscisse du coup à vérifier \\
+\hline
+{\em y} & ordonné du coup à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le carré (0-\/8) dans lequel elles se trouvent selon le tableau suivant \+: ((0,1,2),(3,4,5),(6,7,8)). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{morpionfonction_8c_ad7762f1ca42c772c167565501097242a}\label{morpionfonction_8c_ad7762f1ca42c772c167565501097242a}} 
+\index{morpionfonction.c@{morpionfonction.c}!init\_grille@{init\_grille}}
+\index{init\_grille@{init\_grille}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{init\_grille()}{init\_grille()}}
+{\footnotesize\ttfamily void init\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction qui initialise la grille avec des 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrice} & 9$\ast$9 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{morpionfonction_8c_a38e3b794123276a2aaaf6f3a67a55ca1}\label{morpionfonction_8c_a38e3b794123276a2aaaf6f3a67a55ca1}} 
+\index{morpionfonction.c@{morpionfonction.c}!init\_morpion@{init\_morpion}}
+\index{init\_morpion@{init\_morpion}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{init\_morpion()}{init\_morpion()}}
+{\footnotesize\ttfamily void init\+\_\+morpion (\begin{DoxyParamCaption}\item[{int}]{grille\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction qui initialise le morpion avec des 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grille} & matrice 3$\ast$3 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{morpionfonction_8c_ae3a7c310c9897a6eb1bd3efb064ac9b5}\label{morpionfonction_8c_ae3a7c310c9897a6eb1bd3efb064ac9b5}} 
+\index{morpionfonction.c@{morpionfonction.c}!predict\_rect@{predict\_rect}}
+\index{predict\_rect@{predict\_rect}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{predict\_rect()}{predict\_rect()}}
+{\footnotesize\ttfamily int predict\+\_\+rect (\begin{DoxyParamCaption}\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y }\end{DoxyParamCaption})}
+
+
+
+Prends en paramètres le dernier coup joué, retourne le carré dans lequel devra jouer le joueur au prochain coup. 
+
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{morpionfonction_8c_a151226b7305c52940001ed87ac80bba5}\label{morpionfonction_8c_a151226b7305c52940001ed87ac80bba5}} 
+\index{morpionfonction.c@{morpionfonction.c}!valideCase@{valideCase}}
+\index{valideCase@{valideCase}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{valideCase()}{valideCase()}}
+{\footnotesize\ttfamily int valide\+Case (\begin{DoxyParamCaption}\item[{int $\ast$}]{joueur,  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int $\ast$}]{xdc,  }\item[{int $\ast$}]{ydc,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Vérifie si le coup est valide. S\textquotesingle{}il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & pointeur vers le joueur dont c\textquotesingle{}est le tour \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em xdc} & pointeur vers abscisse dernier coup joué \\
+\hline
+{\em ydc} & pointeur vers ordonnée dernier coup joué \\
+\hline
+{\em x} & abscisse coup à vérifier \\
+\hline
+{\em y} & ordonnée coup à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si le coup est okay, 3 si carré non valide, 4 si case déjà prise, 5 si carré déjà complété, -\/1 si erreur 
+\end{DoxyReturn}
+Si le joueur est renvoyé sur une case déjà gagnée par un joueur.
+
+Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
+
+On ajoute la valeur du joueur à la grille à l\textquotesingle{}endroit joué.
+
+Si le joueur du coup est X, alors on passe au tour de O, sinon c\textquotesingle{}est le tour de X.\mbox{\Hypertarget{morpionfonction_8c_a487e7c8b8444008314825f06cd44c8db}\label{morpionfonction_8c_a487e7c8b8444008314825f06cd44c8db}} 
+\index{morpionfonction.c@{morpionfonction.c}!valideCase\_var@{valideCase\_var}}
+\index{valideCase\_var@{valideCase\_var}!morpionfonction.c@{morpionfonction.c}}
+\doxysubsubsection{\texorpdfstring{valideCase\_var()}{valideCase\_var()}}
+{\footnotesize\ttfamily int valide\+Case\+\_\+var (\begin{DoxyParamCaption}\item[{int $\ast$}]{joueur,  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int $\ast$}]{xdc,  }\item[{int $\ast$}]{ydc,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Vérifie si le coup est valide en suivant les règles de la variante. S\textquotesingle{}il est valide, remplace xdc, ydc par le coup vérifie, ajoute le coup dans la grille et passe au joueur suivant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & pointeur vers le joueur dont c\textquotesingle{}est le tour \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em xdc} & pointeur vers abscisse dernier coup joué \\
+\hline
+{\em ydc} & pointeur vers ordonnée dernier coup joué \\
+\hline
+{\em x} & abscisse coup à vérifier \\
+\hline
+{\em y} & ordonnée coup à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si le coup est okay, 3 si carré non valide, 4 si case déjà prise, 5 si carré déjà complété, -\/1 si erreur 
+\end{DoxyReturn}
+Si le coup joué n\textquotesingle{}est pas dans le bon carré
+
+Si la case n\textquotesingle{}est pas déjà prise
+
+Si la case où veut jouer le joueur est pleine.
+
+Les coordonnées sont valides et deviennent le nouveau dernier coup joué.
+
+On ajoute la valeur du joueur à la grille à l\textquotesingle{}endroit joué.
+
+Si le joueur du coup est X, alors on passe au tour de O, sinon c\textquotesingle{}est le tour de X.

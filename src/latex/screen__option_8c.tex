@@ -1,0 +1,95 @@
+\hypertarget{screen__option_8c}{}\doxysection{screen\+\_\+option.\+c File Reference}
+\label{screen__option_8c}\index{screen\_option.c@{screen\_option.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{screen__option_8c_a34838ea6fe49f3fc31b87f2bc01c8997}\label{screen__option_8c_a34838ea6fe49f3fc31b87f2bc01c8997}} 
+\#define {\bfseries NB\+\_\+\+IMG}~18
+\item 
+\mbox{\Hypertarget{screen__option_8c_af4be193ae5e6c1a3c079b13cb2f367ec}\label{screen__option_8c_af4be193ae5e6c1a3c079b13cb2f367ec}} 
+\#define {\bfseries NB\+\_\+musique}~10
+\item 
+\mbox{\Hypertarget{screen__option_8c_a1519cf00a46e201eac5f44dccd682729}\label{screen__option_8c_a1519cf00a46e201eac5f44dccd682729}} 
+\#define {\bfseries NB\+\_\+\+THEME}~7
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{screen__option_8c_a6b72abb0a9cefd5e47222b2a2f3603a0}\label{screen__option_8c_a6b72abb0a9cefd5e47222b2a2f3603a0}} 
+void \mbox{\hyperlink{screen__option_8c_a6b72abb0a9cefd5e47222b2a2f3603a0}{init\+\_\+option}} (option\+\_\+t $\ast$options)
+\begin{DoxyCompactList}\small\item\em Initialise les options à false et logo de base. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{screen__option_8c_a22e6c5213688f385111c1888b4b133f5}{SDL\+\_\+\+Text\+In\+Rect}} (SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Rect boite, char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Ajoute du texte dans le rectangle passé en paramètre. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{screen__option_8c_aad50df36ada5af130b28d0d75fe9e6e3}{SDL\+\_\+\+Charger\+Image}} (SDL\+\_\+\+Renderer $\ast$renderer, char $\ast$fichier, SDL\+\_\+\+Texture $\ast$$\ast$texture)
+\begin{DoxyCompactList}\small\item\em Charge une image dans la surface passée en paramètre. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{screen__option_8c_a4ec48f802d2157b8b50f7e8c26ad59a6}\label{screen__option_8c_a4ec48f802d2157b8b50f7e8c26ad59a6}} 
+int {\bfseries MAJ\+\_\+option} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, option\+\_\+t $\ast$options, int rcurr, int ccurr)
+\item 
+int \mbox{\hyperlink{screen__option_8c_ac03dd0a90a002e26891dbab8b99ab1ac}{optionscreen}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, option\+\_\+t $\ast$options)
+\begin{DoxyCompactList}\small\item\em Options d\textquotesingle{}affichage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+programme ... 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{screen__option_8c_ac03dd0a90a002e26891dbab8b99ab1ac}\label{screen__option_8c_ac03dd0a90a002e26891dbab8b99ab1ac}} 
+\index{screen\_option.c@{screen\_option.c}!optionscreen@{optionscreen}}
+\index{optionscreen@{optionscreen}!screen\_option.c@{screen\_option.c}}
+\doxysubsubsection{\texorpdfstring{optionscreen()}{optionscreen()}}
+{\footnotesize\ttfamily int optionscreen (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{option\+\_\+t $\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Options d\textquotesingle{}affichage. 
+
+Sauvegarde automatique.
+
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+\mbox{\Hypertarget{screen__option_8c_aad50df36ada5af130b28d0d75fe9e6e3}\label{screen__option_8c_aad50df36ada5af130b28d0d75fe9e6e3}} 
+\index{screen\_option.c@{screen\_option.c}!SDL\_ChargerImage@{SDL\_ChargerImage}}
+\index{SDL\_ChargerImage@{SDL\_ChargerImage}!screen\_option.c@{screen\_option.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_ChargerImage()}{SDL\_ChargerImage()}}
+{\footnotesize\ttfamily int SDL\+\_\+\+Charger\+Image (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{char $\ast$}]{fichier,  }\item[{SDL\+\_\+\+Texture $\ast$$\ast$}]{texture }\end{DoxyParamCaption})}
+
+
+
+Charge une image dans la surface passée en paramètre. 
+
+\begin{DoxyReturn}{Returns}
+0 si on réussi sinon 1. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{screen__option_8c_a22e6c5213688f385111c1888b4b133f5}\label{screen__option_8c_a22e6c5213688f385111c1888b4b133f5}} 
+\index{screen\_option.c@{screen\_option.c}!SDL\_TextInRect@{SDL\_TextInRect}}
+\index{SDL\_TextInRect@{SDL\_TextInRect}!screen\_option.c@{screen\_option.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_TextInRect()}{SDL\_TextInRect()}}
+{\footnotesize\ttfamily int SDL\+\_\+\+Text\+In\+Rect (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{SDL\+\_\+\+Rect}]{boite,  }\item[{char $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Ajoute du texte dans le rectangle passé en paramètre. 
+
+\begin{DoxyReturn}{Returns}
+retourne 0 si on réussi sinon 1. 
+\end{DoxyReturn}

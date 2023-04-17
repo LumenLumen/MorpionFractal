@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['predict_5frect_0',['predict_rect',['../d2/d24/morpionfonction_8c.html#ae3a7c310c9897a6eb1bd3efb064ac9b5',1,'morpionfonction.c']]]
+  ['nb_5fcoups_5fgagnants_66',['nb_coups_gagnants',['../eval__ia_8c.html#a50165d21098d92308e32c51c7e8615dd',1,'eval_ia.c']]]
 ];

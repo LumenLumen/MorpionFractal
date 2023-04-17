@@ -1,30 +1,25 @@
-\hypertarget{morpion_8c}{}\doxysection{Référence du fichier morpion.\+c}
+\hypertarget{morpion_8c}{}\doxysection{morpion.\+c File Reference}
 \label{morpion_8c}\index{morpion.c@{morpion.c}}
 
 
-programme ...  
+Programme principal (main), initialise les bibliothèques et les éléments nécessaires.  
 
 
 {\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
-\doxysubsection*{Fonctions}
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{morpion_8c_a84681b17d081a986d1b3f1b445ae1d14}\label{morpion_8c_a84681b17d081a986d1b3f1b445ae1d14}} 
-void {\bfseries morpion} (int, option\+\_\+t)
-\item 
-\mbox{\Hypertarget{morpion_8c_a029098369c12a17369f1e29d347a36c1}\label{morpion_8c_a029098369c12a17369f1e29d347a36c1}} 
-void {\bfseries menu} (option\+\_\+t $\ast$opt)
-\item 
-\mbox{\Hypertarget{morpion_8c_acdef7a1fd863a6d3770c1268cb06add3}\label{morpion_8c_acdef7a1fd863a6d3770c1268cb06add3}} 
-void {\bfseries main} ()
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{morpion_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Initialisation des variables nécessaires tout au long du programme et appelle du menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Description détaillée}
-programme ... 
+\doxysubsection{Detailed Description}
+Programme principal (main), initialise les bibliothèques et les éléments nécessaires. 
 
-\begin{DoxyAuthor}{Auteur}
+\begin{DoxyAuthor}{Author}
 Groupe morpion fractal 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
@@ -33,3 +28,19 @@ Groupe morpion fractal
 \begin{DoxyDate}{Date}
 9 février 2023 
 \end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{morpion_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{morpion_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{morpion.c@{morpion.c}!main@{main}}
+\index{main@{main}!morpion.c@{morpion.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Initialisation des variables nécessaires tout au long du programme et appelle du menu. 
+
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}

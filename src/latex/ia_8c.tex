@@ -1,0 +1,126 @@
+\hypertarget{ia_8c}{}\doxysection{ia.\+c File Reference}
+\label{ia_8c}\index{ia.c@{ia.c}}
+
+
+Programme contenant toutes les fonctions nécessaires à la génération des coups de la machine.  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ia_8c_af0db8abec4266f95e77ae16f01d0b001}{ia\+\_\+random}} (int joueur, int xdc, int ydc, int $\ast$x, int $\ast$y, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em donne des coordonnées aléatoires \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ia_8c_a13f27877901f0c879bd0a197657657e2}\label{ia_8c_a13f27877901f0c879bd0a197657657e2}} 
+void {\bfseries ia\+\_\+random\+\_\+prudent} (int joueur, int xdc, int ydc, int $\ast$x, int $\ast$y, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\item 
+void \mbox{\hyperlink{ia_8c_ab280cd7e305502fd03e410fef1f94a79}{ia\+\_\+random\+\_\+completionniste}} (int joueur, int xdc, int ydc, int $\ast$x, int $\ast$y, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em donne des coordonnées aléatoires, en essayant de compléter un morpion quand c\textquotesingle{}est possible \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ia_8c_a2119281b71c8cc7674408da8071f4927}{ia\+\_\+eval\+\_\+simple}} (int joueur, int xdc, int ydc, int $\ast$x, int $\ast$y, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em donne des coordonnées basées sur le coup qui donne le \char`\"{}meilleur\char`\"{} tableau pour le joueur immédiatement après le coup \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ia_8c_ad6392fc22c310d96c09d57eeb1eaea35}\label{ia_8c_ad6392fc22c310d96c09d57eeb1eaea35}} 
+int {\bfseries ia\+\_\+random\+\_\+test} (int $\ast$joueur, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$xdc, int $\ast$ydc, int $\ast$x, int $\ast$y)
+\item 
+\mbox{\Hypertarget{ia_8c_a142578466773d3ff3e071e1f30b8068e}\label{ia_8c_a142578466773d3ff3e071e1f30b8068e}} 
+int {\bfseries ia\+\_\+random\+\_\+var\+\_\+test} (int $\ast$joueur, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$xdc, int $\ast$ydc, int $\ast$x, int $\ast$y)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Programme contenant toutes les fonctions nécessaires à la génération des coups de la machine. 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+22 mars 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ia_8c_a2119281b71c8cc7674408da8071f4927}\label{ia_8c_a2119281b71c8cc7674408da8071f4927}} 
+\index{ia.c@{ia.c}!ia\_eval\_simple@{ia\_eval\_simple}}
+\index{ia\_eval\_simple@{ia\_eval\_simple}!ia.c@{ia.c}}
+\doxysubsubsection{\texorpdfstring{ia\_eval\_simple()}{ia\_eval\_simple()}}
+{\footnotesize\ttfamily void ia\+\_\+eval\+\_\+simple (\begin{DoxyParamCaption}\item[{int}]{joueur,  }\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y,  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+donne des coordonnées basées sur le coup qui donne le \char`\"{}meilleur\char`\"{} tableau pour le joueur immédiatement après le coup 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & le joueur dont c\textquotesingle{}est le tour \\
+\hline
+{\em xdc} & abscisse dernier coup joué \\
+\hline
+{\em ydc} & ordonnée dernier coup joué \\
+\hline
+{\em x} & pointeur vers l\textquotesingle{}abscisse que va retourner la fonction \\
+\hline
+{\em y} & pointeur vers l\textquotesingle{}ordonnée que va retourner la fonction \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ia_8c_af0db8abec4266f95e77ae16f01d0b001}\label{ia_8c_af0db8abec4266f95e77ae16f01d0b001}} 
+\index{ia.c@{ia.c}!ia\_random@{ia\_random}}
+\index{ia\_random@{ia\_random}!ia.c@{ia.c}}
+\doxysubsubsection{\texorpdfstring{ia\_random()}{ia\_random()}}
+{\footnotesize\ttfamily ia\+\_\+random (\begin{DoxyParamCaption}\item[{int}]{joueur,  }\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y,  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+donne des coordonnées aléatoires 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & le jouer dont c\textquotesingle{}est le tour \\
+\hline
+{\em xdc} & abscisse dernier coup joué \\
+\hline
+{\em ydc} & ordonnée dernier coup joué \\
+\hline
+{\em x} & pointeur vers l\textquotesingle{}abscisse que va retourner la fonction \\
+\hline
+{\em y} & pointeur vers l\textquotesingle{}ordonnée que va retourner la fonction \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ia_8c_ab280cd7e305502fd03e410fef1f94a79}\label{ia_8c_ab280cd7e305502fd03e410fef1f94a79}} 
+\index{ia.c@{ia.c}!ia\_random\_completionniste@{ia\_random\_completionniste}}
+\index{ia\_random\_completionniste@{ia\_random\_completionniste}!ia.c@{ia.c}}
+\doxysubsubsection{\texorpdfstring{ia\_random\_completionniste()}{ia\_random\_completionniste()}}
+{\footnotesize\ttfamily void ia\+\_\+random\+\_\+completionniste (\begin{DoxyParamCaption}\item[{int}]{joueur,  }\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int $\ast$}]{x,  }\item[{int $\ast$}]{y,  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+donne des coordonnées aléatoires, en essayant de compléter un morpion quand c\textquotesingle{}est possible 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & le jouer dont c\textquotesingle{}est le tour \\
+\hline
+{\em xdc} & abscisse dernier coup joué \\
+\hline
+{\em ydc} & ordonnée dernier coup joué \\
+\hline
+{\em x} & pointeur vers l\textquotesingle{}abscisse que va retourner la fonction \\
+\hline
+{\em y} & pointeur vers l\textquotesingle{}ordonnée que va retourner la fonction \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+\end{DoxyParams}

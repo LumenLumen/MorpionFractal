@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
-  0: "acgilmopsv",
-  1: "gms",
-  2: "acgilmopsv"
+  0: "acegilmnopstv",
+  1: "eims",
+  2: "acegilmnopstv"
 };
 
 var indexSectionNames =
@@ -14,8 +14,8 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "Tout",
-  1: "Fichiers",
-  2: "Fonctions"
+  0: "All",
+  1: "Files",
+  2: "Functions"
 };
 
