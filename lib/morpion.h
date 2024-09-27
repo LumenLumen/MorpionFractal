@@ -22,4 +22,14 @@ int carre_plein(int grille[N][N], int x, int y);
 int valideCase_var (int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int x, int y);
 
 //fonction coups ordinateurs
-void ia_random(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int * x, int * y);
+float strat_val(int i, int j);
+float nb_coups_gagnants(int joueur, int morpion[M][M]);
+float eval_morpion(int joueur, int morpion[M][M], int grille[N][N]);
+
+void ia_random(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
+void ia_random_prudent(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
+void ia_random_completionniste(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
+void ia_eval_simple(int joueur, int xdc, int ydc, int * x, int * y, int morpion[M][M], int grille[N][N]);
+
+int ia_random_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int * x, int * y);
+int ia_random_var_test(int * joueur, int grille[N][N], int morpion[M][M], int * xdc, int * ydc, int * x, int * y);

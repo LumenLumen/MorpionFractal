@@ -1,0 +1,89 @@
+\hypertarget{sauvegarde_8c}{}\doxysection{sauvegarde.\+c File Reference}
+\label{sauvegarde_8c}\index{sauvegarde.c@{sauvegarde.c}}
+
+
+Fonctions qui gèrent la sauvegarde ou le chargement de partie.  
+
+
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{sauvegarde_8c_ada9d5dd15402f78b7fb5652e6d14bc43}{save}} (char $\ast$name, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int joueur, int xdc, int ydc, int var)
+\begin{DoxyCompactList}\small\item\em fonction qui sauvegarde la grille dans un fichier. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sauvegarde_8c_a18661f1c69f8e5de998008a72d0ff693}{load}} (char $\ast$name, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]}, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int $\ast$joueur, int $\ast$xdc, int $\ast$ydc, int $\ast$var)
+\begin{DoxyCompactList}\small\item\em fonction qui charge la grille d\textquotesingle{}un fichier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fonctions qui gèrent la sauvegarde ou le chargement de partie. 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sauvegarde_8c_a18661f1c69f8e5de998008a72d0ff693}\label{sauvegarde_8c_a18661f1c69f8e5de998008a72d0ff693}} 
+\index{sauvegarde.c@{sauvegarde.c}!load@{load}}
+\index{load@{load}!sauvegarde.c@{sauvegarde.c}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily int load (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int $\ast$}]{joueur,  }\item[{int $\ast$}]{xdc,  }\item[{int $\ast$}]{ydc,  }\item[{int $\ast$}]{var }\end{DoxyParamCaption})}
+
+
+
+fonction qui charge la grille d\textquotesingle{}un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & nom du fichier de sauvegarde \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em joueur} & pointeur vers le joueur dont ce sera le tour au chargement de la partie \\
+\hline
+{\em xdc} & pointeur vers abscisse dernier coup joué \\
+\hline
+{\em ydc} & pointeur vers ordonnée dernier coup joué \\
+\hline
+{\em var} & pointeur vers la variable qui indique si on joue en variante ou non. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si échoue, 1 si succès. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sauvegarde_8c_ada9d5dd15402f78b7fb5652e6d14bc43}\label{sauvegarde_8c_ada9d5dd15402f78b7fb5652e6d14bc43}} 
+\index{sauvegarde.c@{sauvegarde.c}!save@{save}}
+\index{save@{save}!sauvegarde.c@{sauvegarde.c}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void save (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]},  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{joueur,  }\item[{int}]{xdc,  }\item[{int}]{ydc,  }\item[{int}]{var }\end{DoxyParamCaption})}
+
+
+
+fonction qui sauvegarde la grille dans un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & nom du fichier de sauvegarde \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em joueur} & joueur dont ce sera le tour au chargement de la partie \\
+\hline
+{\em xdc} & abscisse dernier coup joué \\
+\hline
+{\em ydc} & ordonnée dernier coup joué \\
+\hline
+{\em var} & VRAI si on joue selon les règles de la variante, sinon FAUX. \\
+\hline
+\end{DoxyParams}

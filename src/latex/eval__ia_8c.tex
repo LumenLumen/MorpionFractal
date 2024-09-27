@@ -1,0 +1,97 @@
+\hypertarget{eval__ia_8c}{}\doxysection{eval\+\_\+ia.\+c File Reference}
+\label{eval__ia_8c}\index{eval\_ia.c@{eval\_ia.c}}
+
+
+Programme contenant toutes les fonctions nécessaires aux estimations des coups de la machine.  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{eval__ia_8c_a50165d21098d92308e32c51c7e8615dd}{nb\+\_\+coups\+\_\+gagnants}} (int joueur, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]})
+\begin{DoxyCompactList}\small\item\em donne le nombre de coups gagnants possible pour le joueur dans le morpion, donne -\/1 si le morpion est déjà gagné \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{eval__ia_8c_a1015057f452ad2f4e93d9c78643f862d}{strat\+\_\+val}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em donne la \char`\"{}valeur stratégique\char`\"{} du morpion de coordonnées (i,j) selon le tableau suivant 3 1 3 1 2 1 3 1 3 \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{eval__ia_8c_a37789ad956a973ffc39a7591c345c2cf}{eval\+\_\+morpion}} (int joueur, int morpion\mbox{[}M\mbox{]}\mbox{[}M\mbox{]}, int grille\mbox{[}N\mbox{]}\mbox{[}N\mbox{]})
+\begin{DoxyCompactList}\small\item\em évalue si la position courante du morpion est favorable pour le joueur, négatif signifie défavorable et positif signifie favorable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Programme contenant toutes les fonctions nécessaires aux estimations des coups de la machine. 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+22 mars 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{eval__ia_8c_a37789ad956a973ffc39a7591c345c2cf}\label{eval__ia_8c_a37789ad956a973ffc39a7591c345c2cf}} 
+\index{eval\_ia.c@{eval\_ia.c}!eval\_morpion@{eval\_morpion}}
+\index{eval\_morpion@{eval\_morpion}!eval\_ia.c@{eval\_ia.c}}
+\doxysubsubsection{\texorpdfstring{eval\_morpion()}{eval\_morpion()}}
+{\footnotesize\ttfamily float eval\+\_\+morpion (\begin{DoxyParamCaption}\item[{int}]{joueur,  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]},  }\item[{int}]{grille\mbox{[}\+N\mbox{]}\mbox{[}\+N\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+évalue si la position courante du morpion est favorable pour le joueur, négatif signifie défavorable et positif signifie favorable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & joueur dont on évalue le coup \\
+\hline
+{\em morpion} & matrice 3$\ast$3 \\
+\hline
+{\em grille} & matrice 9$\ast$9 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+estimation si le coup est favorable ou non (float) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{eval__ia_8c_a50165d21098d92308e32c51c7e8615dd}\label{eval__ia_8c_a50165d21098d92308e32c51c7e8615dd}} 
+\index{eval\_ia.c@{eval\_ia.c}!nb\_coups\_gagnants@{nb\_coups\_gagnants}}
+\index{nb\_coups\_gagnants@{nb\_coups\_gagnants}!eval\_ia.c@{eval\_ia.c}}
+\doxysubsubsection{\texorpdfstring{nb\_coups\_gagnants()}{nb\_coups\_gagnants()}}
+{\footnotesize\ttfamily float nb\+\_\+coups\+\_\+gagnants (\begin{DoxyParamCaption}\item[{int}]{joueur,  }\item[{int}]{morpion\mbox{[}\+M\mbox{]}\mbox{[}\+M\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+donne le nombre de coups gagnants possible pour le joueur dans le morpion, donne -\/1 si le morpion est déjà gagné 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joueur} & le joueur dont on évalue le coup \\
+\hline
+{\em morpion} & le morpion 3$\ast$3 dans lequel le joueur doit jouer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 si le morpion est déjà gagnée, sinon un réel indiquant le nombre de coup gagnant possible 
+\end{DoxyReturn}
+\mbox{\Hypertarget{eval__ia_8c_a1015057f452ad2f4e93d9c78643f862d}\label{eval__ia_8c_a1015057f452ad2f4e93d9c78643f862d}} 
+\index{eval\_ia.c@{eval\_ia.c}!strat\_val@{strat\_val}}
+\index{strat\_val@{strat\_val}!eval\_ia.c@{eval\_ia.c}}
+\doxysubsubsection{\texorpdfstring{strat\_val()}{strat\_val()}}
+{\footnotesize\ttfamily float strat\+\_\+val (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+donne la \char`\"{}valeur stratégique\char`\"{} du morpion de coordonnées (i,j) selon le tableau suivant 3 1 3 1 2 1 3 1 3 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & abscisse du coup à évaluer \\
+\hline
+{\em j} & ordonnée du coup à évaluer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+une des valeurs du tableau 
+\end{DoxyReturn}

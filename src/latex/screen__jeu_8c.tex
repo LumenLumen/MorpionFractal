@@ -1,0 +1,124 @@
+\hypertarget{screen__jeu_8c}{}\doxysection{screen\+\_\+jeu.\+c File Reference}
+\label{screen__jeu_8c}\index{screen\_jeu.c@{screen\_jeu.c}}
+
+
+Programme qui gère toutes les fonctions relatives aux parties de tout type.  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/morpion.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib/sauvegarde.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{screen__jeu_8c_a58e4b9cb8e858033d536c10793a7a9c8}{tour\+\_\+de\+\_\+jeu}} (SDL\+\_\+\+Renderer $\ast$renderer, int grille\+\_\+int\mbox{[}9\mbox{]}\mbox{[}9\mbox{]}, int morpion\+\_\+int\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect grille\mbox{[}9\mbox{]}\mbox{[}9\mbox{]}, SDL\+\_\+\+Texture $\ast$croix, SDL\+\_\+\+Texture $\ast$rond, int i, int j, int $\ast$xdc, int $\ast$ydc, int $\ast$joueur, option\+\_\+t $\ast$options, int($\ast$fonction)(int $\ast$, int($\ast$)\mbox{[}9\mbox{]}, int($\ast$)\mbox{[}3\mbox{]}, int $\ast$, int $\ast$, int, int))
+\begin{DoxyCompactList}\small\item\em Déroule le tour de jeu en appelant les fonctions nécessaires. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{screen__jeu_8c_abd6fe0782c23f0be16f9057fe93cb2c4}{gamescreen}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, int reload, option\+\_\+t $\ast$options)
+\begin{DoxyCompactList}\small\item\em Cette fonction gère l\textquotesingle{}ecran de jeu en local et joueur contre machine, les événements et la fin de la partie. Elle lance si nécessaire une sauvegarde, et fait une sauvegarde si nécessaire. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{screen__jeu_8c_a4914cf9e42e5b927a666ce3adf4a83c5}{iavsia}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer, option\+\_\+t $\ast$options)
+\begin{DoxyCompactList}\small\item\em S\textquotesingle{}occupe de gérer les parties machine contre machine et de les afficher. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Programme qui gère toutes les fonctions relatives aux parties de tout type. 
+
+\begin{DoxyAuthor}{Author}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{screen__jeu_8c_abd6fe0782c23f0be16f9057fe93cb2c4}\label{screen__jeu_8c_abd6fe0782c23f0be16f9057fe93cb2c4}} 
+\index{screen\_jeu.c@{screen\_jeu.c}!gamescreen@{gamescreen}}
+\index{gamescreen@{gamescreen}!screen\_jeu.c@{screen\_jeu.c}}
+\doxysubsubsection{\texorpdfstring{gamescreen()}{gamescreen()}}
+{\footnotesize\ttfamily int gamescreen (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{reload,  }\item[{option\+\_\+t $\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Cette fonction gère l\textquotesingle{}ecran de jeu en local et joueur contre machine, les événements et la fin de la partie. Elle lance si nécessaire une sauvegarde, et fait une sauvegarde si nécessaire. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & La fenêtre d\textquotesingle{}affichage \\
+\hline
+{\em renderer} & le rendu d\textquotesingle{}affichage \\
+\hline
+{\em reload} & vaut 1 si on charge la sauvegarde automatique, 2 si on charge la sauvegarde manuelle, charge une nouvelle partie pour les autres valeurs. \\
+\hline
+{\em options} & options de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si elle se termine correctement, autre valeur si recontre une erreur \+: 1 -\/ erreur de chargement de sauvegarde ; 2 -\/ erreur dans le chargement d\textquotesingle{}image ; 3 -\/ erreur d\textquotesingle{}affichage de la grille ; 4 -\/ options-\/$>$vsia contient une valeur non reconnue (!=0,1,2,3,4). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{screen__jeu_8c_a4914cf9e42e5b927a666ce3adf4a83c5}\label{screen__jeu_8c_a4914cf9e42e5b927a666ce3adf4a83c5}} 
+\index{screen\_jeu.c@{screen\_jeu.c}!iavsia@{iavsia}}
+\index{iavsia@{iavsia}!screen\_jeu.c@{screen\_jeu.c}}
+\doxysubsubsection{\texorpdfstring{iavsia()}{iavsia()}}
+{\footnotesize\ttfamily int iavsia (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{option\+\_\+t $\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+S\textquotesingle{}occupe de gérer les parties machine contre machine et de les afficher. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & fenêtre d\textquotesingle{}affichage \\
+\hline
+{\em renderer} & rendu d\textquotesingle{}affichage \\
+\hline
+{\em options} & options de jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoie 0 si elle se termine correctement, renvoie \+: 2 -\/ erreur chargement image ; 3 -\/ erreur affichage grille 
+\end{DoxyReturn}
+\mbox{\Hypertarget{screen__jeu_8c_a58e4b9cb8e858033d536c10793a7a9c8}\label{screen__jeu_8c_a58e4b9cb8e858033d536c10793a7a9c8}} 
+\index{screen\_jeu.c@{screen\_jeu.c}!tour\_de\_jeu@{tour\_de\_jeu}}
+\index{tour\_de\_jeu@{tour\_de\_jeu}!screen\_jeu.c@{screen\_jeu.c}}
+\doxysubsubsection{\texorpdfstring{tour\_de\_jeu()}{tour\_de\_jeu()}}
+{\footnotesize\ttfamily int tour\+\_\+de\+\_\+jeu (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{grille\+\_\+int\mbox{[}9\mbox{]}\mbox{[}9\mbox{]},  }\item[{int}]{morpion\+\_\+int\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{grille\mbox{[}9\mbox{]}\mbox{[}9\mbox{]},  }\item[{SDL\+\_\+\+Texture $\ast$}]{croix,  }\item[{SDL\+\_\+\+Texture $\ast$}]{rond,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int $\ast$}]{xdc,  }\item[{int $\ast$}]{ydc,  }\item[{int $\ast$}]{joueur,  }\item[{option\+\_\+t $\ast$}]{options,  }\item[{int($\ast$)(int $\ast$, int($\ast$)\mbox{[}9\mbox{]}, int($\ast$)\mbox{[}3\mbox{]}, int $\ast$, int $\ast$, int, int)}]{fonction }\end{DoxyParamCaption})}
+
+
+
+Déroule le tour de jeu en appelant les fonctions nécessaires. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & le rendu pour afficher la grille \\
+\hline
+{\em grille\+\_\+int} & la grille 9$\ast$9 qui représente la grille. \\
+\hline
+{\em morpion\+\_\+int} & le morpion 3$\ast$3 \\
+\hline
+{\em grille} & la grille 9$\ast$9 pour l\textquotesingle{}affichage des cases dans la grille \\
+\hline
+{\em croix} & la texture pour le symbole croix \\
+\hline
+{\em rond} & la texture pour le symbole rond \\
+\hline
+{\em i} & abscisse du coup joué \\
+\hline
+{\em j} & ordonné du coup joué \\
+\hline
+{\em xdc} & pointeur vers l\textquotesingle{}abscisse du précédent coup joué \\
+\hline
+{\em ydc} & pointeur vers l\textquotesingle{}ordonnée du précédent coup joué \\
+\hline
+{\em joueur} & pointeur vers le joueur à c\textquotesingle{}est le tour \\
+\hline
+{\em options} & les options de jeu \\
+\hline
+{\em fonction} & la fonction qui va vérifier si le coup (i, j) est valide. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La fonction retourne -\/1 si le match est nul, 0 s\textquotesingle{}il n\textquotesingle{}y a aucun vainqueur, 1 si X gagne, 2 si O gagne, 3, 4 ou 5 si le coup joué n\textquotesingle{}est pas valide. 
+\end{DoxyReturn}

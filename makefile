@@ -6,9 +6,9 @@ SDL_DIR=${HOME}/SDL2
 SDL_LIB_DIR=${SDL_DIR}/lib
 SDL_INC_DIR=${SDL_DIR}/include
 
-fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o
+fich_jeu_complet= screen_jeu.o screen_menu.o screen_option.o screens.o morpion.o morpionfonction.o sauvegarde.o ia.o eval_ia.o screen_rdj.o
 
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 INCS=-I${SDL_INC_DIR}
 
 SRC=src/
@@ -18,7 +18,7 @@ TEST=tests/
 
 
 
-all: game
+all: game test
 
 game: ${fich_jeu_complet}
 	${CC} ${FLAGS} ${fich_jeu_complet} -o ${PROG} ${LIBS} ${INCS}
@@ -47,9 +47,14 @@ sauvegarde.o: ${SRC}sauvegarde.c ${HDIR}sauvegarde.h
 ia.o: ${SRC}ia.c ${HDIR}morpion.h
 	${CC} -c ${FLAGS} ${SRC}ia.c -o ia.o ${LIBS} ${INCS}
 
+eval_ia.o: ${SRC}eval_ia.c ${HDIR}morpion.h
+	${CC} -c ${FLAGS} ${SRC}eval_ia.c -o eval_ia.o ${LIBS} ${INCS}
+
+screen_rdj.o: ${SRC}screen_rdj.c ${HDIR}screens.h
+	${CC} -c ${FLAGS} ${SRC}screen_rdj.c -o screen_rdj.o ${LIBS} ${INCS}
 
 
-test : test_morpionfonction test_sauvegarde test_ia
+test : test_morpionfonction test_sauvegarde test_ia test_eval_ia
 
 test_morpionfonction : ${TEST}test_morpionfonction.o morpionfonction.o
 	${CC} ${FLAGS} ${TEST}test_morpionfonction.o morpionfonction.o -o test_morpionfonction
@@ -63,15 +68,24 @@ test_sauvegarde : ${TEST}test_sauvegarde.o sauvegarde.o morpionfonction.o
 test_sauvegarde.o : ${TEST}test_sauvegarde.c
 	${CC} -c ${FLAGS} ${TEST}test_sauvegarde.c -o test_sauvegarde.o
 
-test_ia : ${TEST}test_ia.o ia.o morpionfonction.o
-	${CC} ${FLAGS} ${TEST}test_ia.o ia.o morpionfonction.o -o test_ia
+test_ia : ${TEST}test_ia.o ia.o eval_ia.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_ia.o ia.o eval_ia.o morpionfonction.o -o test_ia
 	
 test_ia.o : ${TEST}test_ia.c
 	${CC} -c ${FLAGS} ${TEST}test_ia.c -o test_ia.o
 
+test_eval_ia : ${TEST}test_eval_ia.o ia.o morpionfonction.o
+	${CC} ${FLAGS} ${TEST}test_eval_ia.o eval_ia.o ia.o morpionfonction.o -o test_eval_ia
+	
+test_eval_ia.o : ${TEST}test_eval_ia.c
+	${CC} -c ${FLAGS} ${TEST}test_eval_ia.c -o test_eval_ia.o
 
 clean:
 	rm -f ${PROG}
+	rm -f test_morpionfonction 
+	rm -f test_sauvegarde 
+	rm -f test_ia 
+	rm -f test_eval_ia
 	rm -f *.o
 	rm -f ./tests/*.o
 

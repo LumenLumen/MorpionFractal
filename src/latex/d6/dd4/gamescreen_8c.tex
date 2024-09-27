@@ -1,0 +1,65 @@
+\hypertarget{gamescreen_8c}{}\doxysection{Référence du fichier gamescreen.\+c}
+\label{gamescreen_8c}\index{gamescreen.c@{gamescreen.c}}
+
+
+programme ...  
+
+
+{\ttfamily \#include \char`\"{}../lib/screens.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gamescreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}{SDL\+\_\+\+Afficher\+Grille\+Vide}} (SDL\+\_\+\+Renderer $\ast$renderer, SDL\+\_\+\+Rect contour)
+\begin{DoxyCompactList}\small\item\em fonction qui affiche la grille et definie sa couleur. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gamescreen_8c_adb0289a405a5a08a3895f3f5154346c3}{gamescreen}} (SDL\+\_\+\+Window $\ast$window, SDL\+\_\+\+Renderer $\ast$renderer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+programme ... 
+
+\begin{DoxyAuthor}{Auteur}
+Groupe morpion fractal 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+9 février 2023 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{gamescreen_8c_adb0289a405a5a08a3895f3f5154346c3}\label{gamescreen_8c_adb0289a405a5a08a3895f3f5154346c3}} 
+\index{gamescreen.c@{gamescreen.c}!gamescreen@{gamescreen}}
+\index{gamescreen@{gamescreen}!gamescreen.c@{gamescreen.c}}
+\doxysubsubsection{\texorpdfstring{gamescreen()}{gamescreen()}}
+{\footnotesize\ttfamily int gamescreen (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+Lorsque le joueur clique dans la grille, on vérifie dans quelle case il a joué pour s\textquotesingle{}assurer que son coup est valide.
+
+On libère la mémoire à la fin de la fonction.
+
+\begin{DoxyReturn}{Renvoie}
+0
+\end{DoxyReturn}
+\mbox{\Hypertarget{gamescreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}\label{gamescreen_8c_aa981f55ecb3c46abcc96f724ce5c000d}} 
+\index{gamescreen.c@{gamescreen.c}!SDL\_AfficherGrilleVide@{SDL\_AfficherGrilleVide}}
+\index{SDL\_AfficherGrilleVide@{SDL\_AfficherGrilleVide}!gamescreen.c@{gamescreen.c}}
+\doxysubsubsection{\texorpdfstring{SDL\_AfficherGrilleVide()}{SDL\_AfficherGrilleVide()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Afficher\+Grille\+Vide (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{SDL\+\_\+\+Rect}]{contour }\end{DoxyParamCaption})}
+
+
+
+fonction qui affiche la grille et definie sa couleur. 
+
+\begin{DoxyReturn}{Renvoie}
+on retourne 0 si on réussi sinon 1. 
+\end{DoxyReturn}
+On commence par créer le fond.
+
+Ensuite on définit la couleur.
+
+\begin{DoxyReturn}{Renvoie}
+0
+\end{DoxyReturn}
